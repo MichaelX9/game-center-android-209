@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_register_background"
+    tools:context="fall2018.csc2017.LaunchCentre.GameLaunchActivity">
+
+
+    <ImageButton
+        android:id="@+id/slidingTiles"
+        android:layout_width="125dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="45dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_sliding_tiles_icon" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="121dp"
+        android:layout_height="132dp"
+        android:layout_alignStart="@+id/slidingTiles"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="189dp"
+        android:contentDescription="Coming Soon"
+        app:srcCompat="@drawable/ic_game_coming_soon_icon" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="121dp"
+        android:layout_height="132dp"
+        android:layout_alignStart="@+id/slidingTiles"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="332dp"
+        app:srcCompat="@drawable/ic_game_coming_soon_icon" />
+
+</RelativeLayout>

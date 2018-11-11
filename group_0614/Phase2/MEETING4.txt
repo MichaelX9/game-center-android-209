@@ -1,0 +1,7 @@
+# Meeting 4 Minutes
+- Final debug and coding session
+- Fix save button issues
+- Fix undo crashing
+- Fix game load crashing
+- Show Toast text for different prompts (wins, undos left, etc.)
+- Make sure all functionality runs properly

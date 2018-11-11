@@ -1,0 +1,7 @@
+# Meeting 3 Minutes
+- Need to implement supers and fix Sliding Tiles implementation to match
+- Being creating Load and Save interfaces
+   - How will this actually work with the server - Kevin says he wants to learn php
+- How to associate files with specific users?
+   - Use of server suggests we should limit total save files per user perhaps?
+- Finish all functionality by end of meeting and text if game runs succesfully
