@@ -173,8 +173,6 @@ public abstract class GameManager {
     }
 
 
-
-
     //Used for transition between activities
     public final void tempSave(Context context) {
         String path = context.getFilesDir() + File.separator + "/saves/";
@@ -199,8 +197,30 @@ public abstract class GameManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+
+    /**
+     * Creates necessary files/folders if user is opening app for the first time.
+     */
+    public void checkNew(Context context){
+        String path = context.getFilesDir() + File.separator + "/saves/";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        path = context.getFilesDir() + File.separator + "/saves/";
+        File[] files = {new File(path+"temp.txt"), new File(path+"INFO_temp.txt"),
+                new File(path + "scores.txt")};
+        for (File create: files){
+            if (!create.exists()) {
+                try {
+                    create.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }
