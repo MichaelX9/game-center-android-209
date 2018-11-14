@@ -1,0 +1,9 @@
+# Meeting 2 Minutes
+- Finish all individual portion assignments on GoogleDoc by Nov 3 for testing and debugging
+- Use GameManager superclass -> applicable for all future games
+   - We should not use BoardManager to extend this super -> too many non-universal methods
+   - Design a second Manager class for game management and common features -> save, load, undo, etc.
+- Login and Register screen functionality through Kevin's website?
+- Finished CRC flashcards -> Kevin has them
+   - General gist is userData (username, scores, boards, etc.) kept altogether in GameManager
+   - Build activities around that structure -> see how well everything integrates

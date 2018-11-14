@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ic_register_background"
+    tools:context="fall2018.csc2017.LaunchCentre.RegisterActivity">
+
+    <EditText
+        android:id="@+id/etName"
+        style="@android:style/Widget.AutoCompleteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:textColor="#FE7F2D"
+        android:hint="Name"
+        android:textColorHint="#FCCA46"
+        android:backgroundTint="#FCCA46"
+        android:inputType="textPersonName"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etName"
+        android:textColor="#FE7F2D"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#FCCA46"
+        android:backgroundTint="#FCCA46"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etEmail"
+        android:textColor="#FE7F2D"
+        android:layout_alignStart="@+id/etName"
+        android:layout_marginStart="1dp"
+        android:textColorHint="#FCCA46"
+        android:backgroundTint="#FCCA46"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FE7F2D"
+        android:layout_below="@+id/etUsername"
+        android:layout_alignStart="@+id/etName"
+        android:layout_marginStart="1dp"
+        android:textColorHint="#FCCA46"
+        android:backgroundTint="#FCCA46"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <ImageButton
+        android:id="@+id/bRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="148dp"
+        android:layout_marginBottom="254dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_register_button" />
+
+</RelativeLayout>
