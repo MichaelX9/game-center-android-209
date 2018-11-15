@@ -31,11 +31,18 @@ public class StartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_);
+<<<<<<< HEAD
         manager.checkNew(StartingActivity.this);
+=======
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
         addStartButtonListener();
         addLoadButtonListener();
         addScoreButtonListener();
         addDeleteButtonListener();
+<<<<<<< HEAD
+=======
+        manager.tempSave(this);
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
 
         final EditText editText =findViewById(R.id.fileInput);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -114,6 +121,10 @@ public class StartingActivity extends AppCompatActivity {
     private void addLoadFilesListener(){
         final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
 
+<<<<<<< HEAD
+=======
+        manager.tempSave(this);
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
         String[] saves = manager.findSaves(StartingActivity.this);
         int counter = 0;
         for(int i = 0; i < saves.length; i++){
@@ -146,6 +157,10 @@ public class StartingActivity extends AppCompatActivity {
     private void addDeleteFilesListener(){
         final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
 
+<<<<<<< HEAD
+=======
+        manager.tempSave(this);
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
         String[] saves = manager.findSaves(StartingActivity.this);
         int counter = 0;
         for(int i = 0; i < saves.length; i++){

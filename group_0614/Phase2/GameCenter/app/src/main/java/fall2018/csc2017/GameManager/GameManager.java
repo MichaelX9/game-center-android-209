@@ -173,6 +173,11 @@ public abstract class GameManager {
     }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
     //Used for transition between activities
     public final void tempSave(Context context) {
         String path = context.getFilesDir() + File.separator + "/saves/";
@@ -197,6 +202,7 @@ public abstract class GameManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
     }
 
 
@@ -223,4 +229,10 @@ public abstract class GameManager {
         }
     }
 
+=======
+
+    }
+
+
+>>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
 }
