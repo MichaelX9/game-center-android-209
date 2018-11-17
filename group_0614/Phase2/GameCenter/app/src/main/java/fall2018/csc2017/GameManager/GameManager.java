@@ -2,9 +2,13 @@ package fall2018.csc2017.GameManager;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -172,12 +176,6 @@ public abstract class GameManager {
 
     }
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
     //Used for transition between activities
     public final void tempSave(Context context) {
         String path = context.getFilesDir() + File.separator + "/saves/";
@@ -202,7 +200,6 @@ public abstract class GameManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
     }
 
 
@@ -229,10 +226,55 @@ public abstract class GameManager {
         }
     }
 
-=======
-
+    public void addScore(Context context, Integer newScore, String gameName){
+        String path = context.getFilesDir() + File.separator + "/saves/";
+        String score = newScore.toString();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path + "scores.txt", true));
+            writer.append(gameName + '-' + username + '-' + score + '\n');
+            writer.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
+    public List gameScoreGetter(Context context, String gameName){
+        String path = context.getFilesDir() + File.separator + "/saves/";
+        List<Object> gameScores = new ArrayList<>();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
+            String curLine;
+            while((curLine = reader.readLine()) != null){
+                String[] split = curLine.split("-");
+                if (split[0].equals(gameName)){
+                    gameScores.add(Integer.parseInt(split[2]));
+                }
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return gameScores;
+    }
 
->>>>>>> 70ad0701da37f6f4a810048b126fa0655a9dcf7a
+    public List ScoreGetter(Context context, String gameName, String username){
+        String path = context.getFilesDir() + File.separator + "/saves/";
+        List<Object> gameScores = new ArrayList<>();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
+            String curLine;
+            while((curLine = reader.readLine()) != null){
+                String[] split = curLine.split("-");
+                if (split[0] == gameName && split[1] == username){
+                    gameScores.add(Integer.parseInt(split[2]));
+                }
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return gameScores;
+    }
+
 }

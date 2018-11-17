@@ -12,7 +12,7 @@ import fall2018.csc2017.GameManager.GameManager;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class BoardManager implements Serializable {
+class  BoardManager implements Serializable {
 
     static int maximumComplexity = 200;
     SlidingTilesScoreBoard scoreBoard;
@@ -169,9 +169,10 @@ class BoardManager implements Serializable {
                 scoreBoard.finishTiming();
                 scoreBoard.updateDurationPlayed();
                 scoreBoard.setComplexityMeasure(board.numTiles());
-                String score = scoreBoard.calculateScore().toString();
-                String userHighestScore = scoreBoard.getUserHighestScore().toString();
-                String gameHighestScore = scoreBoard.getGameHighestScore().toString();
+                int score = scoreBoard.calculateScore();
+                int userHighestScore = scoreBoard.getUserHighestScore();
+                int gameHighestScore = scoreBoard.getGameHighestScore();
+                StartingActivity.manager.addScore(context, score,"SlidingTiles");
                 Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                                 ".\n Your highest score is " + userHighestScore +
                                 ".\n The game's highest score is " + gameHighestScore + ". ",

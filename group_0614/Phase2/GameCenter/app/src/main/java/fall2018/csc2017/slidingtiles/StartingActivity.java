@@ -115,6 +115,7 @@ public class StartingActivity extends AppCompatActivity {
     private void addLoadFilesListener(){
         final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
 
+
         manager.tempSave(this);
         String[] saves = manager.findSaves(StartingActivity.this);
         int counter = 0;
