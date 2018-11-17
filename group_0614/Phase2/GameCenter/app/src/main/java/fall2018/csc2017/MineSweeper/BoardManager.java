@@ -11,10 +11,18 @@ public class BoardManager {
         return board;
     }
 
+    /***
+     * To process a tap on a block.
+     * @param position The index of the block in board.blocks
+     */
     public void processClick(int position){
         //TODO
     }
 
+    /***
+     *  To process a tap and hold on a clock
+     * @param position The index of the block in board.blocks
+     */
     public void processLongClick(int position){
         //TODO
     }
