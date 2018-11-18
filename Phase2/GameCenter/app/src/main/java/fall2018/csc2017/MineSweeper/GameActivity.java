@@ -34,7 +34,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
         gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,columnHeight,this));
         display();
 
-
     }
 
 
