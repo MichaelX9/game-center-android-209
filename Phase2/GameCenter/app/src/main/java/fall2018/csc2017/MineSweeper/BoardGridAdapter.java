@@ -13,14 +13,13 @@ import java.util.ArrayList;
 class BoardGridAdapter extends BaseAdapter {
     private BoardManager boardManager;
     private Context context;
-    private int columnWidth, columnHeight;
+    private int columnWidth = 0;
+    private int columnHeight = 0;
 
-    public BoardGridAdapter(BoardManager boardManager, int columnWidth, int columnHeight, Context context)
+    public BoardGridAdapter(BoardManager boardManager, Context context)
     {
         this.boardManager = boardManager;
         this.context = context;
-        this.columnWidth = columnWidth;
-        this.columnHeight = columnHeight;
     }
 
     @Override
@@ -71,6 +70,8 @@ class BoardGridAdapter extends BaseAdapter {
         //TODO: set the button style
         if (boardManager.getBoard().getBlock(position).isMineType()){
             button.setBackgroundColor(Color.BLACK);
+        }else{
+            button.setBackgroundColor(Color.WHITE);
         }
     }
 

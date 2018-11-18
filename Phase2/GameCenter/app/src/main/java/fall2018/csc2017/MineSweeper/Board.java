@@ -46,7 +46,7 @@ public class Board extends Observable implements Serializable {
                 int mines = 0;
                 int[] local = getLocalBlocks(i*numCols+j);
                 for(int x: local){
-                    if (getBlock(x) != null && ((Block) getBlock(x)).isMineType()) {
+                    if (getBlock(x) != null && getBlock(x).isMineType()) {
                         mines += 1;
                     }
                 }
@@ -117,9 +117,11 @@ public class Board extends Observable implements Serializable {
 
     public Block getBlock(int pos){
         try{
-            int r = pos % numCols;
-            int c = (pos - r)/numRows;
-            return blocks[c][r];
+            int c = pos % numRows;
+            int r = (pos - c)/numCols;
+
+            Log.d("lmao", pos+",  "+r+", " +c);
+            return blocks[r][c];
         }catch (IndexOutOfBoundsException e){
             System.out.println("Block does not exist.");
             return null;
