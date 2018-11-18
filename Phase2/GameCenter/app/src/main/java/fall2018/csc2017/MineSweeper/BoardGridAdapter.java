@@ -1,6 +1,7 @@
 package fall2018.csc2017.MineSweeper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -68,7 +69,9 @@ class BoardGridAdapter extends BaseAdapter {
             }
         });
         //TODO: set the button style
-
+        if (boardManager.getBoard().getBlock(position).isMineType()){
+            button.setBackgroundColor(Color.BLACK);
+        }
     }
 
     public void setColumnHeight(int columnHeight) {
