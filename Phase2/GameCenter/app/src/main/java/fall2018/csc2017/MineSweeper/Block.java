@@ -36,6 +36,7 @@ public class Block implements Serializable {
     public boolean isMineType(){
         return isMine;
     }
+
     public boolean getVisibility(){
         return visibility!=UNKNOWN;
     }
