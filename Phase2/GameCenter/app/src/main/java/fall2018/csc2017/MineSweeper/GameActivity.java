@@ -31,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         int displayHeight = gridView.getMeasuredHeight();
         int columnWidth = displayWidth / boardManager.getBoard().getNumCols();
         int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
+        gridView.setNumColumns(boardManager.getBoard().getNumCols());
         gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,columnHeight,this));
         display();
 
