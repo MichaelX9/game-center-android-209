@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.ScoreBoard.ScoreBoard;
 
 /**
@@ -16,19 +17,12 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * A collection of each users' list of scores ranked from lowest to highest
      * allowing for look-up by username.
      */
-    static HashMap<String, ArrayList<Integer>> userToScores = new HashMap<>();
+    HashMap<String, ArrayList<Integer>> userToScores = new HashMap<>();
+
     /**
      * A list of all recorded scores ranked from lowest to highest.
      */
-    static ArrayList<Integer> highScores = new ArrayList<>();
-    /***
-     * Copy of userToScores used for serialization
-     */
-    private HashMap<String, ArrayList<Integer>> userToScoresCopy;
-    /***
-     * Copy of highScores used for serialization
-     */
-    private ArrayList<Integer> highScoresCopy;
+    ArrayList<Integer> highScores = new ArrayList<>();
 
     /***
      * Initialize a scoreboard
@@ -37,21 +31,6 @@ class SlidingTilesScoreBoard extends ScoreBoard {
         durationPlayed = Duration.ofSeconds(0);
     }
 
-    /***
-     * pre process for serialization
-     */
-    void preSer() {
-        this.highScoresCopy = highScores;
-        this.userToScoresCopy = userToScores;
-    }
-
-    /***
-     * post process for serialization
-     */
-    void postSer() {
-        highScores = highScoresCopy;
-        userToScores = userToScoresCopy;
-    }
 
     /**
      * Return the highest score user username has achieved so far; if user username has no scores,
