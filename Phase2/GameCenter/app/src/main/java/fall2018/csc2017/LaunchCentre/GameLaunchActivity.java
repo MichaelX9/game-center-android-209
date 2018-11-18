@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import fall2018.csc2017.MineSweeper.GameActivity;
 import fall2018.csc2017.slidingtiles.R;
 import fall2018.csc2017.slidingtiles.StartingActivity;
 
@@ -45,5 +46,10 @@ public class GameLaunchActivity extends AppCompatActivity {
                 GameLaunchActivity.this.startActivity(tmp);
             }
         });
+    }
+
+    public void openMineSweeper(View view){
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }

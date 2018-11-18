@@ -29,6 +29,7 @@
         android:layout_marginTop="189dp"
         android:background="@android:color/transparent"
         android:clickable="true"
+        android:onClick="openMineSweeper"
         app:srcCompat="@drawable/ic_minesweeper_icon" />
 
     <ImageButton
