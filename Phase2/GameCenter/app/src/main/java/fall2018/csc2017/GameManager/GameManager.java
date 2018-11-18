@@ -58,7 +58,7 @@ public abstract class GameManager {
         gameData.add(gameState);
     }
 
-    /***
+    /**
      * getter for scoreboard
      * @return scoreboard
      */
@@ -67,11 +67,21 @@ public abstract class GameManager {
     }
 
     /**
+     * getter for the username
+     * @return username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+
+    /**
      * Abstract method for reversing the previous move taken.
      */
     abstract public void undo();
 
-    /**For the file-reading/writing aspects, Noah cited the following:
+    /*
+     * For the file-reading/writing aspects, Noah cited the following:
      * https://stackoverflow.com/questions/35481924/write-a-string-to-a-file
      * https://stackoverflow.com/questions/5627353/how-to-create-file-directories-and-folders-in-android-data-data-project-filesyst
      */
@@ -239,9 +249,9 @@ public abstract class GameManager {
         }
     }
 
-    public List gameScoreGetter(Context context, String gameName){
+    public static ArrayList<Integer> gameScoreGetter(Context context, String gameName){
         String path = context.getFilesDir() + File.separator + "/saves/";
-        List<Object> gameScores = new ArrayList<>();
+        ArrayList<Integer> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
             String curLine;
@@ -258,15 +268,15 @@ public abstract class GameManager {
         return gameScores;
     }
 
-    public List ScoreGetter(Context context, String gameName, String username){
+    public static ArrayList<Integer> scoreGetter(Context context, String gameName, String username){
         String path = context.getFilesDir() + File.separator + "/saves/";
-        List<Object> gameScores = new ArrayList<>();
+        ArrayList<Integer> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
             String curLine;
             while((curLine = reader.readLine()) != null){
                 String[] split = curLine.split("-");
-                if (split[0] == gameName && split[1] == username){
+                if (split[0].equals(gameName) && split[1].equals(username)){
                     gameScores.add(Integer.parseInt(split[2]));
                 }
             }
