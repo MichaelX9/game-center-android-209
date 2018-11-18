@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
 public class SlidingTilesScoreboardActivity extends AppCompatActivity {
@@ -17,8 +20,10 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         String currentUser = GameLaunchActivity.username;
+        ArrayList<Integer> userHighScores = GameManager.scoreGetter(
+                this,"SlidingTiles", currentUser);
 
-        if (SlidingTilesScoreBoard.userToScores.get(currentUser) != null) {
+        if (userHighScores != null) {
             displayUserHighScores(currentUser, yourScores);
         } else {
             String display = "You do not have any scores yet. ";
@@ -34,13 +39,14 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
      * @param userScores the TextView for the user's high scores
      */
     private void displayUserHighScores(String username, TextView userScores) {
-        int numberOfUserScores = SlidingTilesScoreBoard.userToScores.get(username).size();
+        ArrayList<Integer> userHighScores = GameManager.scoreGetter(
+                this,"SlidingTiles", username);
+        int numberOfUserScores = userHighScores.size();
         StringBuilder userHighScoresBuilder = new StringBuilder();
         for (int i = 1; i <= 10; i++) {
             if (i < numberOfUserScores) {
                 userHighScoresBuilder.append(
-                        SlidingTilesScoreBoard.userToScores.get(
-                                username).get(numberOfUserScores - i));
+                        userHighScores.get(numberOfUserScores - i));
                 userHighScoresBuilder.append("\n");
             }
         }
@@ -52,12 +58,13 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
      * @param globalScores the TextView for the game's high scores
      */
     private void displayGlobalHighScores(TextView globalScores) {
-        int numberOfGlobalScores = SlidingTilesScoreBoard.highScores.size();
+        ArrayList<Integer> globalHighScores = GameManager.gameScoreGetter(this,
+                "SlidingTiles");
+        int numberOfGlobalScores = globalHighScores.size();
         StringBuilder globalHighScoresBuilder = new StringBuilder();
         for (int i = 1; i <= 10; i++) {
             if (i < numberOfGlobalScores) {
-                globalHighScoresBuilder.append(
-                        SlidingTilesScoreBoard.highScores.get(numberOfGlobalScores - i));
+                globalHighScoresBuilder.append(globalHighScores.get(numberOfGlobalScores - i));
                 globalHighScoresBuilder.append("\n");
             }
         }
