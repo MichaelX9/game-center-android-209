@@ -19,25 +19,28 @@
         android:clickable="true"
         app:srcCompat="@drawable/ic_sliding_tiles_icon" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/mineSweeper"
         android:layout_width="121dp"
         android:layout_height="132dp"
         android:layout_alignStart="@+id/slidingTiles"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="189dp"
-        android:contentDescription="Coming Soon"
-        app:srcCompat="@drawable/ic_game_coming_soon_icon" />
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_minesweeper_icon" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ImageButton
+        android:id="@+id/twentyForty"
         android:layout_width="121dp"
         android:layout_height="132dp"
         android:layout_alignStart="@+id/slidingTiles"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="332dp"
-        app:srcCompat="@drawable/ic_game_coming_soon_icon" />
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_2048_icon" />
 
 </RelativeLayout>
