@@ -17,6 +17,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
     private GridView gridView;
     private BoardManager boardManager;
+    private int columnWidth,columnHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,28 @@ public class GameActivity extends AppCompatActivity implements Observer {
         boardManager = new BoardManager(new Board(10,10,0.25));
         boardManager.getBoard().addObserver(this);
 
+
         gridView = findViewById(R.id.MSgridview);
-        int displayWidth = gridView.getMeasuredWidth();
-        int displayHeight = gridView.getMeasuredHeight();
-        int columnWidth = displayWidth / boardManager.getBoard().getNumCols();
-        int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
         gridView.setNumColumns(boardManager.getBoard().getNumCols());
-        gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,columnHeight,this));
+        gridView.setAdapter(new BoardGridAdapter(boardManager,this));
+        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
+                                this);
+                        int displayWidth = gridView.getMeasuredWidth();
+                        int displayHeight = gridView.getMeasuredHeight();
+
+                        columnWidth = displayWidth / boardManager.getBoard().getNumCols();
+                        columnHeight = displayHeight / boardManager.getBoard().getNumRows();
+
+                        ((BoardGridAdapter)gridView.getAdapter()).setColumnWidth(columnWidth);
+                        ((BoardGridAdapter)gridView.getAdapter()).setColumnHeight(columnHeight);
+                        ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
+                    }
+                });
+
         display();
 
     }
