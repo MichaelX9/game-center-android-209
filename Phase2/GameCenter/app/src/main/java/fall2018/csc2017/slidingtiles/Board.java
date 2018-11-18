@@ -73,7 +73,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * Checker for board solvability.
      */
 
-    boolean isSolvable(List<Tile> tiles){
+    private boolean isSolvable(List<Tile> tiles){
         int parity = 0;
         int width = numCols;
         int curRow = 0;
