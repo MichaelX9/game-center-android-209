@@ -42,7 +42,7 @@ public class BoardManager {
      * @param position The index of the block in board.blocks
      */
     public void processLongClick(Context context, int position){
-        if(!board.getBlock(position).getVisibility()){
+        if(!board.getBlock(position).isVisible()){
             board.getBlock(position).toggleFlagged();
         }
     }

@@ -99,7 +99,7 @@ class BoardGridAdapter extends BaseAdapter {
                 button.setBackgroundResource(R.drawable.minesweeper_tile_flaged);
             }
             else {
-                button.setBackgroundResource(R.drawable.minesweeper_tile);
+                button.setBackgroundResource(R.drawable.minesweeper_tile_unknown_selector);
             }
         }
     }
