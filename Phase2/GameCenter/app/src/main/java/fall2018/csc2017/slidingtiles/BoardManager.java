@@ -73,7 +73,7 @@ class  BoardManager implements Serializable {
      *
      * @return whether the tiles are in row-major order
      */
-    private boolean puzzleSolved() {
+    boolean puzzleSolved() {
         Iterator<Tile> iter = this.board.iterator();
         int i = 1;
         while (iter.hasNext()) {
@@ -123,7 +123,7 @@ class  BoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
-    private boolean isValidTap(int position) {
+    boolean isValidTap(int position) {
         return !posEmptyTile(position).equals("None");
     }
 
