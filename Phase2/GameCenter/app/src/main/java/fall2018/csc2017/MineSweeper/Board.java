@@ -1,26 +1,34 @@
 package fall2018.csc2017.MineSweeper;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Board implements Serializable {
-    private int numCols = 10;
-    private int numRows = 10;
-    private ArrayList<Block> blocks;
+public class Board extends Observable implements Serializable {
+    private int numCols;
+    private int numRows;
+    //private ArrayList<Block> blocks;
+    private Block[][] blocks;
+    double percentMines;
 
-    public Board(int col, int row, int numMines){
+    public Board(int col, int row, double percentMines){
         this.numCols = col;
         this.numRows = row;
-        blocks = new ArrayList<>(col*row);
-        generateBlocks(numMines);
+        this.percentMines = percentMines;
+        //blocks = new ArrayList<>(col*row);
+        blocks = new Block[col][row];
+        generateBlocks();
     }
 
-    private void generateBlocks(int numMines){
-        //TODO: randomly generate the board
-        for (Block i: blocks){
-            i = new Block();
+    private void generateBlocks() {
+        //Randomly generates the board
+        for (int i = 0; i < numCols; i++) {
+            for (int j = 0; j < numRows; j++) {
+                blocks[i][j] = new Block(percentMines);
+            }
         }
     }
 
@@ -44,13 +52,15 @@ public class Board implements Serializable {
         return numCols*numRows;
     }
 
-    public Block getBlock(int row, int col){
-        return getBlock((row)*numCols+col);
-    }
 
-    public Block getBlock(int index){
+
+    public Block getBlock(int pos){
         try{
-            return blocks.get(index);
+
+            int r = pos % numCols;
+            int c = (pos - r)/numRows;
+            Log.d("lmao", r+" ," +c);
+            return blocks[c][r];
         }catch (IndexOutOfBoundsException e){
             System.out.println("Block does not exist.");
             return null;
