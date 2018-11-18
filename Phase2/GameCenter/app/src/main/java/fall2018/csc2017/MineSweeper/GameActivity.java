@@ -7,14 +7,15 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import fall2018.csc2017.slidingtiles.R;
 
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements Observer {
 
     private GridView gridView;
-    private int columnWidth,columnHeight;
     private BoardManager boardManager;
 
     @Override
@@ -22,21 +23,34 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
 
+        boardManager = new BoardManager(new Board(10,10,0.25));
+        boardManager.getBoard().addObserver(this);
+
         gridView = findViewById(R.id.MSgridview);
         int displayWidth = gridView.getMeasuredWidth();
         int displayHeight = gridView.getMeasuredHeight();
-        columnWidth = displayWidth / boardManager.getBoard().getNumCols();
-        columnHeight = displayHeight / boardManager.getBoard().getNumRows();
+        int columnWidth = displayWidth / boardManager.getBoard().getNumCols();
+        int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
+        gridView.setNumColumns(boardManager.getBoard().getNumCols());
         gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,columnHeight,this));
+        display();
 
     }
 
-    private ArrayList<Button> generateButtons(){
-        //TODO: generate buttons of blocks from the board
-        return null;
-    }
+
 
     private void display(){
+        ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
+    }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        display();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        display();
     }
 }
