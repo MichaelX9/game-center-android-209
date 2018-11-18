@@ -120,7 +120,9 @@ public abstract class ScoreBoard implements Serializable {
     /**
      * Returns # of moves
      */
-    public int getNumberOfMoves(){return numberOfMoves;}
+    public int getNumberOfMoves() {
+        return numberOfMoves;
+    }
 
     /**
      * writes object using default implementation.
