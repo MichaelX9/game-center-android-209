@@ -9,18 +9,21 @@ import java.util.Iterator;
 
 import fall2018.csc2017.GameManager.GameManager;
 
+import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 class  BoardManager implements Serializable {
 
     static int maximumComplexity = 200;
+
     SlidingTilesScoreBoard scoreBoard;
+
     /**
      * The board being managed.
      */
     private Board board;
-
 
     /**
      * Manage a board that has been pre-populated.
@@ -35,8 +38,11 @@ class  BoardManager implements Serializable {
      * setter for scoreboard
      * @param scoreBoard the scoreboard
      */
-    void setScoreBoard(SlidingTilesScoreBoard scoreBoard) {
+    void setScoreBoard(Context context, SlidingTilesScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
+        this.scoreBoard.userToScores.put(username,
+                GameManager.scoreGetter(context, "SlidingTiles", username));
+        this.scoreBoard.highScores = GameManager.gameScoreGetter(context, "SlidingTiles");
     }
 
     /**

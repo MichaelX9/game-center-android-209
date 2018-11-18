@@ -12,6 +12,7 @@ public class SlidingTilesManager extends GameManager {
      * Number of remaining undos for the player. Negative values denote unlimited undo chances
      */
     private static int undos;
+
     /**
      * List of positions of each tapped tile after swapTile occurs.
      */
@@ -28,7 +29,6 @@ public class SlidingTilesManager extends GameManager {
 
     /**
      * Getter for number of undos remaining.
-     *
      * @return number of undos
      */
     int getUndos() {
@@ -84,20 +84,8 @@ public class SlidingTilesManager extends GameManager {
     }
 
     @Override
-    public void save(Context context) {
-        if (getScoreBoard() != null) {
-            ((SlidingTilesScoreBoard) getScoreBoard()).preSer();
-        }
-
-        super.save(context);
-    }
-
-    @Override
     public void load(Context context, String filename) {
         super.load(context, filename);
-        if (getScoreBoard() != null) {
-            ((SlidingTilesScoreBoard) getScoreBoard()).postSer();
-        }
         getGameState().decompress(context);
     }
 }

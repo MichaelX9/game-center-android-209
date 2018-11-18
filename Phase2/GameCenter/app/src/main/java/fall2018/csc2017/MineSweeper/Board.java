@@ -116,11 +116,14 @@ public class Board extends Observable implements Serializable {
 
 
     public Block getBlock(int pos){
+
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;
 
-            Log.d("lmao", pos+",  "+r+", " +c);
+
+            setChanged();
+            notifyObservers();
             return blocks[r][c];
         }catch (IndexOutOfBoundsException e){
             System.out.println("Block does not exist.");

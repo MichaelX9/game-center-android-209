@@ -5,21 +5,15 @@ import java.util.Random;
 
 public class Block implements Serializable {
 
-    private int visibility = UNKNOWN;
-
     /***
      * Number of mines around this block.
      * Equals MINE if the block itself is a mine.
      */
     private int numMines;
-    private boolean isMine = false;
     private boolean flagged = false;
+    private boolean visible = false;
 
     static final int MINE = -1;
-    static final int KNOWN = 9;
-    static final int UNKNOWN = 10;
-    static final int FLAG = 11;
-    static final int MARKED = 12;
 
     public Block(){
         numMines = 0;
@@ -29,25 +23,37 @@ public class Block implements Serializable {
         Random rand = new Random();
 
         if (rand.nextDouble() < percentMines) {
-            this.isMine = true;
+            this.numMines = MINE;
         }
 
     }
 
     public boolean isMineType(){
-        return isMine;
+        return this.numMines==MINE;
     }
 
-    public boolean getVisibility(){
-        return visibility!=UNKNOWN;
+    public boolean isVisible(){
+        return visible;
     }
 
-    public void toggleFlagged(){
-        flagged = !flagged;
+    public boolean isFlagged(){
+        return flagged;
     }
 
     public void setVisible(){
-        visibility = KNOWN;
+        visible = true;
+        if (isFlagged()){
+            flagged = false;
+        }
+    }
+
+    public void toggleFlagged(){
+        if (isVisible()){
+            flagged = false;
+        }else{
+            flagged = !flagged;
+        }
+
     }
 
     public int getNumMines() {

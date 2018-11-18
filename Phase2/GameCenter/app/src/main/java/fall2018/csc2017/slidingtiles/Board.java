@@ -2,6 +2,7 @@ package fall2018.csc2017.slidingtiles;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
@@ -55,6 +56,9 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
         tiles.get(numTiles - 1).setEmpty();
         Collections.shuffle(tiles);
+        while (!isSolvable(tiles)){
+            Collections.shuffle(tiles);
+        }
 
         Iterator<Tile> iter = tiles.iterator();
 
@@ -62,6 +66,44 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
             for (int col = 0; col != numCols; col++) {
                 this.tiles[row][col] = iter.next();
             }
+        }
+    }
+
+    /**
+     * Checker for board solvability.
+     */
+
+    private boolean isSolvable(List<Tile> tiles){
+        int parity = 0;
+        int width = numCols;
+        int curRow = 0;
+        int blankRow = 0;
+
+        for (int i = 0; i < numCols * numRows; i++){
+            if (i % width == 0){
+                curRow ++;
+            }
+            if (tiles.get(i).getId() == numRows * numCols){
+                blankRow = curRow;
+                continue;
+            }
+            for (int j = i+1; j < numCols * numRows; j++){
+                if (tiles.get(i).getId() > tiles.get(j).getId() && tiles.get(j).getId() != 0){
+                    parity++;
+                }
+            }
+
+        }
+        if (width%2 == 0){
+            if (blankRow % 2 ==0){
+                return parity % 2 ==0;
+            }
+            else {
+                return parity % 2 != 0;
+            }
+        }
+        else {
+            return parity % 2 ==0;
         }
     }
 

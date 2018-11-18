@@ -81,7 +81,8 @@ public class SettingupActivity extends AppCompatActivity {
     public void switchToBGSelection(Board board) {
         Intent intent = new Intent(this, ChooseImageActivity.class);
         StartingActivity.manager.setGameState(new BoardManager(board));
-        StartingActivity.manager.getGameState().setScoreBoard(new SlidingTilesScoreBoard());
+        StartingActivity.manager.getGameState().setScoreBoard(this,
+                new SlidingTilesScoreBoard());
         startActivity(intent);
     }
 
