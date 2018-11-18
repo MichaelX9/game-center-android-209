@@ -13,6 +13,7 @@ public class Block implements Serializable {
      */
     private int numMines;
     private boolean isMine = false;
+    private boolean flagged = false;
 
     static final int MINE = -1;
     static final int KNOWN = 9;
@@ -36,8 +37,13 @@ public class Block implements Serializable {
     public boolean isMineType(){
         return isMine;
     }
+
     public boolean getVisibility(){
         return visibility!=UNKNOWN;
+    }
+
+    public void toggleFlagged(){
+        flagged = !flagged;
     }
 
     public void setVisible(){
