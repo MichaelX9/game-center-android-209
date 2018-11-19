@@ -82,5 +82,11 @@ public class SlidingTilesManager extends GameManager {
         pastMoves.remove(pastMoves.size() - 1);
         getGameState().scoreBoard.incrementUndoCount();
     }
+
+    @Override
+    public void load(Context context, String filename) {
+        super.load(context, filename);
+        getGameState().decompress(context);
+    }
 }
 

@@ -196,7 +196,7 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     private void addDeleteButtonListener() {
-        Button deleteButton = findViewById(R.id.deleter);
+        ImageButton deleteButton = findViewById(R.id.deleter);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
