@@ -65,15 +65,32 @@ public class Board extends Observable implements Serializable {
      */
     private int[] getLocalBlocks(int pos){
         int[] local = new int[8];
-        local[0] = (pos-1-numCols);
-        local[1] = (pos-numCols);
-        local[2] = (pos+1+numCols);
-        local[3] = (pos-1);
-        local[4] = (pos+1);
-        local[5] = (pos-1+numCols);
-        local[6] = (pos+numCols);
-        local[7]= (pos+1+numCols);
-
+        int c = pos % numRows;
+        int r = (pos - c)/numCols;
+        if (c > 0){
+            local[3] = (pos-1);
+            if (r > 0){
+                local[0] = (pos-1-numCols);
+            }
+            if (r+1 < numRows){
+                local[5] = (pos-1+numCols);
+            }
+        }
+        if (c+1 < numCols){
+            local[4] = (pos+1);
+            if (r > 0){
+                local[2] = (pos+1-numCols);
+            }
+            if (r+1 < numRows){
+                local[7]= (pos+1+numCols);
+            }
+        }
+        if (r> 0){
+            local[1] = (pos-numCols);
+        }
+        if (r+1 < numRows){
+            local[6] = (pos+numCols);
+        }
         return local;
     }
 
@@ -103,16 +120,20 @@ public class Board extends Observable implements Serializable {
      * @param pos the position of the given block
      */
     public void revealLocal(int pos){
-        if (getBlock(pos).getNumMines() == 0){
-            for (int l: getLocalBlocks(pos)){
-                if (getBlock(l) != null){
-                    revealLocal(l);
+        if(getBlock(pos).getNumMines() == 0){
+            for(int i: getLocalBlocks(pos)){
+                if (!getBlock(i).isVisible() & getBlock(i).getNumMines() == 0){
+                    revealLocal(i);
+                }
+                else if(!getBlock(i).isVisible() & getBlock(i).getNumMines() != 0){
+                    getBlock(i).setVisible();
                 }
             }
         }
-        getBlock(pos).setVisible();
-    }
 
+        getBlock(pos).setVisible();
+
+    }
 
 
     public Block getBlock(int pos){

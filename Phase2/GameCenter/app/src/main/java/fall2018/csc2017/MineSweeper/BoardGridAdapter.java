@@ -87,7 +87,7 @@ class BoardGridAdapter extends BaseAdapter {
         //TODO: set the button style
         Block block = boardManager.getBoard().getBlock(position);
         if (block.isVisible()){
-            if (block.getNumMines() != block.MINE) {
+            if (!block.isMineType()) {
                 button.setBackgroundResource(numberBlocks[block.getNumMines()]);
             }
             else{
