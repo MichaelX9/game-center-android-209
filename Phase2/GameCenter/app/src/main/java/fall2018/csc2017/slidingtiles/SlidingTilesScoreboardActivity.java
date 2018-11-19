@@ -24,7 +24,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"SlidingTiles", currentUser);
 
-        if (userHighScores != null) {
+        if (userHighScores.size() != 0) {
             displayUserHighScores(currentUser, yourScores);
         } else {
             String display = "You do not have any scores yet. ";
