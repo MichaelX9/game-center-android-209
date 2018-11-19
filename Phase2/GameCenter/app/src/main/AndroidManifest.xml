@@ -20,13 +20,13 @@
         </activity>
         <activity android:name=".StartingActivity" />
         <activity android:name=".GameActivity" />
+        <activity android:name="fall2018.csc2017.MineSweeper.MenuActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.RegisterActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.GameLaunchActivity" />
         <activity android:name=".SettingupActivity" />
         <activity android:name=".SlidingTilesScoreboardActivity" />
         <activity android:name=".ChooseImageActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
-        <activity android:name="fall2018.csc2017.MineSweeper.StartingActivity"></activity>
     </application>
 
 </manifest>
