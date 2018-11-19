@@ -69,7 +69,6 @@ class SlidingTilesScoreBoard extends ScoreBoard {
         int d = ((numberOfSeconds / 60) * 5) + (numberOfUndos * (BoardManager.maximumComplexity -
                 complexityMeasure)) + (numberOfMoves * 3);
         score -= d;
-
         updateData(score);
         return score;
     }

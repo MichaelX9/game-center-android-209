@@ -42,7 +42,7 @@ class  BoardManager implements Serializable {
         this.scoreBoard = scoreBoard;
         this.scoreBoard.userToScores.put(username,
                 GameManager.scoreGetter(context, "SlidingTiles", username));
-        this.scoreBoard.highScores = GameManager.gameScoreGetter(context, "SlidingTiles");
+        this.scoreBoard.highScores = GameManager.scoreGetter(context, "SlidingTiles");
     }
 
     /**
