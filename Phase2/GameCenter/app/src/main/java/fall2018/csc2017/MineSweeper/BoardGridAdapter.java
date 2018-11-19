@@ -77,13 +77,17 @@ class BoardGridAdapter extends BaseAdapter {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager.processClick(context, position);
+                if (!boardManager.getBoard().solved()){
+                    boardManager.processClick(context, position);
+                }
             }
         });
         button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                boardManager.processLongClick(context, position);
+                if (!boardManager.getBoard().solved()){
+                    boardManager.processLongClick(context, position);
+                }
                 return true;
             }
         });

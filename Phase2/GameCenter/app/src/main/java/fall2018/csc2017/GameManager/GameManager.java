@@ -30,7 +30,7 @@ public abstract class GameManager {
     /**
      * The number of moves required to trigger an autosave.
      */
-    public static int autosaveInterval = 3;
+    public static int autosaveInterval;
     /**
      * The file associated with the game the current user is playing. Null if no file.
      */
@@ -42,20 +42,26 @@ public abstract class GameManager {
     protected List<Object> gameData = new ArrayList<Object>();
     protected ScoreBoard scoreBoard;
     /**
-     * The current user's name & password, set to the global variables.
+     * The current user's name, set to the global variables.
      */
     private String username;
+    /**
+     * The current game being played.
+     */
+    private String gameName;
 
     /**
      * Standard constructor for GameManager to be called by all subclasses.
      *
      * @param name - username of associated user needed for save file creation and retrieval.
      */
-    public GameManager(String name) {
+    public GameManager(String name, String gameName) {
         username = name;
         currentFile = username + ".txt";
         gameData.add(scoreBoard);
         gameData.add(gameState);
+        this.gameName = gameName;
+
     }
 
     /**
@@ -89,7 +95,7 @@ public abstract class GameManager {
      * Saves the gameData into two files, one for scoreboard related info, and another for game-position info.
      */
     public void save(Context context) {
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -118,7 +124,7 @@ public abstract class GameManager {
      * Loads a given file.
      */
     public void load(Context context, String filename) {
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File load = new File(path, filename);
         File loadInfo = new File(path, "INFO_" + filename);
         InputStream inputStream;
@@ -147,7 +153,7 @@ public abstract class GameManager {
      */
     public final String[] findSaves(Context context) {
 
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File file = new File(path);
         String[] saves = file.list();
         if (saves != null) {
@@ -179,15 +185,15 @@ public abstract class GameManager {
      * Noah cited https://www.geeksforgeeks.org/delete-file-using-java/
      */
     public final boolean deleteSave(Context context, String file){
-        File mainDelete = new File(context.getFilesDir(),"/saves/"+file);
-        File infoDelete = new File(context.getFilesDir(), "/saves/"+"INFO_"+file);
+        File mainDelete = new File(context.getFilesDir(),"/saves/"+ gameName +"/"+file);
+        File infoDelete = new File(context.getFilesDir(), "/saves/" + gameName +"/"+"INFO_"+file);
         return mainDelete.delete() && infoDelete.delete();
 
     }
 
     //Used for transition between activities
     public final void tempSave(Context context) {
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -216,12 +222,12 @@ public abstract class GameManager {
      * Creates necessary files/folders if user is opening app for the first time.
      */
     public void checkNew(Context context){
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
         }
-        path = context.getFilesDir() + File.separator + "/saves/";
+        path = context.getFilesDir() + File.separator + "/saves/"+ gameName +"/";
         File[] files = {new File(path+"temp.txt"), new File(path+"INFO_temp.txt"),
                 new File(path + "scores.txt")};
         for (File create: files){
@@ -236,7 +242,7 @@ public abstract class GameManager {
     }
 
     public void addScore(Context context, Integer newScore, String gameName){
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         String score = newScore.toString();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path + "scores.txt", true));
@@ -249,7 +255,7 @@ public abstract class GameManager {
     }
 
     public static ArrayList<Integer> scoreGetter(Context context, String gameName){
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         ArrayList<Integer> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
@@ -268,7 +274,7 @@ public abstract class GameManager {
     }
 
     public static ArrayList<Integer> scoreGetter(Context context, String gameName, String username){
-        String path = context.getFilesDir() + File.separator + "/saves/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         ArrayList<Integer> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));

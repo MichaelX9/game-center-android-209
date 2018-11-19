@@ -1,3 +1,4 @@
+/*
 package fall2018.csc2017.TwentyFortyEight;
 
 import android.app.Activity;
@@ -42,3 +43,4 @@ public class GameActivity extends AppCompatActivity implements Observer {
         }
     }
 }
+*/

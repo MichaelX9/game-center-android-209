@@ -126,7 +126,6 @@ public class Board extends Observable implements Observer, Serializable {
      */
     public void revealLocal(int pos){
 
-
         getBlock(pos).setVisible();
         if(!getBlock(pos).isMineType() && getBlock(pos).getNumMines() == 0){
             for(int i: getLocalBlocks(pos)){
@@ -158,4 +157,21 @@ public class Board extends Observable implements Observer, Serializable {
         setChanged();
         notifyObservers();
     }
+
+    /***
+     *Checks (and returns true) if the board is solved.
+     */
+    public boolean solved(){
+        for (int i = 0; i < numCols; i++) {
+            for (int j = 0; j < numRows; j++) {
+                if (!getBlock(i*numCols+j).isVisible() && !getBlock(i*numCols+j).isMineType()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
 }

@@ -24,7 +24,8 @@ public class SlidingTilesManager extends GameManager {
      * @param name - username of player.
      */
     SlidingTilesManager(String name) {
-        super(name);
+        super(name, "SlidingTiles");
+        autosaveInterval = 3;
     }
 
     /**

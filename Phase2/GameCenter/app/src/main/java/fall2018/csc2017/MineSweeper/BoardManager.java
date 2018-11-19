@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
-public class BoardManager {
+public class BoardManager implements Serializable {
     private Board board;
 
     public BoardManager(Board board){
@@ -33,8 +35,10 @@ public class BoardManager {
 
             }
         else{
-            Toast.makeText(context, "You haven't lost yet", Toast.LENGTH_SHORT).show();
             board.revealLocal(position);
+            if (board.solved()){
+                Toast.makeText(context, "You won!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -47,5 +51,10 @@ public class BoardManager {
             board.getBlock(position).toggleFlagged();
         }
     }
+
+
+
+
+
 
 }
