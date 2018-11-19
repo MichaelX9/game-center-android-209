@@ -44,9 +44,9 @@ public class Board extends Observable implements Serializable {
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 int mines = 0;
-                int[] local = getLocalBlocks(i*numCols+j);
+                int[] local = getLocalBlocks(i*numRows+j);
                 for(int x: local){
-                    if (getBlock(x) != null && getBlock(x).isMineType()) {
+                    if (x != -1 && getBlock(x).isMineType()) {
                         mines += 1;
                     }
                 }
@@ -65,8 +65,10 @@ public class Board extends Observable implements Serializable {
      */
     private int[] getLocalBlocks(int pos){
         int[] local = new int[8];
+        local[0]=local[1]=local[2]=local[3]=local[4]=local[5]=local[6]=local[7]=-1;
         int c = pos % numRows;
         int r = (pos - c)/numCols;
+
         if (c > 0){
             local[3] = (pos-1);
             if (r > 0){
@@ -92,6 +94,7 @@ public class Board extends Observable implements Serializable {
             local[6] = (pos+numCols);
         }
         return local;
+
     }
 
 
@@ -120,28 +123,27 @@ public class Board extends Observable implements Serializable {
      * @param pos the position of the given block
      */
     public void revealLocal(int pos){
-        if(getBlock(pos).getNumMines() == 0){
+
+
+        getBlock(pos).setVisible();
+        if(!getBlock(pos).isMineType() && getBlock(pos).getNumMines() == 0){
             for(int i: getLocalBlocks(pos)){
-                if (!getBlock(i).isVisible() & getBlock(i).getNumMines() == 0){
+                if (i != -1 && !getBlock(i).isVisible() && getBlock(i).getNumMines() == 0){
                     revealLocal(i);
                 }
-                else if(!getBlock(i).isVisible() & getBlock(i).getNumMines() != 0){
+                else if(i != -1 && !getBlock(i).isVisible() && getBlock(i).getNumMines() != 0){
                     getBlock(i).setVisible();
                 }
             }
         }
 
-        getBlock(pos).setVisible();
-
     }
 
 
     public Block getBlock(int pos){
-
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;
-
 
             setChanged();
             notifyObservers();

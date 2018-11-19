@@ -3,6 +3,7 @@ package fall2018.csc2017.MineSweeper;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -71,7 +72,9 @@ class BoardGridAdapter extends BaseAdapter {
     }
 
     private void initiateButton(Button button, final int position){
+
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 boardManager.processClick(context, position);

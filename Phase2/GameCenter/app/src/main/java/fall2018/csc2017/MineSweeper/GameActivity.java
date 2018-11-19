@@ -1,5 +1,6 @@
 package fall2018.csc2017.MineSweeper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
@@ -24,7 +25,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
 
-        boardManager = new BoardManager(new Board(10,10,0.25));
+        boardManager = new BoardManager(new Board(10,10,0.15));
         boardManager.getBoard().addObserver(this);
 
 
@@ -69,4 +70,19 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onResume();
         display();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        for (int i = 0; i < boardManager.getBoard().getNumCols(); i++) {
+            for (int j = 0; j < boardManager.getBoard().getNumRows(); j++) {
+                boardManager.getBoard().getBlock(i*boardManager.getBoard().getNumCols()+j).setNumMines(0);
+            }
+        }
+
+        Intent i = new Intent(this, MenuActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(i);
+    }
+
 }
