@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
@@ -42,6 +43,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"SlidingTiles", username);
         int numberOfUserScores = userHighScores.size();
+        Collections.sort(userHighScores);
         StringBuilder userHighScoresBuilder = new StringBuilder();
         for (int i = 1; i <= 10; i++) {
             if (i < numberOfUserScores) {
@@ -61,6 +63,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<Integer> globalHighScores = GameManager.gameScoreGetter(this,
                 "SlidingTiles");
         int numberOfGlobalScores = globalHighScores.size();
+        Collections.sort(globalHighScores);
         StringBuilder globalHighScoresBuilder = new StringBuilder();
         for (int i = 1; i <= 10; i++) {
             if (i < numberOfGlobalScores) {
