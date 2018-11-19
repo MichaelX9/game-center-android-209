@@ -60,7 +60,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
      * @param globalScores the TextView for the game's high scores
      */
     private void displayGlobalHighScores(TextView globalScores) {
-        ArrayList<Integer> globalHighScores = GameManager.gameScoreGetter(this,
+        ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
                 "SlidingTiles");
         int numberOfGlobalScores = globalHighScores.size();
         Collections.sort(globalHighScores);

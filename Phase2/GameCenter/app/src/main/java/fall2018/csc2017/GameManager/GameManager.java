@@ -74,7 +74,6 @@ public abstract class GameManager {
         return username;
     }
 
-
     /**
      * Abstract method for reversing the previous move taken.
      */
@@ -249,7 +248,7 @@ public abstract class GameManager {
         }
     }
 
-    public static ArrayList<Integer> gameScoreGetter(Context context, String gameName){
+    public static ArrayList<Integer> scoreGetter(Context context, String gameName){
         String path = context.getFilesDir() + File.separator + "/saves/";
         ArrayList<Integer> gameScores = new ArrayList<>();
         try{
