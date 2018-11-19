@@ -12,6 +12,7 @@ public class Block implements Serializable {
     private int numMines;
     private boolean flagged = false;
     private boolean visible = false;
+    private boolean isMine = false;
 
     static final int MINE = -1;
 
@@ -23,13 +24,13 @@ public class Block implements Serializable {
         Random rand = new Random();
 
         if (rand.nextDouble() < percentMines) {
-            this.numMines = MINE;
+            isMine = true;
         }
 
     }
 
     public boolean isMineType(){
-        return this.numMines==MINE;
+        return isMine;
     }
 
     public boolean isVisible(){

@@ -26,7 +26,7 @@ public class BoardManager {
             Toast.makeText(context, "You lost, loser", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < board.getNumCols(); i++) {
                 for (int j = 0; j < board.getNumRows(); j++) {
-                    board.getBlock(i*board.getNumBlocks()+j).setVisible();
+                    board.getBlock(i*board.getNumCols()+j).setVisible();
                 }
             }
 
