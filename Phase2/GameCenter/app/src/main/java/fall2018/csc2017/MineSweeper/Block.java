@@ -1,9 +1,10 @@
 package fall2018.csc2017.MineSweeper;
 
 import java.io.Serializable;
+import java.util.Observable;
 import java.util.Random;
 
-public class Block implements Serializable {
+public class Block extends Observable implements Serializable {
 
     /***
      * Number of mines around this block.
@@ -46,6 +47,8 @@ public class Block implements Serializable {
         if (isFlagged()){
             flagged = false;
         }
+        setChanged();
+        notifyObservers();
     }
 
     public void toggleFlagged(){
@@ -54,7 +57,8 @@ public class Block implements Serializable {
         }else{
             flagged = !flagged;
         }
-
+        setChanged();
+        notifyObservers();
     }
 
     public int getNumMines() {

@@ -1,5 +1,6 @@
 package fall2018.csc2017.MineSweeper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
     private GridView gridView;
     private BoardManager boardManager;
-    private int columnWidth,columnHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,10 @@ public class GameActivity extends AppCompatActivity implements Observer {
         boardManager = new BoardManager(new Board(10,10,0.15));
         boardManager.getBoard().addObserver(this);
 
+        final Context context = this;
 
         gridView = findViewById(R.id.MSgridview);
         gridView.setNumColumns(boardManager.getBoard().getNumCols());
-        gridView.setAdapter(new BoardGridAdapter(boardManager,this));
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -41,16 +41,12 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / boardManager.getBoard().getNumCols();
-                        columnHeight = displayHeight / boardManager.getBoard().getNumRows();
+                        int columnWidth = displayWidth / boardManager.getBoard().getNumCols();
+                        int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
 
-                        ((BoardGridAdapter)gridView.getAdapter()).setColumnWidth(columnWidth);
-                        ((BoardGridAdapter)gridView.getAdapter()).setColumnHeight(columnHeight);
-                        ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
+                        gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth, columnHeight,context));
                     }
                 });
-
-        display();
 
     }
 
@@ -65,11 +61,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         display();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        display();
-    }
+
 
     @Override
     public void onBackPressed() {

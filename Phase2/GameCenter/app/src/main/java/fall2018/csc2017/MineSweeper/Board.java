@@ -6,8 +6,9 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public class Board extends Observable implements Serializable {
+public class Board extends Observable implements Observer, Serializable {
     private int numCols;
     private int numRows;
     //private ArrayList<Block> blocks;
@@ -32,6 +33,7 @@ public class Board extends Observable implements Serializable {
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 blocks[i][j] = new Block(percentMines);
+                blocks[i][j].addObserver(this);
             }
         }
     }
@@ -144,13 +146,16 @@ public class Board extends Observable implements Serializable {
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;
-
-            setChanged();
-            notifyObservers();
             return blocks[r][c];
         }catch (IndexOutOfBoundsException e){
             System.out.println("Block does not exist.");
             return null;
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setChanged();
+        notifyObservers();
     }
 }

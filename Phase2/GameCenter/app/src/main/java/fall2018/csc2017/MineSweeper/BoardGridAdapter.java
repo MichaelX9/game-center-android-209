@@ -6,9 +6,11 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -17,8 +19,7 @@ import fall2018.csc2017.slidingtiles.R;
 class BoardGridAdapter extends BaseAdapter {
     private BoardManager boardManager;
     private Context context;
-    private int columnWidth = 0;
-    private int columnHeight = 0;
+    private AbsListView.LayoutParams params;
     static private int[] numberBlocks = {
             R.drawable.minesweeper_tile_empty,
             R.drawable.minesweeper_tile_1,
@@ -31,10 +32,11 @@ class BoardGridAdapter extends BaseAdapter {
             R.drawable.minesweeper_tile_8
     };
 
-    public BoardGridAdapter(BoardManager boardManager, Context context)
+    public BoardGridAdapter(BoardManager boardManager,int columnWidth, int columnHeight, Context context)
     {
         this.boardManager = boardManager;
         this.context = context;
+        this.params = new AbsListView.LayoutParams(columnWidth,columnHeight);
     }
 
 
@@ -56,25 +58,23 @@ class BoardGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Button button;
-        if (convertView == null) {
-            button = new Button(context);
-        }else{
-            button = (Button) convertView;
-        }
-        android.widget.AbsListView.LayoutParams params =
-                new android.widget.AbsListView.LayoutParams(columnWidth, columnHeight);
-        button.setLayoutParams(params);
 
+        Button button;
+        button = new Button(context);
         initiateButton(button, position);
 
+        updateButton(button, position);
+
         return button;
+
     }
 
     private void initiateButton(Button button, final int position){
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setLayoutParams(params);
 
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boardManager.processClick(context, position);
@@ -87,7 +87,10 @@ class BoardGridAdapter extends BaseAdapter {
                 return true;
             }
         });
-        //TODO: set the button style
+
+    }
+
+    private void updateButton(Button button, int position){
         Block block = boardManager.getBoard().getBlock(position);
         if (block.isVisible()){
             if (!block.isMineType()) {
@@ -107,11 +110,7 @@ class BoardGridAdapter extends BaseAdapter {
         }
     }
 
-    public void setColumnHeight(int columnHeight) {
-        this.columnHeight = columnHeight;
-    }
-
-    public void setColumnWidth(int columnWidth) {
-        this.columnWidth = columnWidth;
+    public void setColumnWidthHeight(int columnWidth, int columnHeight) {
+        params = new AbsListView.LayoutParams(columnWidth, columnHeight);
     }
 }
