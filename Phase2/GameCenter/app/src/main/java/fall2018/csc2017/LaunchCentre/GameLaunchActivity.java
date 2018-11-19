@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import fall2018.csc2017.MineSweeper.GameActivity;
+import fall2018.csc2017.MineSweeper.MenuActivity;
 import fall2018.csc2017.slidingtiles.R;
 import fall2018.csc2017.slidingtiles.StartingActivity;
 
@@ -29,6 +30,7 @@ public class GameLaunchActivity extends AppCompatActivity {
         setContentView(R.layout.game_launch_centre);
         Log.d(TAG, "onCreate: Starting");
         addSlidingTilesListener();
+        addMinesweeperListener();
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
@@ -48,8 +50,22 @@ public class GameLaunchActivity extends AppCompatActivity {
         });
     }
 
-    public void openMineSweeper(View view){
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+    /**
+     * Opens Minesweeper game.
+     */
+    private void addMinesweeperListener() {
+        ImageButton startMinesweeper = findViewById(R.id.mineSweeper);
+        startMinesweeper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tmp = new Intent(GameLaunchActivity.this, MenuActivity.class);
+                GameLaunchActivity.this.startActivity(tmp);
+            }
+        });
     }
+
+//    public void openMineSweeper(View view){
+//        Intent intent = new Intent(this, GameActivity.class);
+//        startActivity(intent);
+//    }
 }

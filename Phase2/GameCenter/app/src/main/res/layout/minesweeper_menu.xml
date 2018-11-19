@@ -4,11 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_sliding_tiles_background"
-    tools:context=".StartingActivity">
+    android:background="@drawable/ic_minesweeper_background"
+    tools:context="fall2018.csc2017.MineSweeper.MenuActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/save1"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="130dp"
+        android:background="#FCCA46"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/save2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="20dp"
+        android:background="#FCCA46"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/save3"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -21,7 +47,7 @@
         android:visibility="invisible" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/save4"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -30,33 +56,6 @@
         android:layout_marginEnd="20dp"
         android:background="#FCCA46"
         android:text="Button"
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="20dp"
-        android:background="#FCCA46"
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:visibility="invisible" />
-
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="130dp"
-        android:background="#FCCA46"
         android:textColor="@android:color/black"
         android:textSize="12sp"
         android:visibility="invisible" />
@@ -113,15 +112,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="180dp"
-        android:backgroundTint="#FCCA46"
         android:ems="7"
         android:hint="Name your game"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:lines="1"
         android:singleLine="true"
-        android:textColor="#FE7F2D"
         android:textColorHint="#FCCA46"
+        android:backgroundTint="#FCCA46"
+        android:textColor="#FE7F2D"
         android:visibility="invisible" />
 
 

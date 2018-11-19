@@ -1,4 +1,4 @@
-package fall2018.csc2017.TwentyFourtyEight;
+package fall2018.csc2017.TwentyFortyEight;
 
 import android.content.Context;
 import android.view.GestureDetector;
@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.util.Log;
 
-public class SlidtingTouchListener implements View.OnTouchListener {
+public class SlidingTouchListener implements View.OnTouchListener {
     private GestureDetector gestureDetector;
 
     public void OnSlidingTouchListener(Context context){

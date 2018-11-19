@@ -74,7 +74,6 @@ public abstract class GameManager {
         return username;
     }
 
-
     /**
      * Abstract method for reversing the previous move taken.
      */
