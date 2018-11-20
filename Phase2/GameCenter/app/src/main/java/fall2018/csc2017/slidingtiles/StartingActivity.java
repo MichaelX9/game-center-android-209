@@ -72,7 +72,8 @@ public class StartingActivity extends AppCompatActivity {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
                 }
                 else {
-                    Toast.makeText(StartingActivity.this, "You've reached max saves!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartingActivity.this, "You've reached max saves!",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -102,7 +103,8 @@ public class StartingActivity extends AppCompatActivity {
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent scorePage = new Intent(StartingActivity.this, SlidingTilesScoreboardActivity.class);
+                Intent scorePage = new Intent(StartingActivity.this,
+                        SlidingTilesScoreboardActivity.class);
                 StartingActivity.this.startActivity(scorePage);
             }
         });
@@ -113,7 +115,8 @@ public class StartingActivity extends AppCompatActivity {
      * Activates the load file buttons as invisible.
      */
     private void addLoadFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
+        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2),
+                findViewById(R.id.button3), findViewById(R.id.button4)};
 
 
         manager.tempSave(this);
@@ -147,7 +150,8 @@ public class StartingActivity extends AppCompatActivity {
      * Activates the delete file buttons as invisible.
      */
     private void addDeleteFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
+        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2),
+                findViewById(R.id.button3), findViewById(R.id.button4)};
 
         manager.tempSave(this);
         String[] saves = manager.findSaves(StartingActivity.this);
@@ -161,11 +165,14 @@ public class StartingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
-                        if (manager.deleteSave(StartingActivity.this, ((String) loadFiles[finalI].getText()))){
-                            Toast.makeText(StartingActivity.this, "Save deleted", Toast.LENGTH_SHORT).show();
+                        if (manager.deleteSave(StartingActivity.this,
+                                ((String) loadFiles[finalI].getText()))){
+                            Toast.makeText(StartingActivity.this,
+                                    "Save deleted", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(StartingActivity.this, "Could not delete :(", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StartingActivity.this,
+                                    "Could not delete :(", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
