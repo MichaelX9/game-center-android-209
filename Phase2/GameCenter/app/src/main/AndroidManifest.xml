@@ -21,6 +21,7 @@
         <activity android:name=".StartingActivity" />
         <activity android:name=".GameActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.MenuActivity" />
+        <activity android:name="fall2018.csc2017.TwentyFortyEight.MenuActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.RegisterActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.GameLaunchActivity" />
         <activity android:name=".SettingupActivity" />

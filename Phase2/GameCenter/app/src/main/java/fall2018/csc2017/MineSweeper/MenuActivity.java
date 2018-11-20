@@ -89,7 +89,7 @@ public class MenuActivity extends AppCompatActivity {
      * Activates the load file buttons as invisible.
      */
     private void addLoadFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
+        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2), findViewById(R.id.save3), findViewById(R.id.save4)};
 
 
         manager.tempSave(this);
@@ -131,7 +131,7 @@ public class MenuActivity extends AppCompatActivity {
      * Activates the delete file buttons as invisible.
      */
     private void addDeleteFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4)};
+        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2), findViewById(R.id.save3), findViewById(R.id.save4)};
 
         manager.tempSave(this);
         String[] saves = manager.findSaves(MenuActivity.this);
