@@ -32,7 +32,7 @@ class BoardGridAdapter extends BaseAdapter {
             R.drawable.minesweeper_tile_8
     };
 
-    public BoardGridAdapter(BoardManager boardManager,int columnWidth, int columnHeight, Context context)
+    BoardGridAdapter(BoardManager boardManager,int columnWidth, int columnHeight, Context context)
     {
         this.boardManager = boardManager;
         this.context = context;

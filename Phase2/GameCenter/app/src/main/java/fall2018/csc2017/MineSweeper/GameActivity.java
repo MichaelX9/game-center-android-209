@@ -28,7 +28,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
 
-        boardManager = new BoardManager(new Board(10,10,0.15), GameLaunchActivity.username);
+        boardManager = new BoardManager(new Board(10,10,0.15),
+                GameLaunchActivity.username);
         boardManager.getBoard().addObserver(this);
 
         final Context context = this;
@@ -47,7 +48,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         int columnWidth = displayWidth / boardManager.getBoard().getNumCols();
                         int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
 
-                        gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth, columnHeight,context));
+                        gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,
+                                columnHeight,context));
                     }
                 });
 
@@ -76,7 +78,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
         for (int i = 0; i < boardManager.getBoard().getNumCols(); i++) {
             for (int j = 0; j < boardManager.getBoard().getNumRows(); j++) {
-                boardManager.getBoard().getBlock(i*boardManager.getBoard().getNumCols()+j).setNumMines(0);
+                boardManager.getBoard().getBlock(
+                        i*boardManager.getBoard().getNumCols()+j).setNumMines(0);
             }
         }
 

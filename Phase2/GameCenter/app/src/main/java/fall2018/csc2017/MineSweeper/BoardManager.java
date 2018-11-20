@@ -13,7 +13,7 @@ import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 public class BoardManager extends GameManager implements Serializable {
     private Board board;
 
-    public BoardManager(Board board, String username){
+    BoardManager(Board board, String username){
         super(username, "Minesweeper");
         this.board = board;
     }
@@ -26,7 +26,7 @@ public class BoardManager extends GameManager implements Serializable {
      * Processes a tap on a block.
      * @param position The index of the block in board.blocks
      */
-    public void processClick(Context context, int position){
+    void processClick(Context context, int position){
         if (board.getBlock(position).isMineType()){
             Toast.makeText(context, "You lost, loser", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < board.getNumCols(); i++) {
@@ -48,7 +48,7 @@ public class BoardManager extends GameManager implements Serializable {
      *  Processes a tap and hold on a clock
      * @param position The index of the block in board.blocks
      */
-    public void processLongClick(Context context, int position){
+    void processLongClick(Context context, int position){
         if(!board.getBlock(position).isVisible()){
             board.getBlock(position).toggleFlagged();
         }

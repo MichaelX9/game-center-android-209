@@ -21,7 +21,7 @@ public class Block extends Observable implements Serializable {
         numMines = 0;
     }
 
-    public Block(double percentMines){
+    Block(double percentMines){
         Random rand = new Random();
 
         if (rand.nextDouble() < percentMines) {
@@ -30,7 +30,7 @@ public class Block extends Observable implements Serializable {
 
     }
 
-    public boolean isMineType(){
+    boolean isMineType(){
         return isMine;
     }
 
@@ -38,11 +38,11 @@ public class Block extends Observable implements Serializable {
         return visible;
     }
 
-    public boolean isFlagged(){
+    boolean isFlagged(){
         return flagged;
     }
 
-    public void setVisible(){
+    void setVisible(){
         visible = true;
         if (isFlagged()){
             flagged = false;
@@ -51,7 +51,7 @@ public class Block extends Observable implements Serializable {
         notifyObservers();
     }
 
-    public void toggleFlagged(){
+    void toggleFlagged(){
         if (isVisible()){
             flagged = false;
         }else{
@@ -61,11 +61,11 @@ public class Block extends Observable implements Serializable {
         notifyObservers();
     }
 
-    public int getNumMines() {
+    int getNumMines() {
         return numMines;
     }
 
-    public void setNumMines(int numMines) {
+    void setNumMines(int numMines) {
         this.numMines = numMines;
     }
 }

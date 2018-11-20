@@ -63,7 +63,8 @@ public class MenuActivity extends AppCompatActivity {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
                 }
                 else {
-                    Toast.makeText(MenuActivity.this, "You've reached max saves!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuActivity.this, "You've reached max saves!",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -89,7 +90,8 @@ public class MenuActivity extends AppCompatActivity {
      * Activates the load file buttons as invisible.
      */
     private void addLoadFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2), findViewById(R.id.save3), findViewById(R.id.save4)};
+        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2),
+                findViewById(R.id.save3), findViewById(R.id.save4)};
 
 
         manager.tempSave(this);
@@ -131,7 +133,8 @@ public class MenuActivity extends AppCompatActivity {
      * Activates the delete file buttons as invisible.
      */
     private void addDeleteFilesListener(){
-        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2), findViewById(R.id.save3), findViewById(R.id.save4)};
+        final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2),
+                findViewById(R.id.save3), findViewById(R.id.save4)};
 
         manager.tempSave(this);
         String[] saves = manager.findSaves(MenuActivity.this);
@@ -145,11 +148,14 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
-                        if (manager.deleteSave(MenuActivity.this, ((String) loadFiles[finalI].getText()))){
-                            Toast.makeText(MenuActivity.this, "Save deleted", Toast.LENGTH_SHORT).show();
+                        if (manager.deleteSave(MenuActivity.this,
+                                ((String) loadFiles[finalI].getText()))){
+                            Toast.makeText(MenuActivity.this,
+                                    "Save deleted", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(MenuActivity.this, "Could not delete :(", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MenuActivity.this,
+                                    "Could not delete :(", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

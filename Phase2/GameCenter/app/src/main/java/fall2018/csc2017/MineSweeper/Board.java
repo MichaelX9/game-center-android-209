@@ -13,9 +13,9 @@ public class Board extends Observable implements Observer, Serializable {
     private int numRows;
     //private ArrayList<Block> blocks;
     private Block[][] blocks;
-    double percentMines;
+    private double percentMines;
 
-    public Board(int col, int row, double percentMines){
+    Board(int col, int row, double percentMines){
         this.numCols = col;
         this.numRows = row;
         this.percentMines = percentMines;
@@ -100,7 +100,7 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
 
-    public int getNumCols() {
+    int getNumCols() {
         return numCols;
     }
 
@@ -108,7 +108,7 @@ public class Board extends Observable implements Observer, Serializable {
         this.numCols = numCols;
     }
 
-    public int getNumRows() {
+    int getNumRows() {
         return numRows;
     }
 
@@ -116,7 +116,7 @@ public class Board extends Observable implements Observer, Serializable {
         this.numRows = numRows;
     }
 
-    public int getNumBlocks(){
+    int getNumBlocks(){
         return numCols*numRows;
     }
 
@@ -124,7 +124,7 @@ public class Board extends Observable implements Observer, Serializable {
      * Reveal's all the blocks surrounding a given block.
      * @param pos the position of the given block
      */
-    public void revealLocal(int pos){
+    void revealLocal(int pos){
 
         getBlock(pos).setVisible();
         if(!getBlock(pos).isMineType() && getBlock(pos).getNumMines() == 0){
@@ -141,7 +141,7 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
 
-    public Block getBlock(int pos){
+    Block getBlock(int pos){
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;
@@ -161,10 +161,11 @@ public class Board extends Observable implements Observer, Serializable {
     /***
      *Checks (and returns true) if the board is solved.
      */
-    public boolean solved(){
+    boolean solved(){
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
-                if (!getBlock(i*numCols+j).isVisible() && !getBlock(i*numCols+j).isMineType()){
+                if (!getBlock(i*numCols+j).isVisible() && !getBlock(
+                        i*numCols+j).isMineType()){
                     return false;
                 }
             }
