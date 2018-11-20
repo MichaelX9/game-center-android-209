@@ -76,7 +76,8 @@ public class GameLaunchActivity extends AppCompatActivity {
         startMinesweeper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(GameLaunchActivity.this, fall2018.csc2017.TwentyFortyEight.MenuActivity.class);
+                Intent tmp = new Intent(GameLaunchActivity.this,
+                        fall2018.csc2017.TwentyFortyEight.MenuActivity.class);
                 GameLaunchActivity.this.startActivity(tmp);
             }
         });
