@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
-public class BoardManager {
+public class BoardManager extends GameManager {
     private Board board;
 
-    public BoardManager(Board board){
+    public BoardManager(Board board, String username){
+        super(username);
         this.board = board;
     }
 

@@ -59,6 +59,13 @@ public abstract class GameManager {
     }
 
     /**
+     * Default constructor GameManager.
+     */
+
+    public GameManager(){
+    }
+
+    /**
      * getter for scoreboard
      * @return scoreboard
      */
@@ -73,11 +80,6 @@ public abstract class GameManager {
     public String getUsername() {
         return username;
     }
-
-    /**
-     * Abstract method for reversing the previous move taken.
-     */
-    abstract public void undo();
 
     /*
      * For the file-reading/writing aspects, Noah cited the following:

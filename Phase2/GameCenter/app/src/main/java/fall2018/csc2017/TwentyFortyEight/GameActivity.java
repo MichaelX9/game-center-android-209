@@ -14,31 +14,37 @@ import fall2018.csc2017.TwentyFortyEight.SlidingTouchListener;
 public class GameActivity extends AppCompatActivity implements Observer {
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048);
 
         View myview = findViewById(R.id.TFEgrid);
-        myview.setOnTouchListener(new SlidingTouchListener().OnSlidingTouchListener(this)){
+        myview.setOnTouchListener(new SlidingTouchListener(this) {
             @Override
-            public boolean onSlideLeft(){
+            public boolean onSlideLeft() {
                 return true;
             }
 
             @Override
-            public boolean onSlideRight(){
+            public boolean onSlideRight() {
                 return true;
             }
 
             @Override
-            public boolean onSlideUp(){
+            public boolean onSlideUp() {
                 return true;
             }
 
             @Override
-            public boolean onSlideDown(){
+            public boolean onSlideDown() {
                 return true;
             }
-        }
+        });
+    }
+
+    @Override
+    public void update(){
+
     }
 }
+

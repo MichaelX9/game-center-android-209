@@ -5,11 +5,19 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.util.Log;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
+import android.view.View.OnTouchListener;
+
+
 
 public class SlidingTouchListener implements View.OnTouchListener {
+//    private int slideDistX = 100;
+//    private int slideDistY = 100;
+
     private GestureDetector gestureDetector;
 
-    public void OnSlidingTouchListener(Context context){
+    public SlidingTouchListener(Context context){
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
@@ -73,3 +81,26 @@ public class SlidingTouchListener implements View.OnTouchListener {
         return false;
     }
 }
+
+//    public boolean onFling(MotionEvent e1, MotionEvent e2) {
+//        float xShift = e1.getX() - e2.getX();
+//        float yShift = e1.getY() - e2.getY();
+//
+//        if (Math.abs(xShift) >= slideDistX){
+//            if (xShift > 0) {
+//                return onSlideLeft();
+//            }
+//            else{
+//                return onSlideRight();
+//            }
+//        }
+//        if (Math.abs(yShift) >= slideDistY){
+//            if (yShift > 0){
+//                return onSlideUp();
+//            }
+//            else {
+//                return onSlideDown();
+//            }
+//        }
+//        return false;
+//    }

@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R;
 
 
@@ -25,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
 
-        boardManager = new BoardManager(new Board(10,10,0.15));
+        boardManager = new BoardManager(new Board(10,10,0.15), GameLaunchActivity.username);
         boardManager.getBoard().addObserver(this);
 
         final Context context = this;
@@ -48,6 +51,11 @@ public class GameActivity extends AppCompatActivity implements Observer {
                     }
                 });
 
+    }
+
+    public void saveClicker(View view){
+        boardManager.save(this);
+        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
 
