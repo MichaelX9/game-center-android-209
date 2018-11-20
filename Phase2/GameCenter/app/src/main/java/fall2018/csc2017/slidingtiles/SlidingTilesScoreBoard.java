@@ -75,7 +75,6 @@ class SlidingTilesScoreBoard extends ScoreBoard {
 
     /**
      * adds score to userToScores and highScores.
-     *
      * @param score the recently calculated score for the player.
      */
     private void updateData(Integer score) {
