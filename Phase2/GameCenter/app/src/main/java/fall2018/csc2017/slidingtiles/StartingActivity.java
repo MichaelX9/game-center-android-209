@@ -161,7 +161,6 @@ public class StartingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
-                        Log.d("lmao",(String) loadFiles[finalI].getText());
                         if (manager.deleteSave(StartingActivity.this, ((String) loadFiles[finalI].getText()))){
                             Toast.makeText(StartingActivity.this, "Save deleted", Toast.LENGTH_SHORT).show();
                         }
@@ -179,7 +178,6 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Set a list of buttons to invisible.
      */
-
     public void setInvisible(Button[] buttons){
         for(Button button: buttons){
             button.setVisibility(View.INVISIBLE);

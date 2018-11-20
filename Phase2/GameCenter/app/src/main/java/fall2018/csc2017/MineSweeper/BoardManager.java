@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
-public class BoardManager extends GameManager {
+public class BoardManager extends GameManager implements Serializable {
     private Board board;
 
     public BoardManager(Board board, String username){
@@ -35,8 +37,10 @@ public class BoardManager extends GameManager {
 
             }
         else{
-            Toast.makeText(context, "You haven't lost yet", Toast.LENGTH_SHORT).show();
             board.revealLocal(position);
+            if (board.solved()){
+                Toast.makeText(context, "You won!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -49,5 +53,10 @@ public class BoardManager extends GameManager {
             board.getBlock(position).toggleFlagged();
         }
     }
+
+
+
+
+
 
 }
