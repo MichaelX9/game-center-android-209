@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         final ImageButton bRegister = findViewById(R.id.bRegister);
 
         bRegister.setOnClickListener(new View.OnClickListener() {
+
             /**
              * Creates Register requests and response listeners
              */
@@ -62,11 +63,14 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean success = jsonObject.getBoolean("success");
 
                             if (success) {
-                                Toast.makeText(RegisterActivity.this, "Register Successful!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                Toast.makeText(RegisterActivity.this,
+                                        "Register Successful!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this,
+                                        LoginActivity.class);
                                 RegisterActivity.this.startActivity(intent);
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(
+                                        RegisterActivity.this);
                                 builder.setMessage("Register Failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
@@ -78,7 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(name, email, username, password, responder);
+                RegisterRequest registerRequest = new RegisterRequest(name, email, username,
+                        password, responder);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 

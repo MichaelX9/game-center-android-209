@@ -14,13 +14,17 @@ import fall2018.csc2017.slidingtiles.StartingActivity;
 
 /**
  * Game Launcher Interface, will eventually be location from which all games are opened.
- * @var TAG: for id purposes
- * @var username: stores the username taken from the server once logged in
  */
 public class GameLaunchActivity extends AppCompatActivity {
 
-
+    /**
+     * the tag for id purposes
+     */
     private static final String TAG = "GameLaunchActivity";
+
+    /**
+     * stores the username taken from the server once a user logs in
+     */
     public static String username;
 
     @Override

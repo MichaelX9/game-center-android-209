@@ -10,17 +10,23 @@ import java.util.Map;
 
 /**
  * Login Activity
- * @var LOGIN_REQUEST_URL: link to the server php file
- * @var params: Map of strings returned to request
  */
 public class LoginRequest extends StringRequest {
+
+    /**
+     * Link to the server php file
+     */
     private static final String LOGIN_REQUEST_URL = "https://kayyzz.com/Login.php";
+
+    /**
+     * Map of strings returned to request
+     */
     private Map<String, String> params;
 
     /**
      * Constructor that sends params to server
      */
-    public LoginRequest(String username, String password, Response.Listener<String> listener) {
+    LoginRequest(String username, String password, Response.Listener<String> listener) {
         super(Request.Method.POST, LOGIN_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("username", username);

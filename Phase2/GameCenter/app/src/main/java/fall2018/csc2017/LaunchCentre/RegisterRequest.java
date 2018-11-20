@@ -9,19 +9,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Register Requester
- * @var REGISTER_REQUEST_URL: link to the server php file
- * @var params: Map of strings returned to request
+ * The Register Requester
  */
 public class RegisterRequest extends StringRequest {
+
+    /**
+     * link to the server php file
+     */
     private static final String REGISTER_REQUEST_URL = "https://kayyzz.com/Register.php";
+
+    /**
+     * Map of strings returned to request
+     */
     private Map<String, String> params;
 
 
     /**
      * Constructor that sends params to server
      */
-    public RegisterRequest(String name, String email, String username, String password, Response.Listener<String> listener) {
+    RegisterRequest(String name, String email, String username, String password,
+                    Response.Listener<String> listener) {
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("name", name);

@@ -46,7 +46,8 @@ public class LoginActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent registerIntent = new Intent(LoginActivity.this,
+                        RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
             }
         });
@@ -72,12 +73,15 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
                                 String name = jsonObject.getString("name");
-                                Toast.makeText(LoginActivity.this, "Welcome " + name + "!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, GameLaunchActivity.class);
+                                Toast.makeText(LoginActivity.this,
+                                        "Welcome " + name + "!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this,
+                                        GameLaunchActivity.class);
                                 intent.putExtra("username", username);
                                 LoginActivity.this.startActivity(intent);
                             }else{
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(
+                                        LoginActivity.this);
                                 builder.setMessage("Login Failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
