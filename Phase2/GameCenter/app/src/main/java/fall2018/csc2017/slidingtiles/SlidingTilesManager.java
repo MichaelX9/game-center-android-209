@@ -75,7 +75,7 @@ public class SlidingTilesManager extends GameManager {
      * Undo functionality for SlidingTilesGame. Will revert both recorded number of moves and the
      * board back one move, while decreasing undo chances by one.
      */
-    public void undo() {
+    void undo() {
         BoardManager boardToChange = StartingActivity.manager.getGameState();
         undos -= 1;
         boardToChange.touchMove(pastMoves.remove(pastMoves.size() - 1));
