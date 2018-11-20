@@ -86,8 +86,10 @@ public class Tile implements Comparable<Tile>, Serializable {
      */
     private void compress() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ((BitmapDrawable) background).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        compressedBackground = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        ((BitmapDrawable) background).getBitmap().compress(Bitmap.CompressFormat.PNG,
+                100, byteArrayOutputStream);
+        compressedBackground = Base64.encodeToString(
+                byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
     }
 
     /***
@@ -95,8 +97,8 @@ public class Tile implements Comparable<Tile>, Serializable {
      * @param context the context
      */
     void decompress(Context context) {
-        byte[] decodedBytes = Base64.decode(compressedBackground.substring(compressedBackground.indexOf(",") + 1),
-                Base64.DEFAULT);
+        byte[] decodedBytes = Base64.decode(compressedBackground.substring(
+                compressedBackground.indexOf(",") + 1), Base64.DEFAULT);
 
         Bitmap b = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
         background = new BitmapDrawable(context.getResources(), b);
