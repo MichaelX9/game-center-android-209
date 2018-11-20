@@ -14,7 +14,7 @@ public class BoardManager extends GameManager implements Serializable {
     private Board board;
 
     public BoardManager(Board board, String username){
-        super(username);
+        super(username, "Minesweeper");
         this.board = board;
     }
 
