@@ -4,14 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc2017.GameManager.GameManager;
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R;
 
 
@@ -25,6 +31,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.minesweeper_main_activity);
+
+        findViewById(R.id.undoButton).setVisibility(View.INVISIBLE);
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
         boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),loadedBoard.getPercentMines()));

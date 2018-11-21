@@ -8,5 +8,4 @@ public class MineManager extends GameManager {
         autosaveInterval = 2;
     }
 
-    public void undo(){}
 }
