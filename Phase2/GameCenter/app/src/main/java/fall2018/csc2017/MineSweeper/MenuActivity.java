@@ -3,6 +3,7 @@ package fall2018.csc2017.MineSweeper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.minesweeper_menu);
         manager.checkNew(MenuActivity.this);
-
         addStartButtonListener();
         addLoadButtonListener();
         addDeleteButtonListener();
@@ -37,6 +37,8 @@ public class MenuActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 GameManager.currentFile = username + "_" + editText.getText() + ".txt";
                 editText.setVisibility(View.INVISIBLE);
+                manager.setGameState(new BoardManager(new Board(10,10,0.15)));
+                manager.tempSave(MenuActivity.this);
                 switchToGame();
                 return true;
             }
@@ -107,11 +109,9 @@ public class MenuActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         setInvisible(loadFiles);
                         GameManager.currentFile = (String) loadFiles[finalI].getText();
-                        if ((MenuActivity.manager.getGameState()) != null) {
 
                             manager.load(MenuActivity.this, GameManager.currentFile);
 
-                        }
                         switchToGame();
                     }
                 });
@@ -179,6 +179,13 @@ public class MenuActivity extends AppCompatActivity {
      */
     private void switchToGame(){
         Intent tmp = new Intent(this, GameActivity.class);
+        manager.tempSave(this);
+        Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
+
+        for (int a = 0; a < loadedBoard.getNumBlocks(); a++) {
+            if (loadedBoard.getBlock(a).isVisible()) {
+            }
+        }
         startActivity(tmp);
     }
 }
