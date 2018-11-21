@@ -54,7 +54,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         StartingActivity.manager.tempSave(this);
 
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.slidingtile_main_activity);
 
         // Add View to activity
         gridView = findViewById(R.id.grid);

@@ -26,12 +26,12 @@ import fall2018.csc2017.slidingtiles.R;
 public class RegisterActivity extends AppCompatActivity {
 
     /**
-     * Adds user registration functionality to R.layout.register xml file
+     * Adds user registration functionality to R.layout.game_register xml file
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+        setContentView(R.layout.game_register);
 
         final EditText etName = findViewById(R.id.etName);
         final EditText etEmail = findViewById(R.id.etEmail);

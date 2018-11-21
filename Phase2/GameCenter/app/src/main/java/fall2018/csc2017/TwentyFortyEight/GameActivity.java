@@ -16,7 +16,7 @@
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_2048);
+//        setContentView(R.layout.tfe_main_activity);
 //
 //        View myview = findViewById(R.id.TFEgrid);
 //        myview.setOnTouchListener(new SlidingTouchListener(this) {

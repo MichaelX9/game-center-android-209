@@ -19,7 +19,7 @@ public class SettingupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settingup);
+        setContentView(R.layout.slidingtile_board_setup);
     }
 
     /***

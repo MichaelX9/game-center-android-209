@@ -3,7 +3,6 @@ package fall2018.csc2017.slidingtiles;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +29,7 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.slidingtile_menu);
         manager.checkNew(StartingActivity.this);
         addStartButtonListener();
         addLoadButtonListener();
