@@ -72,6 +72,8 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         return boardTiles[col][row];
     }
 
+    TFETile tileGetter(int position){return null;}
+
     @Override
     @NonNull
     public Iterator<TFETile> iterator() {

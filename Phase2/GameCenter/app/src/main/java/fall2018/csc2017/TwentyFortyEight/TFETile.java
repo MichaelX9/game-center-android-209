@@ -16,5 +16,7 @@ public class TFETile {
     public void TFEvaluesetter(int newValue){
         tileValue = newValue;
     }
+
+    public int getTileValue(){return tileValue;}
 }
 

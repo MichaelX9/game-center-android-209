@@ -28,6 +28,7 @@
         <activity android:name=".SlidingTilesScoreboardActivity" />
         <activity android:name=".ChooseImageActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
+        <activity android:name="fall2018.csc2017.TwentyFortyEight.GameActivity"></activity>
     </application>
 
 </manifest>
