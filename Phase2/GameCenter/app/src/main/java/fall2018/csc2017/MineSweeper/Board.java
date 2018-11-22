@@ -63,7 +63,7 @@ public class Board extends Observable implements Observer, Serializable {
      * [3]pos[4]
      * [5][6][7]
      */
-    private int[] getLocalBlocks(int pos){
+    int[] getLocalBlocks(int pos){
         int[] local = new int[8];
         local[0]=local[1]=local[2]=local[3]=local[4]=local[5]=local[6]=local[7]=-1;
         int c = pos % numRows;
@@ -170,7 +170,7 @@ public class Board extends Observable implements Observer, Serializable {
         return true;
     }
 
-    public double getPercentMines(){return percentMines;}
+    double getPercentMines(){return percentMines;}
 
 
 }
