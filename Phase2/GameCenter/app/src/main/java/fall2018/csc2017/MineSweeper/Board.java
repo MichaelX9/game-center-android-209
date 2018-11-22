@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class  Board extends Observable implements Observer, Serializable {
+public class Board extends Observable implements Observer, Serializable {
     private int numCols;
     private int numRows;
-    //private ArrayList<Block> blocks;
     private Block[][] blocks;
     private double percentMines;
 
@@ -19,7 +18,6 @@ public class  Board extends Observable implements Observer, Serializable {
         this.numCols = col;
         this.numRows = row;
         this.percentMines = percentMines;
-        //blocks = new ArrayList<>(col*row);
         blocks = new Block[col][row];
         generateBlocks();
         setMineNumbers();
@@ -137,7 +135,6 @@ public class  Board extends Observable implements Observer, Serializable {
                 }
             }
         }
-
     }
 
 
@@ -173,6 +170,7 @@ public class  Board extends Observable implements Observer, Serializable {
         return true;
     }
 
+    public double getPercentMines(){return percentMines;}
 
 
 }

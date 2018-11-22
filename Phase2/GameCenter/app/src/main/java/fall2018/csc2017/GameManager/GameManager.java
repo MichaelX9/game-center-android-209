@@ -97,7 +97,7 @@ public abstract class GameManager {
      * Saves the gameData into two files, one for scoreboard related info, and another for game-position info.
      */
     public void save(Context context) {
-        String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
+        String path = context.getFilesDir() + File.separator + "/saves/" + File.separator+ "/" + gameName +"/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();

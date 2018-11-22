@@ -10,13 +10,11 @@ import java.io.Serializable;
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
-public class BoardManager extends GameManager implements Serializable {
+public class BoardManager implements Serializable {
     private Board board;
 
-    BoardManager(Board board, String username){
-        super(username, "Minesweeper");
+    BoardManager(Board board){
         this.board = board;
-        autosaveInterval = 2;
     }
 
     public Board getBoard() {
@@ -35,7 +33,6 @@ public class BoardManager extends GameManager implements Serializable {
                     board.getBlock(i*board.getNumCols()+j).setVisible();
                 }
             }
-
             }
         else{
             board.revealLocal(position);

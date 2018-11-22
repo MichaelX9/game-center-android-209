@@ -34,7 +34,7 @@ public class Block extends Observable implements Serializable {
         return isMine;
     }
 
-    public boolean isVisible(){
+    boolean isVisible(){
         return visible;
     }
 
@@ -68,4 +68,7 @@ public class Block extends Observable implements Serializable {
     void setNumMines(int numMines) {
         this.numMines = numMines;
     }
+
+    void setMine(boolean state){this.isMine = state;}
+
 }

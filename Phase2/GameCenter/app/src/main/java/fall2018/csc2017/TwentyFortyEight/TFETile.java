@@ -16,8 +16,6 @@ public class TFETile {
         tileValue = newValue;
     }
 
-    public int getTileValue(){
-        return tileValue;
-    }
+    public int getTileValue(){return tileValue;}
 }
 

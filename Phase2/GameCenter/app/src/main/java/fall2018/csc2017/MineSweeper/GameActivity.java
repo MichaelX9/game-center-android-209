@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R;
 
@@ -25,11 +28,28 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
+        MenuActivity.manager.load(GameActivity.this, "temp.txt");
+        Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
+        boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),loadedBoard.getPercentMines()));
 
-        boardManager = new BoardManager(new Board(10,10,0.15),
-                GameLaunchActivity.username);
+        for (int a = 0; a < loadedBoard.getNumBlocks(); a++){
+            Block block = boardManager.getBoard().getBlock(a);
+            if (loadedBoard.getBlock(a).isVisible()){
+                block.setVisible();
+            }
+
+            block.setMine(loadedBoard.getBlock(a).isMineType());
+            block.setNumMines(loadedBoard.getBlock(a).getNumMines());
+
+            if (loadedBoard.getBlock(a).isFlagged()){
+                block.toggleFlagged();
+            }
+
+        }
+
         boardManager.getBoard().addObserver(this);
 
         final Context context = this;
@@ -56,10 +76,11 @@ public class GameActivity extends AppCompatActivity implements Observer {
     }
 
     public void saveClicker(View view){
-        boardManager.save(this);
+        MenuActivity.manager.setGameState(boardManager);
+        MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
-    }
 
+    }
 
 
     private void display(){
@@ -75,13 +96,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void onBackPressed() {
-
-        for (int i = 0; i < boardManager.getBoard().getNumCols(); i++) {
-            for (int j = 0; j < boardManager.getBoard().getNumRows(); j++) {
-                boardManager.getBoard().getBlock(
-                        i*boardManager.getBoard().getNumCols()+j).setNumMines(0);
-            }
-        }
 
         Intent i = new Intent(this, MenuActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
