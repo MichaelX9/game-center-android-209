@@ -30,9 +30,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.minesweeper_main_activity);
-
-        findViewById(R.id.undoButton).setVisibility(View.INVISIBLE);
+        setContentView(R.layout.activity_mine_sweeper);
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
         boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),loadedBoard.getPercentMines()));

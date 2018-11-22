@@ -27,7 +27,6 @@ public class BoardManager implements Serializable {
      */
     void processClick(Context context, int position){
         if (board.getBlock(position).isMineType()){
-
             Toast.makeText(context, "You lost, loser", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < board.getNumCols(); i++) {
                 for (int j = 0; j < board.getNumRows(); j++) {

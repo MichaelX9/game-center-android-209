@@ -40,7 +40,7 @@ public class ChooseImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.slidingtile_choose_image);
+        setContentView(R.layout.activity_choose_image);
         boardManager = StartingActivity.manager.getGameState();
     }
 

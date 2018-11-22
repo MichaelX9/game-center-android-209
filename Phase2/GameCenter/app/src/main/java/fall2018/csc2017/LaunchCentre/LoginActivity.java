@@ -27,12 +27,12 @@ import fall2018.csc2017.slidingtiles.R;
 public class LoginActivity extends AppCompatActivity {
 
     /**
-     * Adds user game_login functionality to R.layout.game_login xml file.
+     * Adds user login functionality to R.layout.login xml file.
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_login);
+        setContentView(R.layout.login);
 
         final EditText etUsername = findViewById(R.id.etUsername);
         final EditText etPassword= findViewById(R.id.etPassword);

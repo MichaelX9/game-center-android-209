@@ -3,6 +3,7 @@ package fall2018.csc2017.slidingtiles;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fall2018.csc2017.GameManager.GameManager;
-import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
 import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 
@@ -30,7 +30,7 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.slidingtile_menu);
+        setContentView(R.layout.activity_starting_);
         manager.checkNew(StartingActivity.this);
         addStartButtonListener();
         addLoadButtonListener();
@@ -225,14 +225,6 @@ public class StartingActivity extends AppCompatActivity {
     private void switchToGame(){
         Intent tmp = new Intent(this, GameActivity.class);
         startActivity(tmp);
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        Intent i = new Intent(this, GameLaunchActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(i);
     }
 
 }
