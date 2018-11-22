@@ -16,7 +16,7 @@ class SlidingTilesScoreboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.slidingtile_scoreboard);
+        setContentView(R.layout.score_board);
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
