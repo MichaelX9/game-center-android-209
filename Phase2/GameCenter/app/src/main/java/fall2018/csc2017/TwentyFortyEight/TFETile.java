@@ -8,13 +8,16 @@ public class TFETile {
     /**
      * Constructor for TFETile.
      */
-    TFETile(int ID){
-        tileID = ID;
-        tileValue = 0;
+    TFETile(int value){
+        tileValue = value;
     }
 
     public void TFEvaluesetter(int newValue){
         tileValue = newValue;
+    }
+
+    public int getTileValue(){
+        return tileValue;
     }
 }
 
