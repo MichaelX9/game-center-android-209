@@ -1,4 +1,4 @@
-pacckage fall2018.csc2017.TwentyFortyEight;
+package fall2018.csc2017.TwentyFortyEight;
 
 
 import java.io.Serializable;
