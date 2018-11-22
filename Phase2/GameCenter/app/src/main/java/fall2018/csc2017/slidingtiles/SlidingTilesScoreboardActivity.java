@@ -11,21 +11,19 @@ import java.util.Collections;
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
-public class SlidingTilesScoreboardActivity extends AppCompatActivity {
+class SlidingTilesScoreboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_board);
-
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
-        String currentUser = GameLaunchActivity.username;
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", currentUser);
+                this,"SlidingTiles", GameLaunchActivity.username);
 
         if (userHighScores.size() != 0) {
-            displayUserHighScores(currentUser, yourScores);
+            displayUserHighScores(yourScores);
         } else {
             String display = "You do not have any scores yet. ";
             yourScores.setText(display);
@@ -36,12 +34,11 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
 
     /**
      * Display the current user's high scores on the Scores page.
-     * @param username the current user's username
      * @param userScores the TextView for the user's high scores
      */
-    private void displayUserHighScores(String username, TextView userScores) {
+    private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", username);
+                this,"SlidingTiles", GameLaunchActivity.username);
         int numberOfUserScores = userHighScores.size();
         Collections.sort(userHighScores);
         StringBuilder userHighScoresBuilder = new StringBuilder();
