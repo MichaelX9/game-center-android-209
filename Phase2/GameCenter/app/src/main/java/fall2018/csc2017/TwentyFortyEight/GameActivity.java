@@ -1,5 +1,6 @@
 package fall2018.csc2017.TwentyFortyEight;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.GridView;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R;
 
 public class GameActivity extends AppCompatActivity implements Observer {
@@ -18,13 +20,14 @@ public class GameActivity extends AppCompatActivity implements Observer {
     private TFEBoardManager tfeBoardManager;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048);
 
         gridView = findViewById(R.id.TFE_Grid);
-        tfeBoardManager = new TFEBoardManager();
+        tfeBoardManager = new TFEBoardManager(new TFEBoard(4,4));
         tfeBoardManager.getBoard().addObserver(this);
         final Context context=this;
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -43,8 +46,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
                                 columnHeight,context));
                     }
                 });
-        View myview = findViewById(R.id.TFEgrid);
-        myview.setOnTouchListener(new SlidingTouchListener(this) {
+        gridView.setOnTouchListener(new SlidingTouchListener(this) {
             @Override
             public boolean onSlideLeft() {
                 tfeBoardManager.getBoard().tileSlide(0);
