@@ -17,5 +17,9 @@ public class TFETile {
     }
 
     public int getTileValue(){return tileValue;}
+
+    public TFETile copy(){
+        return new TFETile(getTileValue());
+    }
 }
 

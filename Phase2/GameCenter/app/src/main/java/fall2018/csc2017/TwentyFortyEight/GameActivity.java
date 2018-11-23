@@ -55,19 +55,19 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
             @Override
             public boolean onSlideRight() {
-                tfeBoardManager.tileSlide(context,0);
+                tfeBoardManager.tileSlide(context,1);
                 return true;
             }
 
             @Override
             public boolean onSlideUp() {
-                tfeBoardManager.tileSlide(context,0);
+                tfeBoardManager.tileSlide(context,2);
                 return true;
             }
 
             @Override
             public boolean onSlideDown() {
-                tfeBoardManager.tileSlide(context,0);
+                tfeBoardManager.tileSlide(context,3);
                 return true;
             }
         });
