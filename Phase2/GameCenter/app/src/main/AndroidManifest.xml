@@ -31,6 +31,7 @@
         <activity android:name=".ChooseImageActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
         <activity android:name="fall2018.csc2017.TwentyFortyEight.GameActivity"></activity>
+        <activity android:name="fall2018.csc2017.MineSweeper.MineSweeperScoreBoardActivity" />
     </application>
 
 </manifest>

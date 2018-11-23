@@ -3,7 +3,6 @@ package fall2018.csc2017.MineSweeper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.slidingtiles.R;
@@ -30,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         addStartButtonListener();
         addLoadButtonListener();
         addDeleteButtonListener();
+        addScoreButtonListener();
 
         final EditText editText =findViewById(R.id.fileInput);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -42,9 +41,10 @@ public class MenuActivity extends AppCompatActivity {
                 switchToGame();
                 return true;
             }
-
         });
+
     }
+
     /**
      * Activate the start button.
      */
@@ -86,6 +86,22 @@ public class MenuActivity extends AppCompatActivity {
                 addLoadFilesListener();
             }
         });
+    }
+
+    /**
+     * Activates the score button
+     */
+    private void addScoreButtonListener() {
+        ImageButton scoreButton = findViewById(R.id.scoreButton);
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent scorePage = new Intent(MenuActivity.this,
+                        MineSweeperScoreBoardActivity.class);
+                MenuActivity.this.startActivity(scorePage);
+            }
+        });
+
     }
 
     /**
@@ -180,8 +196,7 @@ public class MenuActivity extends AppCompatActivity {
     private void switchToGame(){
         Intent tmp = new Intent(this, GameActivity.class);
         manager.tempSave(this);
-        Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
-
+        Board loadedBoard = MenuActivity.manager.getGameState().getBoard();
         for (int a = 0; a < loadedBoard.getNumBlocks(); a++) {
             if (loadedBoard.getBlock(a).isVisible()) {
             }

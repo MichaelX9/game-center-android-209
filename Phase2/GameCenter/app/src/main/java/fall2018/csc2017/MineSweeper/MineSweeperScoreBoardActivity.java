@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.MineSweeper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,17 +10,18 @@ import java.util.Collections;
 
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
+import fall2018.csc2017.slidingtiles.R;
 
-public class SlidingTilesScoreboardActivity extends AppCompatActivity {
+public class MineSweeperScoreBoardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.score_board);
+        setContentView(R.layout.mine_score_board);
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", GameLaunchActivity.username);
+                this,"Minesweeper", GameLaunchActivity.username);
 
         if (userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
@@ -38,7 +39,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
      */
     private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", GameLaunchActivity.username);
+                this,"Minesweeper", GameLaunchActivity.username);
         int numberOfUserScores = userHighScores.size();
         Collections.sort(userHighScores);
         StringBuilder userHighScoresBuilder = new StringBuilder();
@@ -58,7 +59,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
      */
     private void displayGlobalHighScores(TextView globalScores) {
         ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
-                "SlidingTiles");
+                "Minesweeper");
         int numberOfGlobalScores = globalHighScores.size();
         Collections.sort(globalHighScores);
         StringBuilder globalHighScoresBuilder = new StringBuilder();

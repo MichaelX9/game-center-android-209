@@ -32,8 +32,13 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
-        Board loadedBoard = ((BoardManager)MenuActivity.manager.getGameState()).getBoard();
-        boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),loadedBoard.getPercentMines()));
+        Board loadedBoard = MenuActivity.manager.getGameState().getBoard();
+
+        boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),
+                loadedBoard.getPercentMines()));
+        boardManager.setScoreBoard(this, new MineSweeperScoreBoard());
+        boardManager.scoreBoard.setCurrentUser(GameLaunchActivity.username);
+        boardManager.scoreBoard.startTiming();
 
         for (int a = 0; a < loadedBoard.getNumBlocks(); a++){
             Block block = boardManager.getBoard().getBlock(a);
@@ -72,14 +77,12 @@ public class GameActivity extends AppCompatActivity implements Observer {
                                 columnHeight,context));
                     }
                 });
-
     }
 
     public void saveClicker(View view){
         MenuActivity.manager.setGameState(boardManager);
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
-
     }
 
 
@@ -87,16 +90,27 @@ public class GameActivity extends AppCompatActivity implements Observer {
         ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
     }
 
+    /**
+     * Dispatch onPause() to fragments.
+     */
+    @Override
+    protected void onPause() {
+
+        boardManager.scoreBoard.finishTiming();
+        boardManager.scoreBoard.updateDurationPlayed();
+
+        super.onPause();
+        MenuActivity.manager.tempSave(GameActivity.this);
+
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         display();
     }
 
-
-
     @Override
     public void onBackPressed() {
-
         Intent i = new Intent(this, MenuActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
