@@ -49,25 +49,25 @@ public class GameActivity extends AppCompatActivity implements Observer {
         gridView.setOnTouchListener(new SlidingTouchListener(this) {
             @Override
             public boolean onSlideLeft() {
-                tfeBoardManager.getBoard().tileSlide(0);
+                tfeBoardManager.tileSlide(context,0);
                 return true;
             }
 
             @Override
             public boolean onSlideRight() {
-                tfeBoardManager.getBoard().tileSlide(0);
+                tfeBoardManager.tileSlide(context,0);
                 return true;
             }
 
             @Override
             public boolean onSlideUp() {
-                tfeBoardManager.getBoard().tileSlide(0);
+                tfeBoardManager.tileSlide(context,0);
                 return true;
             }
 
             @Override
             public boolean onSlideDown() {
-                tfeBoardManager.getBoard().tileSlide(0);
+                tfeBoardManager.tileSlide(context,0);
                 return true;
             }
         });
