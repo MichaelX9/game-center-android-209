@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import fall2018.csc2017.slidingtiles.GameActivity;
 import fall2018.csc2017.slidingtiles.R;
 
 

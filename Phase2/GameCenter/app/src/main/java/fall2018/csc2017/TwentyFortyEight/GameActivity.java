@@ -11,6 +11,8 @@ import java.util.Observer;
 
 import fall2018.csc2017.slidingtiles.R;
 
+import static java.lang.Math.min;
+
 public class GameActivity extends AppCompatActivity implements Observer {
 
     private GridView gridView;
@@ -25,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
         gridView = findViewById(R.id.TFE_Grid);
         tfeBoardManager = new TFEBoardManager();
         tfeBoardManager.getBoard().addObserver(this);
+        gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
         final Context context=this;
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -38,8 +41,10 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         int columnWidth = displayWidth / tfeBoardManager.getBoard().getNumCol();
                         int columnHeight = displayHeight / tfeBoardManager.getBoard().getNumRow();
 
-                        gridView.setAdapter(new TFEGridAdapter(tfeBoardManager, columnWidth,
-                                columnHeight,context));
+                        int columnParam = min(columnHeight, columnWidth);
+
+                        gridView.setAdapter(new TFEGridAdapter(tfeBoardManager, columnParam,
+                                columnParam,context));
                     }
                 });
     }

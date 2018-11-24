@@ -16,7 +16,7 @@ public class TFEGridAdapter extends BaseAdapter {
 
     public TFEGridAdapter(TFEBoardManager tfeBoardManager, int columnWidth, int columnHeight, Context context) {
         this.tfeBoardManager = tfeBoardManager;
-        this.params = new AbsListView.LayoutParams(columnWidth - 10, columnHeight - 10);
+        this.params = new AbsListView.LayoutParams(columnWidth, columnHeight);
         this.context = context;
     }
 

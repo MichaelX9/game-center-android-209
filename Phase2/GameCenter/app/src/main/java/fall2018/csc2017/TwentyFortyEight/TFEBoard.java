@@ -36,6 +36,7 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         numCol = col;
         numRow = row;
         boardTiles = new TFETile[col][row];
+        generateBoard();
     }
 
     void generateBoard() {
@@ -72,7 +73,11 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         return boardTiles[col][row];
     }
 
-    TFETile tileGetter(int position){return null;}
+    TFETile tileGetter(int position){
+        int row = position /numCol;
+        int col = position % numCol;
+        return tileGetter(row, col);
+    }
 
     @Override
     @NonNull
