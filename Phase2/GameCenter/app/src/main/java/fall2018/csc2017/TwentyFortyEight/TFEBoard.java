@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
 import fall2018.csc2017.slidingtiles.Tile;
 
@@ -35,19 +36,19 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
     TFEBoard(int col, int row){
         numCol = col;
         numRow = row;
-        boardTiles = new TFETile[col][row];
+        boardTiles = new TFETile[row][col];
         generateBoard();
     }
 
     void generateBoard() {
         List<TFETile> tiles = new ArrayList<>();
         for (int i = 1; i <= numCol * numRow; i++) {
-            TFETile newTile = new TFETile(i);
+            TFETile newTile = new TFETile(0);
             tiles.add(newTile);
         }
-        Collections.shuffle(tiles);
         tiles.get(0).TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
         tiles.get(1).TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
+        Collections.shuffle(tiles);
 
         Iterator<TFETile> tilesIterator = tiles.iterator();
         for (int row = 0; row != numRow; row++) {
@@ -70,13 +71,13 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
      */
 
     TFETile tileGetter(int row, int col){
-        return boardTiles[col][row];
+        return boardTiles[row][col];
     }
 
     TFETile tileGetter(int position){
-        int row = position /numCol;
-        int col = position % numCol;
-        return tileGetter(row, col);
+        int r = position / numRow;
+        int c = position % numCol;
+        return boardTiles[r][c];
     }
 
     @Override
@@ -99,6 +100,21 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
 
     public int getNumRow(){
         return numRow;
+    }
+
+    boolean isSolved(){
+        for (int c = 0; c < numCol; c++) {
+            for (int r = 0; r < numRow; r++) {
+                if (boardTiles[r][c].getTileValue() == 2048) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public TFETile[][] getTiles(){
+        return boardTiles;
     }
 
     private class TFEIterator implements Iterator<TFETile> {

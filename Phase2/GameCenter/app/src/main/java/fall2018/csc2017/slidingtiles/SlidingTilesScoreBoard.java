@@ -4,8 +4,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-
-import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.ScoreBoard.ScoreBoard;
 
 /**

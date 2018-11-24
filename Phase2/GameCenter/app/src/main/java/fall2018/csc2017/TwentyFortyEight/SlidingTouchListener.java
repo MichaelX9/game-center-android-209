@@ -28,7 +28,7 @@ public class SlidingTouchListener implements View.OnTouchListener {
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
         private final String TAG = GestureListener.class.getSimpleName();
 
-        private static final int SLIDE_THRESHOLD = 50;
+        private static final int SLIDE_THRESHOLD = 100;
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
