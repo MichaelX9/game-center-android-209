@@ -12,7 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.slidingtiles.R ;
 
 public class GameActivity extends AppCompatActivity implements Observer {
 

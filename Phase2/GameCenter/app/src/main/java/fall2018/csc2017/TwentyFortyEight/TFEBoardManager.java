@@ -42,9 +42,12 @@ public class TFEBoardManager {
 
     private List<TFETile> merger(List<TFETile> list){
         for(int i = 0; i < list.size() - 1; i++){
-            if(list.get(i) == list.get(i+1)){
+            if(list.get(i).getTileValue() == 0){
+                list.remove(i);
+            }
+            if(list.get(i).getTileValue() == list.get(i+1).getTileValue()){
                 int value = list.get(i).getTileValue();
-                list.set(i, new TFETile(value));
+                list.set(i, new TFETile(value*2));
                 list.remove(i+1);
             }
         }
@@ -92,7 +95,7 @@ public class TFEBoardManager {
             List<TFETile> tileGroup = new ArrayList<>();
             for(int r = row - 1; r >= 0; r--){
                 if(boardTiles[r][c].getTileValue() != 0){
-                    tileGroup.add(boardTiles[r][c]);
+                    tileGroup.add(boardTiles[r][c].copy());
                     boardTiles[r][c].TFEvaluesetter(0);
                 }
             }
@@ -110,7 +113,7 @@ public class TFEBoardManager {
             List<TFETile> tileGroup = new ArrayList<>();
             for (int r = 0; r < row; r++) {
                 if (boardTiles[r][c].getTileValue() != 0) {
-                    tileGroup.add(boardTiles[r][c]);
+                    tileGroup.add(boardTiles[r][c].copy());
                     boardTiles[r][c].TFEvaluesetter(0);
                 }
             }
