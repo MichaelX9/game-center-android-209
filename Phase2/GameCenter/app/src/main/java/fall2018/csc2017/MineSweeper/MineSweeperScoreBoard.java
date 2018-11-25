@@ -2,7 +2,6 @@ package fall2018.csc2017.MineSweeper;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import fall2018.csc2017.ScoreBoard.ScoreBoard;
 
@@ -17,22 +16,40 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     private int score;
 
     /**
-     * A collection of each users' list of scores ranked from lowest to highest
+     * A collection of the current user's list of scores ranked from lowest to highest
      * allowing for look-up by username.
      */
-    ArrayList<Integer> userScores = new ArrayList<>();
+    private ArrayList<Integer> userScores;
 
     /**
      * A list of all recorded scores ranked from lowest to highest.
      */
-    ArrayList<Integer> highScores = new ArrayList<>();
+    private ArrayList<Integer> highScores;
 
     /***
      * Initialize a scoreboard
      */
     MineSweeperScoreBoard() {
         score = 0;
+        userScores = new ArrayList<>();
+        highScores = new ArrayList<>();
         durationPlayed = Duration.ofSeconds(0);
+    }
+
+    /**
+     * set userScores to the given ArrayList.
+     * @param lst the ArrayList used to set userScores.
+     */
+    void setUserScores(ArrayList<Integer> lst) {
+        userScores = lst;
+    }
+
+    /**
+     * set highScores to the given ArrayList.
+     * @param lst the ArrayList used to set highScores.
+     */
+    void setHighScores(ArrayList<Integer> lst) {
+        highScores = lst;
     }
 
     /**
