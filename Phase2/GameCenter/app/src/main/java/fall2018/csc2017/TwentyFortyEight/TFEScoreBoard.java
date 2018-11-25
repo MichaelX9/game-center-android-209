@@ -67,10 +67,10 @@ public class TFEScoreBoard extends ScoreBoard {
 
     /**
      * Update the score (after each click) based the new sums created during merges.
-     * @param position the position of the block clicked.
+     * @param newSum the new sum created by tile merges
      */
-    void updateScoreOnClick(int position) {
-
+    void updateScoreOnMerge(int newSum) {
+        score += newSum;
     }
 
 
