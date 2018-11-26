@@ -85,6 +85,9 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      */
     protected Integer calculateScore() {
         score -= (int) durationPlayed.getSeconds();
+        if (score < 0) {
+            score = 0;
+        }
         highScores.add(score);
         userScores.add(score);
         Collections.sort(highScores);
