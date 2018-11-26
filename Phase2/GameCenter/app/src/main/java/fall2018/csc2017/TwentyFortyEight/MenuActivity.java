@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
                 GameManager.currentFile = username + "_" + editText.getText() + ".txt";
                 editText.setVisibility(View.INVISIBLE);
                 manager.setGameState(new TFEBoardManager(new TFEBoard(4,4)));
-                manager.tempSave(fall2018.csc2017.TwentyFortyEight.MenuActivity.this);
+                manager.tempSave(MenuActivity.this);
                 switchToGame();
                 return true;
             }

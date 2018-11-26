@@ -1,6 +1,8 @@
 package fall2018.csc2017.TwentyFortyEight;
 
-public class TFETile {
+import java.io.Serializable;
+
+public class TFETile implements Serializable {
 
     private int tileID;
     private int tileValue;

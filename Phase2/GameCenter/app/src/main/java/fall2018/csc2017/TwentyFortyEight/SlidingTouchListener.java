@@ -21,17 +21,21 @@ public class SlidingTouchListener implements View.OnTouchListener {
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
+    @Override
     public boolean onTouch(View v, MotionEvent e){
         return gestureDetector.onTouchEvent(e);
     }
 
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
-        private final String TAG = GestureListener.class.getSimpleName();
 
         private static final int SLIDE_THRESHOLD = 100;
 
         @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        public boolean onDown(MotionEvent e){
+            return true;
+        }
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             try {
                 float deltaY = e2.getY() - e1.getY();
                 float deltaX = e2.getX() - e1.getX();
@@ -40,45 +44,40 @@ public class SlidingTouchListener implements View.OnTouchListener {
                     if (Math.abs(deltaX) > SLIDE_THRESHOLD) {
                         if (deltaX > 0) {
                             // the user made a sliding right gesture
-                            return onSlideRight();
+                            onSlideRight();
                         } else {
                             // the user made a sliding left gesture
-                            return onSlideLeft();
+                            onSlideLeft();
                         }
                     }
                 } else {
                     if (Math.abs(deltaY) > SLIDE_THRESHOLD) {
                         if (deltaY > 0) {
                             // the user made a sliding down gesture
-                            return onSlideDown();
+                            onSlideDown();
                         } else {
                             // the user made a sliding up gesture
-                            return onSlideUp();
+                            onSlideUp();
                         }
                     }
                 }
             } catch (Exception exception) {
-                Log.e(TAG, exception.getMessage());
+                exception.printStackTrace();
             }
-
             return false;
         }
     }
 
-    public boolean onSlideRight() {
-        return false;
+    public void onSlideRight(){
     }
 
-    public boolean onSlideLeft() {
-        return false;
+    public void onSlideLeft(){
     }
 
-    public boolean onSlideUp() {
-        return false;
+    public void onSlideUp(){
     }
 
-    public boolean onSlideDown() {
-        return false;
+    public void onSlideDown(){
     }
 }
 
