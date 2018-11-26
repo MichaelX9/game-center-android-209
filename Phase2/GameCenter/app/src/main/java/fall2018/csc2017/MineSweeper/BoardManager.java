@@ -31,9 +31,9 @@ public class BoardManager implements Serializable {
      */
     void setScoreBoard(Context context, MineSweeperScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
-        this.scoreBoard.userScores = GameManager.scoreGetter(context, "Minesweeper",
-                GameLaunchActivity.username);
-        this.scoreBoard.highScores = GameManager.scoreGetter(context, "Minesweeper");
+        this.scoreBoard.setUserScores(GameManager.scoreGetter(context, "Minesweeper",
+                GameLaunchActivity.username));
+        this.scoreBoard.setHighScores(GameManager.scoreGetter(context, "Minesweeper"));
     }
 
     /***

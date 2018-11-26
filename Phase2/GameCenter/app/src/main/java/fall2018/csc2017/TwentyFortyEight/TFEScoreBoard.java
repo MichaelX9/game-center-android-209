@@ -1,15 +1,13 @@
-package fall2018.csc2017.MineSweeper;
-import java.time.Duration;
+package fall2018.csc2017.TwentyFortyEight;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import fall2018.csc2017.ScoreBoard.ScoreBoard;
 
 /**
- * The ScoreBoard for the MineSweeper game.
+ * The ScoreBoard for the 2048 game.
  */
-public class MineSweeperScoreBoard extends ScoreBoard {
-
+public class TFEScoreBoard extends ScoreBoard {
     /**
      * The score that is being updated throughout the game.
      */
@@ -29,11 +27,10 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /***
      * Initialize a scoreboard
      */
-    MineSweeperScoreBoard() {
-        score = 0;
+    TFEScoreBoard() {
         userScores = new ArrayList<>();
         highScores = new ArrayList<>();
-        durationPlayed = Duration.ofSeconds(0);
+        score = 0;
     }
 
     /**
@@ -69,13 +66,11 @@ public class MineSweeperScoreBoard extends ScoreBoard {
 
 
     /**
-     * Update the score (after each click) based on the number of blocks revealed.
-     * @param position the position of the block clicked.
+     * Update the score (after each click) based the new sums created during merges.
+     * @param newSum the new sum created by tile merges
      */
-    void updateScoreOnClick(int position) {
-        int[] blocksRevealed = MenuActivity.manager.getGameState().getBoard().getLocalBlocks(position);
-        int numBlocksRevealed = blocksRevealed.length;
-        score += 100 * numBlocksRevealed;
+    void updateScoreOnMerge(int newSum) {
+        score += newSum;
     }
 
 
@@ -84,7 +79,6 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * adding the score to userToScores and highScores.
      */
     protected Integer calculateScore() {
-        score -= (int) durationPlayed.getSeconds();
         highScores.add(score);
         userScores.add(score);
         Collections.sort(highScores);
@@ -92,5 +86,4 @@ public class MineSweeperScoreBoard extends ScoreBoard {
 
         return score;
     }
-
 }

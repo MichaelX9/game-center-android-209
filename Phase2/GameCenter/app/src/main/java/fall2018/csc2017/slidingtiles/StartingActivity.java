@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fall2018.csc2017.GameManager.GameManager;
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
 import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 
@@ -226,5 +227,11 @@ public class StartingActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, GameActivity.class);
         startActivity(tmp);
     }
+    @Override
+    public void onBackPressed() {
 
+        Intent i = new Intent(this, GameLaunchActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(i);
+    }
 }

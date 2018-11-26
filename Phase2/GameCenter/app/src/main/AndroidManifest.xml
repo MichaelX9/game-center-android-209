@@ -32,6 +32,7 @@
         <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
         <activity android:name="fall2018.csc2017.TwentyFortyEight.GameActivity"></activity>
         <activity android:name="fall2018.csc2017.MineSweeper.MineSweeperScoreBoardActivity" />
+        <activity android:name="fall2018.csc2017.TwentyFortyEight.TFEScoreBoardActivity" />
     </application>
 
 </manifest>
