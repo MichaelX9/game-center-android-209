@@ -4,16 +4,12 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Random;
-import java.util.Stack;
 
-import fall2018.csc2017.slidingtiles.Tile;
 
 public class TFEBoard extends Observable implements Serializable, Iterable<TFETile> {
 
@@ -42,7 +38,7 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         generateBoard();
     }
 
-    void generateBoard() {
+    private void generateBoard() {
         List<TFETile> tiles = new ArrayList<>();
         for (int i = 1; i <= numCol * numRow; i++) {
             TFETile newTile = new TFETile(0);
@@ -68,11 +64,15 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         return numCol * numRow;
     }
 
+    int getNumCol(){return numCol;}
+
+    int getNumRow(){return numRow;}
+
     /**
      * Tile getter from the board.
      */
 
-    TFETile tileGetter(int row, int col){
+    private TFETile tileGetter(int row, int col){
         return boardTiles[row][col];
     }
 
@@ -88,22 +88,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         return new TFEIterator();
     }
 
-    /**
-     * Getter for number of columns.
-     */
-
-    public int getNumCol(){
-        return numCol;
-    }
-
-    /**
-     * Getter for number of rows.
-     */
-
-    public int getNumRow(){
-        return numRow;
-    }
-
     boolean isSolved(){
         for (int c = 0; c < numCol; c++) {
             for (int r = 0; r < numRow; r++) {
@@ -113,10 +97,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
             }
         }
         return false;
-    }
-
-    public TFETile[][] getTiles(){
-        return boardTiles;
     }
 
     private class TFEIterator implements Iterator<TFETile> {
@@ -144,9 +124,8 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         }
     }
     void tileSlide(int slideDirection) {
-        TFETile[][] boardTiles = getTiles();
-        int row = getNumRow();
-        int col = getNumCol();
+        int row = numRow;
+        int col = numCol;
         TFETile[][] toCheck = arrCopy(boardTiles);
         switch (slideDirection){
             case 0:
@@ -167,28 +146,22 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         }
         setChanged();
         notifyObservers();
-//        if(board.isSolved()){
-//            Toast.makeText(context,"YOU WIN!", Toast.LENGTH_LONG).show();
-//            MenuActivity.manager.save(context);
-//        }
     }
 
     private void newBlock(TFETile[][] boardTiles){
-        int row = getNumRow();
-        int col = getNumCol();
-        List<Integer> blankTiles = new ArrayList<>();
+        int row = numRow;
+        int col = numCol;
+        List<TFETile> blankTiles = new ArrayList<>();
         for(int c = 0; c<col; c++){
             for(int r = 0; r<row; r++){
                 if(boardTiles[r][c].getTileValue() == 0){
-                    blankTiles.add(row*r + c);
+                    blankTiles.add(boardTiles[r][c]);
                 }
             }
         }
         Random random = new Random();
         int tileInd = random.nextInt(blankTiles.size());
-        int nr = tileInd / numRow;
-        int nc = tileInd % numCol;
-        boardTiles[nr][nc].TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
+        blankTiles.get(tileInd).TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
     }
 
     private boolean sameArray(TFETile[][] arr1, TFETile[][] arr2){
