@@ -17,4 +17,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <fragment
+        android:id="@+id/fragment"
+        android:name="fall2018.csc2017.GameManager.GameButtons"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp" />
 </android.support.constraint.ConstraintLayout>

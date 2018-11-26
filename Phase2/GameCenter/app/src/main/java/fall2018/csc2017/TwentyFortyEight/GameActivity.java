@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -33,7 +34,9 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
 //        detector = new GestureDetectorCompat(this, new SlideListener());
 
         gridView = findViewById(R.id.TFE_Grid);
-        tfeBoardManager = new TFEBoardManager(new TFEBoard(4, 4));
+
+        MenuActivity.manager.load(GameActivity.this, "temp.txt");
+        tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
         tfeBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
         final Context context = this;
@@ -102,5 +105,14 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     public void update(Observable o, Object arg) {
         ((TFEGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
     }
+
+
+    public void saveClicker(View view){
+        MenuActivity.manager.setGameState(tfeBoardManager);
+        MenuActivity.manager.save(this);
+        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
+    }
+
+
 }
 

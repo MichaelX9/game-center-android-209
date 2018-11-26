@@ -6,6 +6,6 @@ public class TFEManager extends GameManager {
 
     TFEManager(String name){
         super(name, "TFE");
-        autosaveInterval = 2;
+        autosaveInterval = 4;
     }
 }

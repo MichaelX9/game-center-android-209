@@ -51,6 +51,7 @@ public class BoardManager implements Serializable {
                             ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
                             ". ", Toast.LENGTH_LONG).show();
             MenuActivity.manager.save(context);
+
             for (int i = 0; i < board.getNumCols(); i++) {
                 for (int j = 0; j < board.getNumRows(); j++) {
                     board.getBlock(i*board.getNumCols()+j).setVisible();
@@ -64,13 +65,16 @@ public class BoardManager implements Serializable {
             if (board.solved()){
                 scoreBoard.finishTiming();
                 scoreBoard.updateDurationPlayed();
+                scoreBoard.incrementMoveCount();
+                if (scoreBoard.getNumberOfMoves() % GameManager.autosaveInterval == 0) {
+                    MenuActivity.manager.save(context);
+                }
                 int score = scoreBoard.calculateScore();
                 MenuActivity.manager.addScore(context, score,"Minesweeper");
                 Toast.makeText(context,  "YOU WIN!" + " \n Your score is " + score +
                         ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
                         ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
                         ". ", Toast.LENGTH_LONG).show();
-                MenuActivity.manager.save(context);
             }
         }
     }
