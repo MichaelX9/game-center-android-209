@@ -21,7 +21,7 @@ public class TFEScoreBoardActivity extends AppCompatActivity {
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"TwentyFortyEight", GameLaunchActivity.username);
+                this,"TFE", GameLaunchActivity.username);
 
         if (userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
@@ -39,7 +39,7 @@ public class TFEScoreBoardActivity extends AppCompatActivity {
      */
     private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
-                this,"TwentyFortyEight", GameLaunchActivity.username);
+                this,"TFE", GameLaunchActivity.username);
         int numberOfUserScores = userHighScores.size();
         Collections.sort(userHighScores);
         StringBuilder userHighScoresBuilder = new StringBuilder();
@@ -59,7 +59,7 @@ public class TFEScoreBoardActivity extends AppCompatActivity {
      */
     private void displayGlobalHighScores(TextView globalScores) {
         ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
-                "TwentyFortyEight");
+                "TFE");
         int numberOfGlobalScores = globalHighScores.size();
         Collections.sort(globalHighScores);
         StringBuilder globalHighScoresBuilder = new StringBuilder();
