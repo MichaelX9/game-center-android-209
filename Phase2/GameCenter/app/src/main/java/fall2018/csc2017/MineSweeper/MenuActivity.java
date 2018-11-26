@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fall2018.csc2017.GameManager.GameManager;
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R;
 import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 
@@ -202,6 +203,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         }
         startActivity(tmp);
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent i = new Intent(this, GameLaunchActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(i);
     }
 }
 
