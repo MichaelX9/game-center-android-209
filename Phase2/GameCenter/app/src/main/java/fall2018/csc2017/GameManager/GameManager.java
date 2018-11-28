@@ -48,7 +48,7 @@ public abstract class GameManager {
     /**
      * The current game being played.
      */
-    private String gameName;
+    protected String gameName;
 
     /**
      * Standard constructor for GameManager to be called by all subclasses.

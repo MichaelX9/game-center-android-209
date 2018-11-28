@@ -180,12 +180,7 @@ public class MenuActivity extends AppCompatActivity {
     private void switchToGame(){
         Intent tmp = new Intent(this, fall2018.csc2017.TwentyFortyEight.GameActivity.class);
         manager.tempSave(this);
-//        TFEBoard loadedBoard = ((TFEBoardManager) fall2018.csc2017.TwentyFortyEight.MenuActivity.manager.getGameState()).getBoard();
-//
-//        for (int a = 0; a < loadedBoard.getNumBlocks(); a++) {
-//            if (loadedBoard.getBlock(a).isVisible()) {
-//            }
-//        }
+
         startActivity(tmp);
     }
     @Override
@@ -194,6 +189,13 @@ public class MenuActivity extends AppCompatActivity {
         Intent i = new Intent(this, GameLaunchActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
+    }
+
+    @Override
+    public void onResume(){
+
+        super.onResume();
+        manager.reset();
     }
 
 }

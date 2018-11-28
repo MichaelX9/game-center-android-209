@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -37,9 +39,13 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
 
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
+        MenuActivity.manager.undoSetup(this);
+        MenuActivity.manager.setUndos(tfeBoardManager.getUndos());
+
         tfeBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
         final Context context = this;
+
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -58,12 +64,15 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                                 columnParam, context));
                     }
                 });
+
     }
 
     float prevX, prevY;
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
         switch (event.getAction()) {
+
             case MotionEvent.ACTION_DOWN:
                 prevX = event.getX();
                 prevY = event.getY();
@@ -75,7 +84,9 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
 
 
                 //Calculates where we swiped
-
+                if (MenuActivity.manager.getUndos() > 0){
+                    MenuActivity.manager.addRecent(this, tfeBoardManager);
+                }
                 if (Math.abs(newX - prevX) > Math.abs(newY - prevY)) {
                     //LEFT - RiGHT Direction
 
@@ -98,11 +109,21 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 }
 
                 break;
+
         }
+
+
+
         return false;
     }
+
     @Override
     public void update(Observable o, Object arg) {
+        display();
+    }
+
+
+    private void display(){
         ((TFEGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
     }
 
@@ -112,6 +133,24 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
+
+    public void undoClicker(View view){
+        if (MenuActivity.manager.getUndos() == 0){
+            Toast.makeText(this, "No more undos left!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            if (!MenuActivity.manager.undo(GameActivity.this)){
+                Toast.makeText(this, "Couldn't undo", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                for(int i = 0; i < tfeBoardManager.getBoard().numTiles(); i++){
+                    tfeBoardManager.getBoard().tileGetter(i).TFEvaluesetter(((TFEBoardManager)MenuActivity.manager.getGameState()).getBoard().tileGetter(i).getTileValue());
+                }
+            display();
+            }
+        }
+    }
+
 
 
 }

@@ -197,11 +197,7 @@ public class MenuActivity extends AppCompatActivity {
     private void switchToGame(){
         Intent tmp = new Intent(this, GameActivity.class);
         manager.tempSave(this);
-        Board loadedBoard = MenuActivity.manager.getGameState().getBoard();
-        for (int a = 0; a < loadedBoard.getNumBlocks(); a++) {
-            if (loadedBoard.getBlock(a).isVisible()) {
-            }
-        }
+
         startActivity(tmp);
     }
     @Override
