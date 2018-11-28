@@ -22,9 +22,6 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
 
     private GridView gridView;
     private TFEBoardManager tfeBoardManager;
-//    private GestureDetector detector;
-//    View.OnTouchListener gListener;
-//    private static final int SLIDE_THRESHOLD = 100;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,7 +29,6 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048);
         findViewById(R.id.TFE_Grid).setOnTouchListener(this);
-//        detector = new GestureDetectorCompat(this, new SlideListener());
 
         gridView = findViewById(R.id.TFE_Grid);
 
