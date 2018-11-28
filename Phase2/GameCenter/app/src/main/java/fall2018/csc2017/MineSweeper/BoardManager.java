@@ -13,19 +13,32 @@ import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
 public class BoardManager implements Serializable {
 
+    /**
+     * The board for the game to be managed.
+     */
     private Board board;
 
+    /**
+     * The scoreBoard for the game.
+     */
     MineSweeperScoreBoard scoreBoard;
 
+    /**
+     * A new BoardManager.
+     * @param board the board to be assigned
+     */
     BoardManager(Board board){
         this.board = board;
     }
 
+    /**
+     * Getter for the board.
+     */
     public Board getBoard() {
         return board;
     }
 
-    /***
+    /**
      * setter for scoreboard
      * @param scoreBoard the scoreboard
      */

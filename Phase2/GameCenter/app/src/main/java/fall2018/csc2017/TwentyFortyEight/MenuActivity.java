@@ -30,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
         addStartButtonListener();
         addLoadButtonListener();
         addDeleteButtonListener();
+        addScoreButtonListener();
 
         final EditText editText =findViewById(R.id.fileInput);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -45,6 +46,7 @@ public class MenuActivity extends AppCompatActivity {
 
         });
     }
+
     /**
      * Activate the start button.
      */
@@ -55,7 +57,8 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int counter = 0;
 
-                for(String save: manager.findSaves(fall2018.csc2017.TwentyFortyEight.MenuActivity.this)){
+                for(String save: manager.findSaves(
+                        fall2018.csc2017.TwentyFortyEight.MenuActivity.this)){
                     if (save != null){
                         counter += 1;
                     }
@@ -65,7 +68,8 @@ public class MenuActivity extends AppCompatActivity {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
                 }
                 else {
-                    Toast.makeText(fall2018.csc2017.TwentyFortyEight.MenuActivity.this, "You've reached max saves!",
+                    Toast.makeText(fall2018.csc2017.TwentyFortyEight.MenuActivity.this,
+                            "You've reached max saves!",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -97,7 +101,8 @@ public class MenuActivity extends AppCompatActivity {
 
 
         manager.tempSave(this);
-        String[] saves = manager.findSaves(fall2018.csc2017.TwentyFortyEight.MenuActivity.this);
+        String[] saves = manager.findSaves(
+                fall2018.csc2017.TwentyFortyEight.MenuActivity.this);
         int counter = 0;
         for(int i = 0; i < saves.length; i++){
             if (saves[i] != null) {
@@ -110,7 +115,8 @@ public class MenuActivity extends AppCompatActivity {
                         setInvisible(loadFiles);
                         GameManager.currentFile = (String) loadFiles[finalI].getText();
 
-                        manager.load(fall2018.csc2017.TwentyFortyEight.MenuActivity.this, GameManager.currentFile);
+                        manager.load(fall2018.csc2017.TwentyFortyEight.MenuActivity.this,
+                                GameManager.currentFile);
 
                         switchToGame();
                     }
@@ -118,6 +124,22 @@ public class MenuActivity extends AppCompatActivity {
                 counter += 1;
             }
         }
+    }
+
+    /**
+     * Activates the score button
+     */
+    private void addScoreButtonListener() {
+        ImageButton scoreButton = findViewById(R.id.scoreButton);
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent scorePage = new Intent(MenuActivity.this,
+                        TFEScoreBoardActivity.class);
+                MenuActivity.this.startActivity(scorePage);
+            }
+        });
+
     }
 
     /**
@@ -178,11 +200,13 @@ public class MenuActivity extends AppCompatActivity {
      * Switch to the GameActivity view to play the game.
      */
     private void switchToGame(){
-        Intent tmp = new Intent(this, fall2018.csc2017.TwentyFortyEight.GameActivity.class);
+        Intent tmp = new Intent(this,
+                fall2018.csc2017.TwentyFortyEight.GameActivity.class);
         manager.tempSave(this);
 
         startActivity(tmp);
     }
+
     @Override
     public void onBackPressed() {
 

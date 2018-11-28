@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 import fall2018.csc2017.slidingtiles.R ;
 
 import static java.lang.Math.min;
@@ -45,6 +44,9 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         tfeBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
         final Context context = this;
+
+        tfeBoardManager.getBoard().setScoreBoard(this, new TFEScoreBoard());
+        tfeBoardManager.getBoard().getScoreBoard().setCurrentUser(GameLaunchActivity.username);
 
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -111,9 +113,6 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 break;
 
         }
-
-
-
         return false;
     }
 
@@ -144,14 +143,23 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
             }
             else {
                 for(int i = 0; i < tfeBoardManager.getBoard().numTiles(); i++){
-                    tfeBoardManager.getBoard().tileGetter(i).TFEvaluesetter(((TFEBoardManager)MenuActivity.manager.getGameState()).getBoard().tileGetter(i).getTileValue());
+                    tfeBoardManager.getBoard().tileGetter(i).TFEvaluesetter(
+                            ((TFEBoardManager)MenuActivity.manager.getGameState()
+                            ).getBoard().tileGetter(i).getTileValue());
                 }
             display();
             }
         }
     }
 
-
+    /**
+     * Dispatch onPause() to fragments.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MenuActivity.manager.tempSave(GameActivity.this);
+    }
 
 }
 
