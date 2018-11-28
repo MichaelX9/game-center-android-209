@@ -107,7 +107,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 }
                 if(tfeBoardManager.getBoard().isSolved()){
                     tfeBoardManager.getBoard().makeTextForSolvedGame(this);
-                };
+                }
                 if(tfeBoardManager.getBoard().isOver()){
                     tfeBoardManager.getBoard().makeTextForLostGame(this);
                 }
