@@ -29,7 +29,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /***
      * Initialize a scoreboard
      */
-    MineSweeperScoreBoard() {
+    public MineSweeperScoreBoard() {
         score = 0;
         userScores = new ArrayList<>();
         highScores = new ArrayList<>();
@@ -87,11 +87,12 @@ public class MineSweeperScoreBoard extends ScoreBoard {
         if (score < 0) {
             score = 0;
         }
-        highScores.add(score);
-        userScores.add(score);
-        Collections.sort(highScores);
-        Collections.sort(userScores);
-
+        if (highScores != null) {
+            highScores.add(score);
+            userScores.add(score);
+            Collections.sort(highScores);
+            Collections.sort(userScores);
+        }
         return score;
     }
 
