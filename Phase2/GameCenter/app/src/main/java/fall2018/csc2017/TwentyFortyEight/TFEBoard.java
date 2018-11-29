@@ -143,7 +143,7 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
                     if (boardTiles[r][c].getTileValue() == 0) {
                         return false;
                     }
-                    else if(boardTiles[r][c].getTileValue() == boardTiles[r][c+1].getTileValue() && boardTiles[r][c].getTileValue() == boardTiles[r+1][c].getTileValue()){
+                    else if(boardTiles[r][c].getTileValue() == boardTiles[r][c+1].getTileValue() || boardTiles[r][c].getTileValue() == boardTiles[r+1][c].getTileValue()){
                         return false;
                     }
                 }
