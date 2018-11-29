@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 class TFETile implements Serializable {
 
+    /**
+     * Value of the tile.
+     */
     private int tileValue;
 
     /**

@@ -34,11 +34,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
     private TFETile[][] boardTiles;
 
     /**
-     * The scoreBoard for the game.
-     */
-    private TFEScoreBoard scoreBoard;
-
-    /**
      * Constructor for a new 2048 board.
      */
     TFEBoard(int col, int row) {
@@ -46,25 +41,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         numRow = row;
         boardTiles = new TFETile[row][col];
         generateBoard();
-    }
-
-    /**
-     * setter for scoreboard
-     *
-     * @param scoreBoard the scoreboard
-     */
-    void setScoreBoard(Context context, TFEScoreBoard scoreBoard) {
-        this.scoreBoard = scoreBoard;
-        this.scoreBoard.setUserScores(GameManager.scoreGetter(context, "TFE",
-                GameLaunchActivity.username));
-        this.scoreBoard.setHighScores(GameManager.scoreGetter(context, "TFE"));
-    }
-
-    /**
-     * Getter for the scoreBoard.
-     */
-    TFEScoreBoard getScoreBoard() {
-        return scoreBoard;
     }
 
     /**
@@ -176,34 +152,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
             }
         }
         return true;
-    }
-
-    /**
-     * Make the text bubble for when the game is solved after recording the score.
-     */
-    void makeTextForSolvedGame(Context context) {
-        if(scoreBoard.getNumberOfMoves() % GameManager.autosaveInterval ==0) {
-            MenuActivity.manager.save(context);
-        }
-        int score = scoreBoard.calculateScore();
-        MenuActivity.manager.addScore(context, score,"TFE");
-        Toast.makeText(context,"YOU WIN!"+" \n Your score is "+score +
-            ".\n Your highest score is "+scoreBoard.getUserHighestScore()+
-            ".\n The game's highest score is "+scoreBoard.getGameHighestScore()+
-            ". ",Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Make the text bubble for when the game is over after recording the score.
-     */
-    void makeTextForLostGame(Context context) {
-        int score = scoreBoard.calculateScore();
-        MenuActivity.manager.addScore(context, score, "TFE");
-        Toast.makeText(context,  "YOU LOST!" + " \n Your score is " + score +
-                ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
-                ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
-                ". ", Toast.LENGTH_LONG).show();
-        MenuActivity.manager.save(context);
     }
 
     /**
@@ -328,7 +276,8 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
                 int value = list.get(i).getTileValue();
                 list.set(i, new TFETile(value * 2));
 
-                scoreBoard.updateScoreOnMerge(value * 2);
+
+                MenuActivity.manager.getGameState().getScoreBoard().updateScoreOnMerge(value*2);
 
                 list.remove(i+1);
             }
