@@ -22,7 +22,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"SlidingTiles", GameLaunchActivity.username);
 
-        if (userHighScores.size() != 0) {
+        if (userHighScores != null && userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
         } else {
             String display = "You do not have any scores yet. ";
@@ -38,14 +38,16 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
     private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"SlidingTiles", GameLaunchActivity.username);
-        Collections.sort(userHighScores);
-        Collections.reverse(userHighScores);
-        StringBuilder userHighScoresBuilder = new StringBuilder();
-        for (Integer score : userHighScores) {
-            userHighScoresBuilder.append(score);
-            userHighScoresBuilder.append("\n");
+        if (userHighScores != null) {
+            Collections.sort(userHighScores);
+            Collections.reverse(userHighScores);
+            StringBuilder userHighScoresBuilder = new StringBuilder();
+            for (Integer score : userHighScores) {
+                userHighScoresBuilder.append(score);
+                userHighScoresBuilder.append("\n");
+            }
+            userScores.setText(userHighScoresBuilder.toString());
         }
-        userScores.setText(userHighScoresBuilder.toString());
     }
 
     /**
@@ -55,14 +57,17 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
     private void displayGlobalHighScores(TextView globalScores) {
         ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
                 "SlidingTiles");
-        Collections.sort(globalHighScores);
-        Collections.reverse(globalHighScores);
-        StringBuilder globalHighScoresBuilder = new StringBuilder();
-        for (Integer score : globalHighScores) {
-            globalHighScoresBuilder.append(score);
-            globalHighScoresBuilder.append("\n");
+        if (globalHighScores != null) {
+            Collections.sort(globalHighScores);
+            Collections.reverse(globalHighScores);
+
+            StringBuilder globalHighScoresBuilder = new StringBuilder();
+            for (Integer score : globalHighScores) {
+                globalHighScoresBuilder.append(score);
+                globalHighScoresBuilder.append("\n");
+            }
+            globalScores.setText(globalHighScoresBuilder.toString());
         }
-        globalScores.setText(globalHighScoresBuilder.toString());
     }
 
 }
