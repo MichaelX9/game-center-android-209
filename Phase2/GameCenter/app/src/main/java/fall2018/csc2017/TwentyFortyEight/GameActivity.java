@@ -42,14 +42,14 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
         MenuActivity.manager.undoSetup(this);
-        MenuActivity.manager.setUndos(tfeBoardManager.getUndos());
+        MenuActivity.manager.setUndos(MenuActivity.manager.getUndos());
 
         tfeBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
         final Context context = this;
 
-        tfeBoardManager.getBoard().setScoreBoard(this, new TFEScoreBoard());
-        tfeBoardManager.getBoard().getScoreBoard().setCurrentUser(GameLaunchActivity.username);
+        tfeBoardManager.setScoreBoard(this, new TFEScoreBoard());
+        tfeBoardManager.getScoreBoard().setCurrentUser(GameLaunchActivity.username);
 
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -113,10 +113,10 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                     }
                 }
                 if(tfeBoardManager.getBoard().isSolved()){
-                    tfeBoardManager.getBoard().makeTextForSolvedGame(this);
+                    tfeBoardManager.makeTextForSolvedGame(this);
                 }
                 if(tfeBoardManager.getBoard().isOver()){
-                    tfeBoardManager.getBoard().makeTextForLostGame(this);
+                    tfeBoardManager.makeTextForLostGame(this);
                 }
 
                 break;

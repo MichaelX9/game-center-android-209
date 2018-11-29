@@ -20,6 +20,14 @@ class TFEManager extends GameManager {
     private int undos;
 
     /**
+     * GameState getter.
+     */
+    @Override
+    public TFEBoardManager getGameState(){
+        return (TFEBoardManager) gameState;
+    }
+
+    /**
      * The path's of the recent boards, used for undo.
      * Updated every move, unless there are no more undos left. recentBoards[0] is the oldest
      */
