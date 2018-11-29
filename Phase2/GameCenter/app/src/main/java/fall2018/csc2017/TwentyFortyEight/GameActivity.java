@@ -30,6 +30,11 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
      */
     private TFEBoardManager tfeBoardManager;
 
+    /**
+     * Boolean flag to mark when a gameState has already ended.
+     */
+    private boolean gameOver = false;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         gridView = findViewById(R.id.TFE_Grid);
 
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
-        tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
+        tfeBoardManager = MenuActivity.manager.getGameState();
         MenuActivity.manager.undoSetup(this);
         MenuActivity.manager.setUndos(MenuActivity.manager.getUndos());
 
@@ -112,11 +117,13 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                         tfeBoardManager.getBoard().tileSlide(2);
                     }
                 }
-                if(tfeBoardManager.getBoard().isSolved()){
+                if(tfeBoardManager.getBoard().isSolved() && !gameOver){
                     tfeBoardManager.makeTextForSolvedGame(this);
+                    gameOver = true;
                 }
-                if(tfeBoardManager.getBoard().isOver()){
+                if(tfeBoardManager.getBoard().isOver() && !gameOver){
                     tfeBoardManager.makeTextForLostGame(this);
+                    gameOver = true;
                 }
 
                 break;
@@ -164,7 +171,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
             else {
                 for(int i = 0; i < tfeBoardManager.getBoard().numTiles(); i++){
                     tfeBoardManager.getBoard().tileGetter(i).TFEvaluesetter(
-                            ((TFEBoardManager)MenuActivity.manager.getGameState()
+                            (MenuActivity.manager.getGameState()
                             ).getBoard().tileGetter(i).getTileValue());
                 }
             display();
