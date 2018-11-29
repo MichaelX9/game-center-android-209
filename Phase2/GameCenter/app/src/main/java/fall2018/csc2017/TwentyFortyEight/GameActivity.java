@@ -83,6 +83,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     }
 
     float prevX, prevY;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -97,29 +98,24 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 float newX = event.getX();
                 float newY = event.getY();
 
-
-                //Calculates where we swiped
                 if (MenuActivity.manager.getUndos() > 0){
                     MenuActivity.manager.addRecent(this, tfeBoardManager);
                 }
                 if (Math.abs(newX - prevX) > Math.abs(newY - prevY)) {
-                    //LEFT - RiGHT Direction
-
                     if( newX > prevX) {
-                        //RIGHT
+                        //Right-swipe
                         tfeBoardManager.getBoard().tileSlide(0);
                     } else {
-                        //LEFT
+                        //Left-swipe
                         tfeBoardManager.getBoard().tileSlide(1);
                     }
                 } else {
-                    // UP-DOWN Direction
                     if (newY > prevY) {
-                        //DOWN
-                        tfeBoardManager.getBoard().tileSlide(3);
-                    } else {
-                        //UP
+                        //Up-Swipe
                         tfeBoardManager.getBoard().tileSlide(2);
+                    } else {
+                        //Down-swipe
+                        tfeBoardManager.getBoard().tileSlide(3);
                     }
                 }
                 if(tfeBoardManager.getBoard().isSolved() && !TFEMade){
@@ -141,7 +137,6 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     public void update(Observable o, Object arg) {
         display();
     }
-
 
     /**
      * Set background image of each grid space and call adaptor to change view.
