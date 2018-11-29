@@ -73,6 +73,9 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * @param position the position of the block clicked.
      */
     void updateScoreOnClick(int position) {
+        if (MenuActivity.manager.getGameState() == null){
+            return;
+        }
         int numBlocksRevealed = MenuActivity.manager.getGameState().getBoard().revealLocal(position);
         score += 300 * numBlocksRevealed;
     }
