@@ -121,7 +121,7 @@ public class Board extends Observable implements Observer, Serializable {
     /***
      * Reveal all the blocks surrounding a given block and return the number of blocks revealed.
      * @param pos the position of the given block
-     * @return the nu
+     * @return the number of blocks revealed
      */
     int revealLocal(int pos){
 
