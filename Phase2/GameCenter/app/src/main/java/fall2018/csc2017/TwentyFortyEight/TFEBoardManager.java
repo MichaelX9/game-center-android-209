@@ -10,32 +10,11 @@ public class TFEBoardManager implements Serializable {
     private TFEBoard board;
 
     /**
-     * Number of total undoes allowed.
-     */
-    int undos = 3;
-
-    /**
      * Constructor for a new board manager.
      * @param board - board to be managed.
      */
     TFEBoardManager(TFEBoard board) {
         this.board = board;
-    }
-
-    /**
-     * Getter for number of undoes.
-     * @return number of undoes remaining.
-     */
-    int getUndos(){
-        return undos;
-    }
-
-    /**
-     * Setter for number of undoes
-     * @param i - number of undoes allowed.
-     */
-    void setUndos(int i){
-        this.undos = i;
     }
 
     /**
