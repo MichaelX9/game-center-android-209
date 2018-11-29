@@ -29,7 +29,6 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
             yourScores.setText(display);
         }
         displayGlobalHighScores(globalScores);
-
     }
 
     /**
@@ -39,15 +38,12 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
     private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"SlidingTiles", GameLaunchActivity.username);
-        int numberOfUserScores = userHighScores.size();
         Collections.sort(userHighScores);
+        Collections.reverse(userHighScores);
         StringBuilder userHighScoresBuilder = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            if (i < numberOfUserScores) {
-                userHighScoresBuilder.append(
-                        userHighScores.get(numberOfUserScores - i));
-                userHighScoresBuilder.append("\n");
-            }
+        for (Integer score : userHighScores) {
+            userHighScoresBuilder.append(score);
+            userHighScoresBuilder.append("\n");
         }
         userScores.setText(userHighScoresBuilder.toString());
     }
@@ -59,14 +55,12 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
     private void displayGlobalHighScores(TextView globalScores) {
         ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
                 "SlidingTiles");
-        int numberOfGlobalScores = globalHighScores.size();
         Collections.sort(globalHighScores);
+        Collections.reverse(globalHighScores);
         StringBuilder globalHighScoresBuilder = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            if (i < numberOfGlobalScores) {
-                globalHighScoresBuilder.append(globalHighScores.get(numberOfGlobalScores - i));
-                globalHighScoresBuilder.append("\n");
-            }
+        for (Integer score : globalHighScores) {
+            globalHighScoresBuilder.append(score);
+            globalHighScoresBuilder.append("\n");
         }
         globalScores.setText(globalHighScoresBuilder.toString());
     }
