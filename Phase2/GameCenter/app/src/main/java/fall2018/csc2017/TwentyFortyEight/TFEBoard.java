@@ -156,10 +156,21 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         return false;
     }
 
+    boolean isOver(){
+        for (int c = 0; c < numCol; c++) {
+            for (int r = 0; r < numRow; r++) {
+                if (boardTiles[r][c].getTileValue() != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Make the text bubble for when the game is solved after recording the score.
      */
-    private void makeTextForSolvedGame(Context context) {
+    void makeTextForSolvedGame(Context context) {
         if(scoreBoard.getNumberOfMoves() % GameManager.autosaveInterval ==0) {
             MenuActivity.manager.save(context);
         }
@@ -174,7 +185,7 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
     /**
      * Make the text bubble for when the game is over after recording the score.
      */
-    private void makeTextForLostGame(Context context) {
+    void makeTextForLostGame(Context context) {
         int score = scoreBoard.calculateScore();
         MenuActivity.manager.addScore(context, score, "TFE");
         Toast.makeText(context,  "YOU LOST!" + " \n Your score is " + score +

@@ -90,8 +90,10 @@ public abstract class ScoreBoard implements Serializable {
      * Update durationPlayed.
      */
     public void updateDurationPlayed() {
-        this.durationPlayed = this.durationPlayed.plusSeconds(Duration.between(timeStarted,
-                timeFinished).getSeconds());
+        if (timeStarted != null && timeFinished != null){
+            this.durationPlayed = this.durationPlayed.plusSeconds(Duration.between(timeStarted,
+                    timeFinished).getSeconds());
+        }
     }
 
     public void minusMoveCount(){this.numberOfMoves -= 2; }

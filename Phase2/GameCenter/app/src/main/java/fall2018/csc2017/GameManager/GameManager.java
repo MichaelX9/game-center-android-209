@@ -1,6 +1,7 @@
 package fall2018.csc2017.GameManager;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -244,6 +245,9 @@ public abstract class GameManager {
     }
 
     public void addScore(Context context, Integer newScore, String gameName){
+        if (context.getFilesDir() == null){
+            return;
+        }
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         String score = newScore.toString();
         try {
@@ -257,6 +261,10 @@ public abstract class GameManager {
     }
 
     public static ArrayList<Integer> scoreGetter(Context context, String gameName){
+        if (context.getFilesDir() == null){
+            return null;
+        }
+        System.out.println(context.getFilesDir());
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         ArrayList<Integer> gameScores = new ArrayList<>();
         try{
@@ -276,6 +284,9 @@ public abstract class GameManager {
     }
 
     public static ArrayList<Integer> scoreGetter(Context context, String gameName, String username){
+        if (context.getFilesDir() == null){
+            return null;
+        }
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         ArrayList<Integer> gameScores = new ArrayList<>();
         try{

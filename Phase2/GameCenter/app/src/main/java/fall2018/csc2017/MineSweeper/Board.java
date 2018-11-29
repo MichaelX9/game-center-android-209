@@ -14,7 +14,7 @@ public class Board extends Observable implements Observer, Serializable {
     private Block[][] blocks;
     private double percentMines;
 
-    Board(int col, int row, double percentMines){
+    public Board(int col, int row, double percentMines){
         this.numCols = col;
         this.numRows = row;
         this.percentMines = percentMines;
@@ -143,7 +143,7 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
 
-    Block getBlock(int pos){
+    public Block getBlock(int pos){
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;

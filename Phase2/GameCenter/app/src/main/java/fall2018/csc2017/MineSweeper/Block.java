@@ -34,11 +34,11 @@ public class Block extends Observable implements Serializable {
         return isMine;
     }
 
-    boolean isVisible(){
+    public boolean isVisible(){
         return visible;
     }
 
-    boolean isFlagged(){
+    public boolean isFlagged(){
         return flagged;
     }
 
