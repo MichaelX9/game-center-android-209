@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
@@ -83,6 +84,22 @@ public class GameActivity extends AppCompatActivity implements Observer {
         MenuActivity.manager.setGameState(boardManager);
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    public void undoClicker(View view) {
+        Random rand = new Random();
+        int n = rand.nextInt(5) + 1;
+        if (n == 1){
+            Toast.makeText(this, "Sorry, I can't save you", Toast.LENGTH_SHORT).show();
+        } else if (n == 2){
+            Toast.makeText(this, "Try again :)", Toast.LENGTH_SHORT).show();
+        } else if (n == 3){
+            Toast.makeText(this, "Ha Ha, you can't Undo", Toast.LENGTH_SHORT).show();
+        } else if (n == 4){
+            Toast.makeText(this, "Nice Try...", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(this, "Undo NA ;-;", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
