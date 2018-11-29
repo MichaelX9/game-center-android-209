@@ -186,6 +186,9 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates the listener for functionality of delete save button.
+     */
     private void addDeleteButtonListener() {
         ImageButton deleteButton = findViewById(R.id.deleter);
         deleteButton.setOnClickListener(new View.OnClickListener() {

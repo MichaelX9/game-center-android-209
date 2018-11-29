@@ -4,19 +4,23 @@ import java.io.Serializable;
 
 public class TFEBoardManager implements Serializable {
 
+    /**
+     * Current 2048 board.
+     */
     private TFEBoard board;
-    int undos = 3;
+
+    /**
+     * Constructor for a new board manager.
+     * @param board - board to be managed.
+     */
     TFEBoardManager(TFEBoard board) {
         this.board = board;
     }
 
-
-    int getUndos(){
-        return undos;
-    }
-    void setUndos(int i){
-        this.undos = i;
-    }
+    /**
+     * Getter for current board state.
+     * @return current board being managed.
+     */
     public TFEBoard getBoard(){return this.board;}
 
 

@@ -20,7 +20,14 @@ import static java.lang.Math.min;
 
 public class GameActivity extends AppCompatActivity implements Observer, View.OnTouchListener {
 
+    /**
+     * Gridview which displays the gameboard.
+     */
     private GridView gridView;
+
+    /**
+     * Boardmanager class for the current game.
+     */
     private TFEBoardManager tfeBoardManager;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -124,17 +131,28 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     }
 
 
+    /**
+     * Set background image of each grid space and call adaptor to change view.
+     */
     private void display(){
         ((TFEGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
     }
 
 
+    /**
+     * Clicker for save button to initiate save game function.
+     * @param view - current view of the board.
+     */
     public void saveClicker(View view){
         MenuActivity.manager.setGameState(tfeBoardManager);
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Clicker for undo button to initiate undo functionality.
+     * @param view - current view of board
+     */
     public void undoClicker(View view){
         if (MenuActivity.manager.getUndos() == 0){
             Toast.makeText(this, "No more undos left!", Toast.LENGTH_SHORT).show();
