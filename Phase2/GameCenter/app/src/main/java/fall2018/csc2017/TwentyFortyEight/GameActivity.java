@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
         MenuActivity.manager.undoSetup(this);
-        MenuActivity.manager.setUndos(tfeBoardManager.getUndos());
+        MenuActivity.manager.setUndos(MenuActivity.manager.getUndos());
 
         tfeBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(tfeBoardManager.getBoard().getNumCol());
