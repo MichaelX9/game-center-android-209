@@ -23,14 +23,13 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"Minesweeper", GameLaunchActivity.username);
 
-        if (userHighScores.size() != 0) {
+        if (userHighScores != null && userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
         } else {
             String display = "You do not have any scores yet. ";
             yourScores.setText(display);
         }
         displayGlobalHighScores(globalScores);
-
     }
 
     /**
@@ -40,17 +39,16 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
     private void displayUserHighScores(TextView userScores) {
         ArrayList<Integer> userHighScores = GameManager.scoreGetter(
                 this,"Minesweeper", GameLaunchActivity.username);
-        int numberOfUserScores = userHighScores.size();
-        Collections.sort(userHighScores);
-        StringBuilder userHighScoresBuilder = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            if (i < numberOfUserScores) {
-                userHighScoresBuilder.append(
-                        userHighScores.get(numberOfUserScores - i));
+        if (userHighScores != null) {
+            Collections.sort(userHighScores);
+            Collections.reverse(userHighScores);
+            StringBuilder userHighScoresBuilder = new StringBuilder();
+            for (Integer score : userHighScores) {
+                userHighScoresBuilder.append(score);
                 userHighScoresBuilder.append("\n");
             }
+            userScores.setText(userHighScoresBuilder.toString());
         }
-        userScores.setText(userHighScoresBuilder.toString());
     }
 
     /**
@@ -60,16 +58,16 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
     private void displayGlobalHighScores(TextView globalScores) {
         ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
                 "Minesweeper");
-        int numberOfGlobalScores = globalHighScores.size();
-        Collections.sort(globalHighScores);
-        StringBuilder globalHighScoresBuilder = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            if (i < numberOfGlobalScores) {
-                globalHighScoresBuilder.append(globalHighScores.get(numberOfGlobalScores - i));
+        if (globalHighScores != null) {
+            Collections.sort(globalHighScores);
+            Collections.reverse(globalHighScores);
+            StringBuilder globalHighScoresBuilder = new StringBuilder();
+            for (Integer score : globalHighScores) {
+                globalHighScoresBuilder.append(score);
                 globalHighScoresBuilder.append("\n");
             }
+            globalScores.setText(globalHighScoresBuilder.toString());
         }
-        globalScores.setText(globalHighScoresBuilder.toString());
     }
 
 }

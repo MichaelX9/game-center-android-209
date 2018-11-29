@@ -21,13 +21,13 @@ public class BoardManager implements Serializable {
     /**
      * The scoreBoard for the game.
      */
-    MineSweeperScoreBoard scoreBoard;
+    public MineSweeperScoreBoard scoreBoard;
 
     /**
      * A new BoardManager.
      * @param board the board to be assigned
      */
-    BoardManager(Board board){
+    public BoardManager(Board board){
         this.board = board;
     }
 
@@ -42,7 +42,7 @@ public class BoardManager implements Serializable {
      * setter for scoreboard
      * @param scoreBoard the scoreboard
      */
-    void setScoreBoard(Context context, MineSweeperScoreBoard scoreBoard) {
+    public void setScoreBoard(Context context, MineSweeperScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
         this.scoreBoard.setUserScores(GameManager.scoreGetter(context, "Minesweeper",
                 GameLaunchActivity.username));
@@ -53,7 +53,7 @@ public class BoardManager implements Serializable {
      * Processes a tap on a block.
      * @param position The index of the block in board.blocks
      */
-    void processClick(Context context, int position){
+    public void processClick(Context context, int position){
         if (board.getBlock(position).isMineType()){
             scoreBoard.finishTiming();
             scoreBoard.updateDurationPlayed();
@@ -96,7 +96,7 @@ public class BoardManager implements Serializable {
      *  Processes a tap and hold on a clock
      * @param position The index of the block in board.blocks
      */
-    void processLongClick(Context context, int position){
+    public void processLongClick(Context context, int position){
         if(!board.getBlock(position).isVisible()){
             board.getBlock(position).toggleFlagged();
         }

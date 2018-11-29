@@ -29,7 +29,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /***
      * Initialize a scoreboard
      */
-    MineSweeperScoreBoard() {
+    public MineSweeperScoreBoard() {
         score = 0;
         userScores = new ArrayList<>();
         highScores = new ArrayList<>();
@@ -73,9 +73,11 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * @param position the position of the block clicked.
      */
     void updateScoreOnClick(int position) {
-        int[] blocksRevealed = MenuActivity.manager.getGameState().getBoard().getLocalBlocks(position);
-        int numBlocksRevealed = blocksRevealed.length;
-        score += 100 * numBlocksRevealed;
+        if (MenuActivity.manager.getGameState() == null){
+            return;
+        }
+        int numBlocksRevealed = MenuActivity.manager.getGameState().getBoard().revealLocal(position);
+        score += 300 * numBlocksRevealed;
     }
 
 
@@ -88,11 +90,12 @@ public class MineSweeperScoreBoard extends ScoreBoard {
         if (score < 0) {
             score = 0;
         }
-        highScores.add(score);
-        userScores.add(score);
-        Collections.sort(highScores);
-        Collections.sort(userScores);
-
+        if (highScores != null) {
+            highScores.add(score);
+            userScores.add(score);
+            Collections.sort(highScores);
+            Collections.sort(userScores);
+        }
         return score;
     }
 

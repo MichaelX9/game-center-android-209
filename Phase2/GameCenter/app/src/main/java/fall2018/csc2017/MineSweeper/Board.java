@@ -14,7 +14,7 @@ public class Board extends Observable implements Observer, Serializable {
     private Block[][] blocks;
     private double percentMines;
 
-    Board(int col, int row, double percentMines){
+    public Board(int col, int row, double percentMines){
         this.numCols = col;
         this.numRows = row;
         this.percentMines = percentMines;
@@ -63,7 +63,7 @@ public class Board extends Observable implements Observer, Serializable {
      * [3]pos[4]
      * [5][6][7]
      */
-    int[] getLocalBlocks(int pos){
+    private int[] getLocalBlocks(int pos){
         int[] local = new int[8];
         local[0]=local[1]=local[2]=local[3]=local[4]=local[5]=local[6]=local[7]=-1;
         int c = pos % numRows;
@@ -119,10 +119,13 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
     /***
-     * Reveal's all the blocks surrounding a given block.
+     * Reveal all the blocks surrounding a given block and return the number of blocks revealed.
      * @param pos the position of the given block
+     * @return the number of blocks revealed
      */
-    void revealLocal(int pos){
+    int revealLocal(int pos){
+
+        int numBlocksRevealed = 0;
 
         getBlock(pos).setVisible();
         if(!getBlock(pos).isMineType() && getBlock(pos).getNumMines() == 0){
@@ -132,13 +135,15 @@ public class Board extends Observable implements Observer, Serializable {
                 }
                 else if(i != -1 && !getBlock(i).isVisible() && getBlock(i).getNumMines() != 0){
                     getBlock(i).setVisible();
+                    numBlocksRevealed++;
                 }
             }
         }
+        return numBlocksRevealed + 1;
     }
 
 
-    Block getBlock(int pos){
+    public Block getBlock(int pos){
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;
