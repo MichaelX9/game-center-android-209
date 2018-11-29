@@ -31,9 +31,14 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     private TFEBoardManager tfeBoardManager;
 
     /**
-     * Boolean flag to mark when a gameState has already ended.
+     * Boolean flag to mark when a gameState has ended.
      */
     private boolean gameOver = false;
+
+    /**
+     * Boolean flag to mark when a 2048 has been made.
+     */
+    private boolean TFEMade = false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -117,11 +122,11 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                         tfeBoardManager.getBoard().tileSlide(2);
                     }
                 }
-                if(tfeBoardManager.getBoard().isSolved() && !gameOver){
+                if(tfeBoardManager.getBoard().isSolved() && !TFEMade){
                     tfeBoardManager.makeTextForSolvedGame(this);
-                    gameOver = true;
+                    TFEMade = true;
                 }
-                if(tfeBoardManager.getBoard().isOver() && !gameOver){
+                else if(tfeBoardManager.getBoard().isOver() && !gameOver){
                     tfeBoardManager.makeTextForLostGame(this);
                     gameOver = true;
                 }
