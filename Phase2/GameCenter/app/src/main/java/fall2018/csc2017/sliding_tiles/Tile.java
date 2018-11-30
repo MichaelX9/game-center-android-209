@@ -76,11 +76,15 @@ public class Tile implements Comparable<Tile>, Serializable {
      * preSer the background to compressedBackground
      */
     private void preSer() {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ((BitmapDrawable) background).getBitmap().compress(Bitmap.CompressFormat.PNG,
-                100, byteArrayOutputStream);
-        compressedBackground = Base64.encodeToString(
-                byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ((BitmapDrawable) background).getBitmap().compress(Bitmap.CompressFormat.PNG,
+                    100, byteArrayOutputStream);
+            compressedBackground = Base64.encodeToString(
+                    byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        }catch (NullPointerException ignored){
+
+        }
     }
 
     /***

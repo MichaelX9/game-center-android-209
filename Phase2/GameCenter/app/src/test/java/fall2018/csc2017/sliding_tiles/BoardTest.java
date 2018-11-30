@@ -1,5 +1,7 @@
 package fall2018.csc2017.sliding_tiles;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -14,7 +16,8 @@ public class BoardTest {
 
     @Before
     public void setUp() {
-        Drawable d = new ColorDrawable();
+        Bitmap b = Bitmap.createBitmap(10,10,Bitmap.Config.ARGB_8888);
+        Drawable d = new BitmapDrawable(b);
         Tile[][] tiles = new Tile[2][2];
         tiles[0][0] = new Tile(1, d);
         tiles[0][1] = new Tile(2, d);
