@@ -32,7 +32,10 @@ public class GameActivity extends AppCompatActivity implements Observer {
      */
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
-    
+
+    /***
+     * The game board of current game
+     */
     private Board board;
 
     /**

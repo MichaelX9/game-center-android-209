@@ -30,6 +30,7 @@ public class SlidingTilesManager extends GameManager {
 
     /**
      * Getter for number of undos remaining.
+     *
      * @return number of undos
      */
     int getUndos() {
