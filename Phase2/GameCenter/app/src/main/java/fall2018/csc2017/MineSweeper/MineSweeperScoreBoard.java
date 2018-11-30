@@ -57,6 +57,9 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * return null.
      */
     Integer getUserHighestScore() {
+        if (userScores == null){
+            return null;
+        }
         return userScores.get(userScores.size() - 1);
     }
 

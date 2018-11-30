@@ -19,7 +19,14 @@ import fall2018.csc2017.SlidingTiles.R;
 
 public class GameActivity extends AppCompatActivity implements Observer {
 
+    /**
+     * The grid view which displays the game board.
+     */
     private GridView gridView;
+
+    /**
+     * The BoardManager instance for this game.
+     */
     private BoardManager boardManager;
 
     @Override
@@ -75,12 +82,19 @@ public class GameActivity extends AppCompatActivity implements Observer {
                 });
     }
 
+    /**
+     * Add the save button functionality to the game interface.
+     * @param view the view
+     */
     public void saveClicker(View view){
         MenuActivity.manager.setGameState(boardManager);
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Add the undo button functionality to the game interface.
+     */
     public void undoClicker(View view) {
         Random rand = new Random();
         int n = rand.nextInt(5) + 1;
@@ -98,6 +112,9 @@ public class GameActivity extends AppCompatActivity implements Observer {
     }
 
 
+    /**
+     * Set background image of each grid space and call adaptor to change view.
+     */
     private void display(){
         ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
     }

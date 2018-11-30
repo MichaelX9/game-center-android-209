@@ -1,8 +1,6 @@
 package fall2018.csc2017.TwentyFortyEight;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,9 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Random;
-
-import fall2018.csc2017.GameManager.GameManager;
-import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
 
 
 public class TFEBoard extends Observable implements Serializable, Iterable<TFETile> {
@@ -143,7 +138,7 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
                     if (boardTiles[r][c].getTileValue() == 0) {
                         return false;
                     }
-                    else if(boardTiles[r][c].getTileValue() == boardTiles[r][c+1].getTileValue() && boardTiles[r][c].getTileValue() == boardTiles[r+1][c].getTileValue()){
+                    else if(boardTiles[r][c].getTileValue() == boardTiles[r][c+1].getTileValue() || boardTiles[r][c].getTileValue() == boardTiles[r+1][c].getTileValue()){
                         return false;
                     }
                 }

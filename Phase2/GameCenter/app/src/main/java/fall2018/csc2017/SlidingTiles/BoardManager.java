@@ -15,8 +15,14 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
  */
 class  BoardManager implements Serializable {
 
+    /**
+     * The maximumComplexity measure for score calculation.
+     */
     static int maximumComplexity = 200;
 
+    /**
+     * The scoreboard for the game.
+     */
     SlidingTilesScoreBoard scoreBoard;
 
     /**
