@@ -110,7 +110,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                         tfeBoardManager.getBoard().tileSlide(1);
                     }
                 } else {
-                    if (newY > prevY) {
+                    if (newY < prevY) {
                         //Up-Swipe
                         tfeBoardManager.getBoard().tileSlide(2);
                     } else {
