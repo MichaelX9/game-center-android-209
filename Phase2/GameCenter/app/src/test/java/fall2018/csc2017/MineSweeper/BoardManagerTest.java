@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class BoardManagerTest {
     private Board mineBoard;
     private BoardManager minesweeperBM;
-    private MineSweeperScoreBoard mineScoreBoard;
+    private MineSweeperScoreBoard mineScoreBoard = null;
     private Context context;
 
     /**
