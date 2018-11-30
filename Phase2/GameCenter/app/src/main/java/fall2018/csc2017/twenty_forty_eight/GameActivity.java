@@ -82,6 +82,9 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
 
     }
 
+    /**
+     * Variables to hold the even info in the x and y directions for onTouch functionality.
+     */
     float prevX, prevY;
 
     /**
