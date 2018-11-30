@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_login_background"
-    tools:context="fall2018.csc2017.LaunchCentre.LoginActivity">
+    tools:context="fall2018.csc2017.launch_centre.LoginActivity">
 
     <EditText
         android:id="@+id/etPassword"

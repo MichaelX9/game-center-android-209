@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_tfe_background"
-    tools:context="fall2018.csc2017.MineSweeper.MenuActivity">
+    tools:context="fall2018.csc2017.mine_sweeper.MenuActivity">
 
     <Button
         android:id="@+id/save1"

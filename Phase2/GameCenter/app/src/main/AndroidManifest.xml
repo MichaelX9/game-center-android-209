@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fall2018.csc2017.SlidingTiles">
+    package="fall2018.csc2017">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,26 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="fall2018.csc2017.LaunchCentre.LoginActivity">
+        <activity android:name="fall2018.csc2017.launch_centre.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fall2018.csc2017.SlidingTiles.MenuActivity" />
-        <activity android:name="fall2018.csc2017.SlidingTiles.GameActivity" />
-        <activity android:name="fall2018.csc2017.MineSweeper.MenuActivity" />
-        <activity android:name="fall2018.csc2017.TwentyFortyEight.MenuActivity" />
-        <activity android:name="fall2018.csc2017.LaunchCentre.RegisterActivity" />
-        <activity android:name="fall2018.csc2017.LaunchCentre.GameLaunchActivity" />
-        <activity android:name="fall2018.csc2017.SlidingTiles.ChooseComplexityActivity" />
-        <activity android:name="fall2018.csc2017.SlidingTiles.SlidingTilesScoreboardActivity" />
-        <activity android:name="fall2018.csc2017.SlidingTiles.ChooseImageActivity" />
-        <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
-        <activity android:name="fall2018.csc2017.TwentyFortyEight.GameActivity"></activity>
-        <activity android:name="fall2018.csc2017.MineSweeper.MineSweeperScoreBoardActivity" />
-        <activity android:name="fall2018.csc2017.TwentyFortyEight.TFEScoreBoardActivity" />
+        <activity android:name="fall2018.csc2017.sliding_tiles.MenuActivity" />
+        <activity android:name="fall2018.csc2017.sliding_tiles.GameActivity" />
+        <activity android:name="fall2018.csc2017.mine_sweeper.MenuActivity" />
+        <activity android:name="fall2018.csc2017.twenty_forty_eight.MenuActivity" />
+        <activity android:name="fall2018.csc2017.launch_centre.RegisterActivity" />
+        <activity android:name="fall2018.csc2017.launch_centre.GameLaunchActivity" />
+        <activity android:name="fall2018.csc2017.sliding_tiles.ChooseComplexityActivity" />
+        <activity android:name="fall2018.csc2017.sliding_tiles.SlidingTilesScoreboardActivity" />
+        <activity android:name="fall2018.csc2017.sliding_tiles.ChooseImageActivity" />
+        <activity android:name="fall2018.csc2017.mine_sweeper.GameActivity" />
+        <activity android:name="fall2018.csc2017.twenty_forty_eight.GameActivity"/>
+        <activity android:name="fall2018.csc2017.mine_sweeper.MineSweeperScoreBoardActivity" />
+        <activity android:name="fall2018.csc2017.twenty_forty_eight.TFEScoreBoardActivity" />
     </application>
 
 </manifest>
