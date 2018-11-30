@@ -155,9 +155,9 @@ abstract class BoardFactory {
         }
         if (width % 2 == 0){
             if (blankRow % 2 ==0){
-                return parity % 2 != 0;
-            } else {
                 return parity % 2 == 0;
+            } else {
+                return parity % 2 != 0;
             }
         } else {
             return parity % 2 ==0;
