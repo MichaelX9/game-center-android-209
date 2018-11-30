@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests 100% of (Minesweeper) Board Manager
@@ -23,7 +23,7 @@ public class BoardManagerTest {
      * after every method run
      */
     @Before
-    public void setUp(){
+    public void setUp() {
         // Defines a board with of normal size & mine percentage
         mineBoard = new Board(10, 10, 0.15);
         minesweeperBM = new BoardManager(mineBoard);
@@ -59,8 +59,12 @@ public class BoardManagerTest {
         minesweeperBM.scoreBoard.calculateScore();
 
         assert !minesweeperBM.getBoard().getBlock(0).isVisible();
-        minesweeperBM.processClick(context, 0);
-        assert minesweeperBM.getBoard().getBlock(0).isVisible();
+        int i = 0;
+        while (mineBoard.getBlock(i).isMineType()) {
+            i++;
+        }
+        minesweeperBM.processClick(context, i);
+        assert minesweeperBM.getBoard().getBlock(i).isVisible();
     }
 
 
@@ -73,9 +77,9 @@ public class BoardManagerTest {
         minesweeperBM.setScoreBoard(context, mineScoreBoard);
 
         assert !minesweeperBM.getBoard().getBlock(99).isFlagged();
-        minesweeperBM.processLongClick(context, 99);
+        minesweeperBM.processLongClick(99);
         assert minesweeperBM.getBoard().getBlock(99).isFlagged();
-        minesweeperBM.processLongClick(context, 99);
+        minesweeperBM.processLongClick(99);
         assert !minesweeperBM.getBoard().getBlock(99).isFlagged();
     }
 

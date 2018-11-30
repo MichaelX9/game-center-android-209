@@ -8,6 +8,10 @@ import java.io.Serializable;
 import fall2018.csc2017.game_manager.GameManager;
 import fall2018.csc2017.launch_centre.GameLaunchActivity;
 
+
+/***
+ * This class manages the game board of 2048
+ */
 public class TFEBoardManager implements Serializable {
 
     /**
@@ -22,6 +26,7 @@ public class TFEBoardManager implements Serializable {
 
     /**
      * Constructor for a new board manager.
+     *
      * @param board - board to be managed.
      */
     TFEBoardManager(TFEBoard board) {
@@ -30,9 +35,12 @@ public class TFEBoardManager implements Serializable {
 
     /**
      * Getter for current board state.
+     *
      * @return current board being managed.
      */
-    public TFEBoard getBoard(){return this.board;}
+    public TFEBoard getBoard() {
+        return this.board;
+    }
 
     /**
      * setter for scoreboard
@@ -58,13 +66,13 @@ public class TFEBoardManager implements Serializable {
      */
     void makeTextForSolvedGame(Context context) {
         int score = scoreBoard.calculateScore();
-        MenuActivity.manager.addScore(context, score,"TFE");
+        MenuActivity.manager.addScore(context, score, "TFE");
         Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                 ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
                 ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
                 ". ", Toast.LENGTH_LONG).show();
         MenuActivity.manager.save(context);
-        }
+    }
 
     /**
      * Make the text bubble for when the game is over after recording the score.
@@ -72,13 +80,12 @@ public class TFEBoardManager implements Serializable {
     void makeTextForLostGame(Context context) {
         int score = scoreBoard.calculateScore();
         MenuActivity.manager.addScore(context, score, "TFE");
-        Toast.makeText(context,  "YOU LOST!" + " \n Your score is " + score +
+        Toast.makeText(context, "YOU LOST!" + " \n Your score is " + score +
                 ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
                 ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
                 ". ", Toast.LENGTH_LONG).show();
         MenuActivity.manager.save(context);
     }
-
 
 
 }
