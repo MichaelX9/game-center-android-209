@@ -37,7 +37,8 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      */
     String getUserHighestScore() {
         if (userToScores.get(currentUser) != null) {
-            return userToScores.get(currentUser).get(userScores.size() - 1);
+            String onlyScore = userToScores.get(currentUser).get(userScores.size() - 1);
+            return onlyScore.substring(0, onlyScore.indexOf(':'));
         } else {
             return null;
         }
@@ -47,7 +48,8 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * Return the highest score any user has achieved
      */
     String getGameHighestScore() {
-        return highScores.get(highScores.size() - 1);
+        String onlyScore = highScores.get(highScores.size() - 1);
+        return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
 
 
@@ -78,10 +80,10 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * @param score the recently calculated score for the player.
      */
     private void updateData(Integer score) {
-        highScores.add(String.valueOf(score));
-        userScores.add(String.valueOf(score));
-        Collections.sort(highScores);
-        Collections.sort(userScores);
+        highScores.add(String.valueOf(score + ": "));
+        userScores.add(String.valueOf(score+ ": "));
+        Collections.sort(highScores, new sortByScore());
+        Collections.sort(userScores, new sortByScore());
         userToScores.put(currentUser, userScores);
     }
 }

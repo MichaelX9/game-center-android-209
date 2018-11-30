@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Abstract class to be implemented by all games.
@@ -145,4 +146,16 @@ public abstract class ScoreBoard implements Serializable {
         in.defaultReadObject();
     }
 
+    /**
+     * Overrides Comparator's compare method to sort by the "number part" of the String
+     */
+    public class sortByScore implements Comparator<String>
+    {
+        @Override
+        public int compare(String a, String b)
+        {
+            return Integer.parseInt(a.substring(0, a.indexOf(':'))) -
+                    Integer.parseInt(b.substring(0, b.indexOf(':')));
+        }
+    }
 }

@@ -54,14 +54,16 @@ public class TFEScoreBoard extends ScoreBoard {
      * return null.
      */
     String getUserHighestScore() {
-        return userScores.get(userScores.size() - 1);
+        String onlyScore = userScores.get(userScores.size() - 1);
+        return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
 
     /**
      * Return the highest score any user has achieved
      */
     String getGameHighestScore() {
-        return highScores.get(highScores.size() - 1);
+        String onlyScore = highScores.get(highScores.size() - 1);
+        return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
 
 
@@ -79,10 +81,10 @@ public class TFEScoreBoard extends ScoreBoard {
      * adding the score to userToScores and highScores.
      */
     protected Integer calculateScore() {
-        highScores.add(String.valueOf(score));
-        userScores.add(String.valueOf(score));
-        Collections.sort(highScores);
-        Collections.sort(userScores);
+        highScores.add(String.valueOf(score + ": "));
+        userScores.add(String.valueOf(score  + ": "));
+        Collections.sort(highScores, new sortByScore());
+        Collections.sort(userScores, new sortByScore());
 
         return score;
     }

@@ -2,6 +2,7 @@ package fall2018.csc2017.mine_sweeper;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import fall2018.csc2017.score_board.ScoreBoard;
 
@@ -60,14 +61,16 @@ public class MineSweeperScoreBoard extends ScoreBoard {
         if (userScores == null){
             return null;
         }
-        return userScores.get(userScores.size() - 1);
+        String onlyScore = userScores.get(userScores.size() - 1);
+        return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
 
     /**
      * Return the highest score any user has achieved
      */
     public String getGameHighestScore() {
-        return highScores.get(highScores.size() - 1);
+        String onlyScore = highScores.get(highScores.size() - 1);
+        return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
 
 
@@ -94,12 +97,11 @@ public class MineSweeperScoreBoard extends ScoreBoard {
             score = 0;
         }
         if (highScores != null) {
-            highScores.add(String.valueOf(score));
-            userScores.add(String.valueOf(score));
-            Collections.sort(highScores);
-            Collections.sort(userScores);
+            highScores.add(String.valueOf(score) + ": ");
+            userScores.add(String.valueOf(score) + ": ");
+            Collections.sort(highScores, new sortByScore());
+            Collections.sort(userScores, new sortByScore());
         }
         return score;
     }
-
 }

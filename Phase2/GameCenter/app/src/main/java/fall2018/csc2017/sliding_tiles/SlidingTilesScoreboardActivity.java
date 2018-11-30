@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import fall2018.csc2017.R;
 import fall2018.csc2017.game_manager.GameManager;
@@ -41,11 +42,12 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<String> userHighScores = GameManager.scoreGetter(
                 this, "sliding_tiles", GameLaunchActivity.username);
         if (userHighScores != null) {
-            Collections.sort(userHighScores);
+            Collections.sort(userHighScores, new sortByScore());
             Collections.reverse(userHighScores);
             StringBuilder userHighScoresBuilder = new StringBuilder();
             for (String score : userHighScores) {
-                userHighScoresBuilder.append(score);
+                String scoreOnly = score.substring(0, score.indexOf(':'));
+                userHighScoresBuilder.append(scoreOnly);
                 userHighScoresBuilder.append("\n");
             }
             userScores.setText(userHighScoresBuilder);
@@ -61,7 +63,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         ArrayList<String> globalHighScores = GameManager.scoreGetter(this,
                 "sliding_tiles");
         if (globalHighScores != null) {
-            Collections.sort(globalHighScores);
+            Collections.sort(globalHighScores, new sortByScore());
             Collections.reverse(globalHighScores);
 
             StringBuilder globalHighScoresBuilder = new StringBuilder();
@@ -70,6 +72,19 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
                 globalHighScoresBuilder.append("\n");
             }
             globalScores.setText(globalHighScoresBuilder);
+        }
+    }
+
+    /**
+     * Overrides Comparator's compare method to sort by the "number part" of the String
+     */
+    class sortByScore implements Comparator<String>
+    {
+        @Override
+        public int compare(String a, String b)
+        {
+            return Integer.parseInt(a.substring(0, a.indexOf(':'))) -
+                    Integer.parseInt(b.substring(0, b.indexOf(':')));
         }
     }
 
