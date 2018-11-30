@@ -4,22 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 
 public class GameActivity extends AppCompatActivity implements Observer {

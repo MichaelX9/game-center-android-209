@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,10 +16,7 @@ import java.io.Serializable;
  */
 public class Tile implements Comparable<Tile>, Serializable {
 
-    /***
-     * the image for the emptyTile
-     */
-    static private transient Drawable emptyTile;
+
     /**
      * The background id to find the tile image.
      */
@@ -28,6 +25,7 @@ public class Tile implements Comparable<Tile>, Serializable {
      * The background compressed in String format
      */
     private String compressedBackground;
+
 
     /**
      * The unique id.
@@ -43,16 +41,9 @@ public class Tile implements Comparable<Tile>, Serializable {
     Tile(int id, Drawable background) {
         this.id = id;
         this.background = background;
-        compress();
+        preSer();
     }
 
-    /***
-     * Setter for emptyTile
-     * @param d image for the empty tile
-     */
-    static void setEmptyTile(Drawable d) {
-        emptyTile = d;
-    }
 
     /**
      * Return the background id.
@@ -69,7 +60,7 @@ public class Tile implements Comparable<Tile>, Serializable {
      */
     public void setBackground(Drawable background) {
         this.background = background;
-        compress();
+        preSer();
     }
 
     /**
@@ -82,9 +73,9 @@ public class Tile implements Comparable<Tile>, Serializable {
     }
 
     /***
-     * compress the background to compressedBackground
+     * preSer the background to compressedBackground
      */
-    private void compress() {
+    private void preSer() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ((BitmapDrawable) background).getBitmap().compress(Bitmap.CompressFormat.PNG,
                 100, byteArrayOutputStream);
@@ -93,23 +84,15 @@ public class Tile implements Comparable<Tile>, Serializable {
     }
 
     /***
-     * decompress the compressedBackground to background
+     * postSer the compressedBackground to background
      * @param context the context
      */
-    void decompress(Context context) {
+    void postSer(Context context) {
         byte[] decodedBytes = Base64.decode(compressedBackground.substring(
                 compressedBackground.indexOf(",") + 1), Base64.DEFAULT);
 
         Bitmap b = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
         background = new BitmapDrawable(context.getResources(), b);
-    }
-
-    /***
-     * Set this tile as empty tile.
-     */
-    void setEmpty() {
-        background = emptyTile;
-        compress();
     }
 
     @Override

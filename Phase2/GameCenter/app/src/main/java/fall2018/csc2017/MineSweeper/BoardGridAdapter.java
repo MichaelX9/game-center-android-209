@@ -1,20 +1,13 @@
 package fall2018.csc2017.MineSweeper;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
-import java.util.ArrayList;
-
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 class BoardGridAdapter extends BaseAdapter {
     private BoardManager boardManager;

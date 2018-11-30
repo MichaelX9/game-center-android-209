@@ -1,9 +1,8 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,7 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
 
     public static SlidingTilesManager manager = new SlidingTilesManager(username);
@@ -31,8 +30,8 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_);
-        manager.checkNew(StartingActivity.this);
+        setContentView(R.layout.activity_slidingtile_menu);
+        manager.checkNew(MenuActivity.this);
         addStartButtonListener();
         addLoadButtonListener();
         addScoreButtonListener();
@@ -63,7 +62,7 @@ public class StartingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int counter = 0;
 
-                for(String save: manager.findSaves(StartingActivity.this)){
+                for(String save: manager.findSaves(MenuActivity.this)){
                     if (save != null){
                         counter += 1;
                     }
@@ -73,7 +72,7 @@ public class StartingActivity extends AppCompatActivity {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
                 }
                 else {
-                    Toast.makeText(StartingActivity.this, "You've reached max saves!",
+                    Toast.makeText(MenuActivity.this, "You've reached max saves!",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -104,9 +103,9 @@ public class StartingActivity extends AppCompatActivity {
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent scorePage = new Intent(StartingActivity.this,
+                Intent scorePage = new Intent(MenuActivity.this,
                         SlidingTilesScoreboardActivity.class);
-                StartingActivity.this.startActivity(scorePage);
+                MenuActivity.this.startActivity(scorePage);
             }
         });
 
@@ -121,7 +120,7 @@ public class StartingActivity extends AppCompatActivity {
 
 
         manager.tempSave(this);
-        String[] saves = manager.findSaves(StartingActivity.this);
+        String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
         for(int i = 0; i < saves.length; i++){
             if (saves[i] != null) {
@@ -133,9 +132,9 @@ public class StartingActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         setInvisible(loadFiles);
                         GameManager.currentFile = (String) loadFiles[finalI].getText();
-                        if ((StartingActivity.manager.getGameState()) != null) {
+                        if ((MenuActivity.manager.getGameState()) != null) {
 
-                            manager.load(StartingActivity.this, GameManager.currentFile);
+                            manager.load(MenuActivity.this, GameManager.currentFile);
 
                         }
                         switchToGame();
@@ -155,7 +154,7 @@ public class StartingActivity extends AppCompatActivity {
                 findViewById(R.id.button3), findViewById(R.id.button4)};
 
         manager.tempSave(this);
-        String[] saves = manager.findSaves(StartingActivity.this);
+        String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
         for(int i = 0; i < saves.length; i++){
             if (saves[i] != null) {
@@ -166,13 +165,13 @@ public class StartingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
-                        if (manager.deleteSave(StartingActivity.this,
+                        if (manager.deleteSave(MenuActivity.this,
                                 ((String) loadFiles[finalI].getText()))){
-                            Toast.makeText(StartingActivity.this,
+                            Toast.makeText(MenuActivity.this,
                                     "Save deleted", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(StartingActivity.this,
+                            Toast.makeText(MenuActivity.this,
                                     "Could not delete :(", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -192,15 +191,6 @@ public class StartingActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Read the temporary board from disk.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //manager.load(StartingActivity.this, "temp.txt");
-    }
-
     private void addDeleteButtonListener() {
         ImageButton deleteButton = findViewById(R.id.deleter);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +206,7 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToSettingup() {
 
-        Intent tmp = new Intent(this, SettingupActivity.class);
+        Intent tmp = new Intent(this, ChooseComplexityActivity.class);
         startActivity(tmp);
     }
 

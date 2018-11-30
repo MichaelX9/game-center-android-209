@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 /**
  * Register Activity

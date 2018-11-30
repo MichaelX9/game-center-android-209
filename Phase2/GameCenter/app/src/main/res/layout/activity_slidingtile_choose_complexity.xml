@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCCA46"
-    tools:context=".SettingupActivity">
+    tools:context=".ChooseComplexityActivity">
 
     <Button
         android:id="@+id/button8"

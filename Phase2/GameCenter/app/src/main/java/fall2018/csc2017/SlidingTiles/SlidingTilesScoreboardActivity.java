@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

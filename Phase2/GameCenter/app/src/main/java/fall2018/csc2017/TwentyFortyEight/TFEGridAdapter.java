@@ -1,14 +1,13 @@
 package fall2018.csc2017.TwentyFortyEight;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 public class TFEGridAdapter extends BaseAdapter {
     TFEBoardManager tfeBoardManager;

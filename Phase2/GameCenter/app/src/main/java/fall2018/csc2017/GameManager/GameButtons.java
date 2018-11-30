@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 public class GameButtons extends Fragment {
     /**

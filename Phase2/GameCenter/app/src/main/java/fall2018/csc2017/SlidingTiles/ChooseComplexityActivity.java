@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 /***
  * The activity for user to choose board complexity and number of undoes.
  */
-public class SettingupActivity extends AppCompatActivity {
+public class ChooseComplexityActivity extends AppCompatActivity {
     /***
      * The number of undoes user selected
      */
@@ -19,7 +19,7 @@ public class SettingupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settingup);
+        setContentView(R.layout.activity_slidingtile_choose_complexity);
     }
 
     /***
@@ -54,7 +54,9 @@ public class SettingupActivity extends AppCompatActivity {
      */
     public void startStandardGame(int row, int col) {
         undoEdit();
-        switchToBGSelection(new Board(row, col));
+        BoardFactory.setNumRowsCows(row, col);
+        Intent intent = new Intent(this, ChooseImageActivity.class);
+        startActivity(intent);
     }
 
     /***
@@ -74,17 +76,6 @@ public class SettingupActivity extends AppCompatActivity {
 
     }
 
-    /***
-     * switch to ChooseImageActivity
-     * @param board the board initialized in this activity
-     */
-    public void switchToBGSelection(Board board) {
-        Intent intent = new Intent(this, ChooseImageActivity.class);
-        StartingActivity.manager.setGameState(new BoardManager(board));
-        StartingActivity.manager.getGameState().setScoreBoard(this,
-                new SlidingTilesScoreBoard());
-        startActivity(intent);
-    }
 
     /***
      * set up custom number of undoes
@@ -92,6 +83,6 @@ public class SettingupActivity extends AppCompatActivity {
     private void undoEdit() {
         EditText undo = findViewById(R.id.undoSetter);
         undoNum = Integer.parseInt(undo.getText().toString());
-        StartingActivity.manager.setUndo(undoNum);
+        MenuActivity.manager.setUndo(undoNum);
     }
 }
