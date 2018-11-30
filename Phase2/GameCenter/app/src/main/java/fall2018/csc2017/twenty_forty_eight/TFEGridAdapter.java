@@ -9,6 +9,9 @@ import android.widget.ImageView;
 
 import fall2018.csc2017.R;
 
+/***
+ * The adapter class helps displaying the 2048 game board to the GridView.
+ */
 public class TFEGridAdapter extends BaseAdapter {
     private TFEBoardManager tfeBoardManager;
     private AbsListView.LayoutParams params;
@@ -44,11 +47,17 @@ public class TFEGridAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        updateViews(imageView, position, context);
+        updateViews(imageView, position);
         return imageView;
     }
 
-    private void updateViews(ImageView imageView, int position, Context context) {
+    /***
+     * Updates the views according to their position in the board
+     *
+     * @param imageView the view to be updated
+     * @param position the view's position in the board
+     */
+    private void updateViews(ImageView imageView, int position) {
         switch (tfeBoardManager.getBoard().tileGetter(position).getTileValue()) {
             case 2:
                 imageView.setImageResource(R.drawable.twentyfortyeight_tile_1);

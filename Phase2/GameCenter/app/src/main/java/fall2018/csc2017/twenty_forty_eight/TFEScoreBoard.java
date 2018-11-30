@@ -1,4 +1,5 @@
 package fall2018.csc2017.twenty_forty_eight;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -35,6 +36,7 @@ public class TFEScoreBoard extends ScoreBoard {
 
     /**
      * set userScores to the given ArrayList.
+     *
      * @param lst the ArrayList used to set userScores.
      */
     void setUserScores(ArrayList<String> lst) {
@@ -43,6 +45,7 @@ public class TFEScoreBoard extends ScoreBoard {
 
     /**
      * set highScores to the given ArrayList.
+     *
      * @param lst the ArrayList used to set highScores.
      */
     void setHighScores(ArrayList<String> lst) {
@@ -69,6 +72,7 @@ public class TFEScoreBoard extends ScoreBoard {
 
     /**
      * Update the score (after each click) based the new sums created during merges.
+     *
      * @param newSum the new sum created by tile merges
      */
     void updateScoreOnMerge(int newSum) {
@@ -82,7 +86,7 @@ public class TFEScoreBoard extends ScoreBoard {
      */
     protected Integer calculateScore() {
         highScores.add(String.valueOf(score + ": "));
-        userScores.add(String.valueOf(score  + ": "));
+        userScores.add(String.valueOf(score + ": "));
         Collections.sort(highScores, new sortByScore());
         Collections.sort(userScores, new sortByScore());
 

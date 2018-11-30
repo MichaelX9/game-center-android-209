@@ -12,6 +12,9 @@ import java.io.ObjectOutputStream;
 import fall2018.csc2017.game_manager.GameManager;
 import static java.lang.Integer.min;
 
+/***
+ * The game manager for 2048
+ */
 class TFEGameManager extends GameManager {
 
      /**

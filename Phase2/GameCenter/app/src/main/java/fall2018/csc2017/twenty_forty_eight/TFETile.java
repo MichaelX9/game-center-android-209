@@ -2,6 +2,9 @@ package fall2018.csc2017.twenty_forty_eight;
 
 import java.io.Serializable;
 
+/***
+ * Tiles of 2048 game.
+ */
 class TFETile implements Serializable {
 
     /**

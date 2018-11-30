@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
-
+/***
+ * The 2048 game board.
+ */
 public class TFEBoard extends Observable implements Serializable, Iterable<TFETile> {
 
     /**
@@ -129,24 +131,214 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
 
     /**
      * Checker for whether or not there are no valid moves possible.
+     *
      * @return whether valid moves remain
      */
-    boolean isOver(){
+    boolean isOver() {
         for (int c = 0; c < numCol; c++) {
             for (int r = 0; r < numRow; r++) {
-                try{
+                try {
                     if (boardTiles[r][c].getTileValue() == 0) {
                         return false;
-                    }
-                    else if(boardTiles[r][c].getTileValue() == boardTiles[r][c+1].getTileValue() || boardTiles[r][c].getTileValue() == boardTiles[r+1][c].getTileValue()){
+                    } else if (boardTiles[r][c].getTileValue() == boardTiles[r][c + 1].getTileValue() || boardTiles[r][c].getTileValue() == boardTiles[r + 1][c].getTileValue()) {
                         return false;
                     }
-                }
-                catch(IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException ignored) {
                 }
             }
         }
         return true;
+    }
+
+    /**
+     * Switcher function to call correct directional slider function depending on direction of swipe.
+     *
+     * @param slideDirection - integer representing one of four possible swipe directions.
+     */
+    void tileSlide(int slideDirection) {
+        TFETile[][] toCheck = arrCopy(boardTiles);
+        switch (slideDirection) {
+            case 0:
+                rightSlider(boardTiles);
+                break;
+            case 1:
+                leftSlider(boardTiles);
+                break;
+            case 2:
+                upSlider(boardTiles);
+                break;
+            case 3:
+                downSlider(boardTiles);
+                break;
+        }
+        if (!sameArray(boardTiles, toCheck)) {
+            newBlock(boardTiles);
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Generator for new numbered block after a move is made.
+     *
+     * @param boardTiles - current array representing the tiles on the board.
+     */
+    private void newBlock(TFETile[][] boardTiles) {
+        int row = numRow;
+        int col = numCol;
+        List<TFETile> blankTiles = new ArrayList<>();
+        for (int c = 0; c < col; c++) {
+            for (int r = 0; r < row; r++) {
+                if (boardTiles[r][c].getTileValue() == 0) {
+                    blankTiles.add(boardTiles[r][c]);
+                }
+            }
+        }
+        Random random = new Random();
+        int tileInd = random.nextInt(blankTiles.size());
+        blankTiles.get(tileInd).TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
+    }
+
+    /**
+     * Helper function to compare two TFETile 2D arrays.
+     *
+     * @param arr1 - First array to compare.
+     * @param arr2 - Second array to compare.
+     * @return whether or not the two arrays contain the same value TFETiles at the same locations.
+     */
+    private boolean sameArray(TFETile[][] arr1, TFETile[][] arr2) {
+        for (int r = 0; r < numRow; r++) {
+            for (int c = 0; c < numCol; c++) {
+                if (arr1[r][c].getTileValue() != arr2[r][c].getTileValue()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Helper function to create a copy of a 2D TFETile array
+     *
+     * @param tiles - 2D array to copy.
+     * @return a new 2D TFETile array containing TFETiles with values equal to the TFETile at the
+     * corresponding location in the input list.
+     */
+    private TFETile[][] arrCopy(TFETile[][] tiles) {
+        TFETile[][] newCopy = new TFETile[numRow][numCol];
+        for (int r = 0; r < numRow; r++) {
+            for (int c = 0; c < numCol; c++) {
+                newCopy[r][c] = new TFETile((tiles[r][c].getTileValue()));
+            }
+        }
+        return newCopy;
+    }
+
+    /**
+     * Helper function to help merge any TFETiles which should be merged after a slide input.
+     *
+     * @param list - a list of TFETiles from one row or one column.
+     * @return - List of TFETiles after all possible merges are made.
+     */
+    private List<TFETile> merger(List<TFETile> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i).getTileValue() == 0) {
+                list.remove(i);
+            } else if (list.get(i).getTileValue() == list.get(i + 1).getTileValue()) {
+                int value = list.get(i).getTileValue();
+                list.set(i, new TFETile(value * 2));
+
+
+                MenuActivity.manager.getGameState().getScoreBoard().updateScoreOnMerge(value * 2);
+
+                list.remove(i + 1);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Slider for right slide motion input.
+     *
+     * @param boardTiles - current board state.
+     */
+    private void rightSlider(TFETile[][] boardTiles) {
+        for (int r = 0; r < numRow; r++) {
+            List<TFETile> tileGroup = new ArrayList<>();
+            for (int c = numCol - 1; c >= 0; c--) {
+                if (boardTiles[r][c].getTileValue() != 0) {
+                    tileGroup.add(boardTiles[r][c].copy());
+                    boardTiles[r][c].TFEvaluesetter(0);
+                }
+            }
+            tileGroup = merger(tileGroup);
+            for (int e = 1; e <= tileGroup.size(); e++) {
+                boardTiles[r][numCol - e] = (tileGroup.get(e - 1));
+            }
+        }
+    }
+
+    /**
+     * Slider for left slide motion input.
+     *
+     * @param boardTiles - current board state.
+     */
+    private void leftSlider(TFETile[][] boardTiles) {
+        for (int r = 0; r < numRow; r++) {
+            List<TFETile> tileGroup = new ArrayList<>();
+            for (int c = 0; c < numCol; c++) {
+                if (boardTiles[r][c].getTileValue() != 0) {
+                    tileGroup.add(boardTiles[r][c].copy());
+                    boardTiles[r][c].TFEvaluesetter(0);
+                }
+            }
+            tileGroup = merger(tileGroup);
+            for (int e = 0; e < tileGroup.size(); e++) {
+                boardTiles[r][e] = tileGroup.get(e);
+            }
+        }
+    }
+
+    /**
+     * Slider for up slide motion input.
+     *
+     * @param boardTiles - current board state.
+     */
+    private void upSlider(TFETile[][] boardTiles) {
+        for (int c = 0; c < numCol; c++) {
+            List<TFETile> tileGroup = new ArrayList<>();
+            for (int r = 0; r < numRow; r++) {
+                if (boardTiles[r][c].getTileValue() != 0) {
+                    tileGroup.add(boardTiles[r][c].copy());
+                    boardTiles[r][c].TFEvaluesetter(0);
+                }
+            }
+            tileGroup = merger(tileGroup);
+            for (int e = 0; e < tileGroup.size(); e++) {
+                boardTiles[e][c] = tileGroup.get(e);
+            }
+        }
+    }
+
+    /**
+     * Slider for down slide motion input.
+     *
+     * @param boardTiles - current board state.
+     */
+    private void downSlider(TFETile[][] boardTiles) {
+        for (int c = 0; c < numCol; c++) {
+            List<TFETile> tileGroup = new ArrayList<>();
+            for (int r = numRow - 1; r >= 0; r--) {
+                if (boardTiles[r][c].getTileValue() != 0) {
+                    tileGroup.add(boardTiles[r][c].copy());
+                    boardTiles[r][c].TFEvaluesetter(0);
+                }
+            }
+            tileGroup = merger(tileGroup);
+            for (int e = 1; e <= tileGroup.size(); e++) {
+                boardTiles[numRow - e][c] = (tileGroup.get(e - 1));
+            }
+        }
     }
 
     /**
@@ -174,189 +366,6 @@ public class TFEBoard extends Observable implements Serializable, Iterable<TFETi
         public boolean hasNext() {
             return nextRowIndex != numRow;
 
-        }
-    }
-
-    /**
-     * Switcher function to call correct directional slider function depending on direction of swipe.
-     * @param slideDirection - integer representing one of four possible swipe directions.
-     */
-    void tileSlide(int slideDirection) {
-        TFETile[][] toCheck = arrCopy(boardTiles);
-        switch (slideDirection){
-            case 0:
-                rightSlider(boardTiles);
-                break;
-            case 1:
-                leftSlider(boardTiles);
-                break;
-            case 2:
-                upSlider(boardTiles);
-                break;
-            case 3:
-                downSlider(boardTiles);
-                break;
-        }
-        if(!sameArray(boardTiles, toCheck)){
-            newBlock(boardTiles);
-        }
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Generator for new numbered block after a move is made.
-     * @param boardTiles - current array representing the tiles on the board.
-     */
-    private void newBlock(TFETile[][] boardTiles){
-        int row = numRow;
-        int col = numCol;
-        List<TFETile> blankTiles = new ArrayList<>();
-        for(int c = 0; c<col; c++){
-            for(int r = 0; r<row; r++){
-                if(boardTiles[r][c].getTileValue() == 0){
-                    blankTiles.add(boardTiles[r][c]);
-                }
-            }
-        }
-        Random random = new Random();
-        int tileInd = random.nextInt(blankTiles.size());
-        blankTiles.get(tileInd).TFEvaluesetter(Math.random() < 0.9 ? 2 : 4);
-    }
-
-    /**
-     * Helper function to compare two TFETile 2D arrays.
-     * @param arr1 - First array to compare.
-     * @param arr2 - Second array to compare.
-     * @return whether or not the two arrays contain the same value TFETiles at the same locations.
-     */
-    private boolean sameArray(TFETile[][] arr1, TFETile[][] arr2){
-        for(int r =0; r<numRow; r++){
-            for(int c = 0; c<numCol; c++){
-                if(arr1[r][c].getTileValue() != arr2[r][c].getTileValue()){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Helper function to create a copy of a 2D TFETile array
-     * @param tiles - 2D array to copy.
-     * @return a new 2D TFETile array containing TFETiles with values equal to the TFETile at the
-     * corresponding location in the input list.
-     */
-    private TFETile[][] arrCopy(TFETile[][] tiles){
-        TFETile[][] newCopy = new TFETile[numRow][numCol];
-        for(int r = 0; r<numRow; r++){
-            for(int c = 0; c<numCol; c++){
-                newCopy[r][c] = new TFETile((tiles[r][c].getTileValue()));
-            }
-        }
-        return newCopy;
-    }
-
-    /**
-     * Helper function to help merge any TFETiles which should be merged after a slide input.
-     * @param list - a list of TFETiles from one row or one column.
-     * @return - List of TFETiles after all possible merges are made.
-     */
-    private List<TFETile> merger(List<TFETile> list){
-        for(int i = 0; i < list.size() - 1; i++){
-            if(list.get(i).getTileValue() == 0){
-                list.remove(i);
-            }
-            else if(list.get(i).getTileValue() == list.get(i+1).getTileValue()){
-                int value = list.get(i).getTileValue();
-                list.set(i, new TFETile(value * 2));
-
-
-                MenuActivity.manager.getGameState().getScoreBoard().updateScoreOnMerge(value*2);
-
-                list.remove(i+1);
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Slider for right slide motion input.
-     * @param boardTiles - current board state.
-     */
-    private void rightSlider(TFETile[][] boardTiles){
-        for(int r = 0; r < numRow; r++){
-            List<TFETile> tileGroup = new ArrayList<>();
-            for(int c = numCol-1; c >= 0; c--){
-                if(boardTiles[r][c].getTileValue() != 0){
-                    tileGroup.add(boardTiles[r][c].copy());
-                    boardTiles[r][c].TFEvaluesetter(0);
-                }
-            }
-            tileGroup =  merger(tileGroup);
-            for(int e = 1; e <= tileGroup.size(); e++ ){
-                boardTiles[r][numCol-e] = (tileGroup.get(e-1));
-            }
-        }
-    }
-
-    /**
-     * Slider for left slide motion input.
-     * @param boardTiles - current board state.
-     */
-    private void leftSlider(TFETile[][] boardTiles){
-        for(int r = 0; r < numRow; r++) {
-            List<TFETile> tileGroup = new ArrayList<>();
-            for (int c = 0; c < numCol; c++) {
-                if (boardTiles[r][c].getTileValue() != 0) {
-                    tileGroup.add(boardTiles[r][c].copy());
-                    boardTiles[r][c].TFEvaluesetter(0);
-                }
-            }
-            tileGroup = merger(tileGroup);
-            for (int e = 0; e < tileGroup.size(); e++) {
-                boardTiles[r][e] = tileGroup.get(e);
-            }
-        }
-    }
-
-    /**
-     * Slider for up slide motion input.
-     * @param boardTiles - current board state.
-     */
-    private void upSlider(TFETile[][] boardTiles){
-        for(int c = 0; c < numCol; c++){
-            List<TFETile> tileGroup = new ArrayList<>();
-            for(int r = 0; r < numRow; r++){
-                if(boardTiles[r][c].getTileValue() != 0){
-                    tileGroup.add(boardTiles[r][c].copy());
-                    boardTiles[r][c].TFEvaluesetter(0);
-                }
-            }
-            tileGroup = merger(tileGroup);
-            for(int e = 0; e < tileGroup.size(); e++){
-                boardTiles[e][c] = tileGroup.get(e);
-            }
-        }
-    }
-
-    /**
-     * Slider for down slide motion input.
-     * @param boardTiles - current board state.
-     */
-    private void downSlider(TFETile[][] boardTiles){
-        for(int c = 0; c < numCol; c++) {
-            List<TFETile> tileGroup = new ArrayList<>();
-            for (int r = numRow - 1; r >= 0; r--) {
-                if (boardTiles[r][c].getTileValue() != 0) {
-                    tileGroup.add(boardTiles[r][c].copy());
-                    boardTiles[r][c].TFEvaluesetter(0);
-                }
-            }
-            tileGroup = merger(tileGroup);
-            for (int e = 1; e <= tileGroup.size(); e++) {
-                boardTiles[numRow - e][c] = (tileGroup.get(e-1));
-            }
         }
     }
 }
