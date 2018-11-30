@@ -56,6 +56,7 @@ public class BoardManagerTest {
     @Test
     public void processClick() {
         minesweeperBM.setScoreBoard(context, mineScoreBoard);
+        minesweeperBM.scoreBoard.calculateScore();
 
         assert !minesweeperBM.getBoard().getBlock(0).isVisible();
         minesweeperBM.processClick(context, 0);
