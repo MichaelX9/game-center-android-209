@@ -27,7 +27,7 @@ public class ChooseComplexityActivity extends AppCompatActivity {
      * @param view Android view
      */
     public void StartGame3x3(View view) {
-        startStandardGame(3, 3);
+        startGame(3, 3);
 
     }
 
@@ -36,7 +36,7 @@ public class ChooseComplexityActivity extends AppCompatActivity {
      * @param view Android view
      */
     public void StartGame4x4(View view) {
-        startStandardGame(4, 4);
+        startGame(4, 4);
     }
 
     /***
@@ -44,7 +44,7 @@ public class ChooseComplexityActivity extends AppCompatActivity {
      * @param view Android view
      */
     public void StartGame5x5(View view) {
-        startStandardGame(5, 5);
+        startGame(5, 5);
     }
 
     /***
@@ -52,7 +52,7 @@ public class ChooseComplexityActivity extends AppCompatActivity {
      * @param row number of rows for the board
      * @param col number of columns for the board
      */
-    public void startStandardGame(int row, int col) {
+    public void startGame(int row, int col) {
         undoEdit();
         BoardFactory.setNumRowsCows(row, col);
         Intent intent = new Intent(this, ChooseImageActivity.class);
@@ -71,7 +71,7 @@ public class ChooseComplexityActivity extends AppCompatActivity {
         if (row > 20 || col > 10) {
             Toast.makeText(this, "Board cannot be larger than 20x10", Toast.LENGTH_SHORT).show();
         } else {
-            startStandardGame(row, col);
+            startGame(row, col);
         }
 
     }

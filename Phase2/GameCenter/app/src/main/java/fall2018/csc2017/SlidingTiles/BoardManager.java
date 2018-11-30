@@ -13,7 +13,7 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class  BoardManager implements Serializable {
+class BoardManager implements Serializable {
 
     /**
      * The maximumComplexity measure for score calculation.
@@ -56,7 +56,6 @@ class  BoardManager implements Serializable {
     Board getBoard() {
         return board;
     }
-
 
 
     /***
@@ -122,7 +121,7 @@ class  BoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
-    boolean isValidTap(int position) {
+    private boolean isValidTap(int position) {
         return !posEmptyTile(position).equals("None");
     }
 
@@ -176,7 +175,7 @@ class  BoardManager implements Serializable {
                 int score = scoreBoard.calculateScore();
                 int userHighestScore = scoreBoard.getUserHighestScore();
                 int gameHighestScore = scoreBoard.getGameHighestScore();
-                MenuActivity.manager.addScore(context, score,"SlidingTiles");
+                MenuActivity.manager.addScore(context, score, "SlidingTiles");
                 Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                                 ".\n Your highest score is " + userHighestScore +
                                 ".\n The game's highest score is " + gameHighestScore + ". ",

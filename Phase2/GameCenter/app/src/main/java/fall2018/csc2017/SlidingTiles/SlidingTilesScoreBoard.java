@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
 import fall2018.csc2017.ScoreBoard.ScoreBoard;
 
 /**
@@ -73,6 +74,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
 
     /**
      * adds score to userToScores and highScores.
+     *
      * @param score the recently calculated score for the player.
      */
     private void updateData(Integer score) {

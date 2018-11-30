@@ -135,7 +135,7 @@ public class ChooseImageActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
                 Uri imageUri = data.getData();
-                if(imageUri != null) {
+                if (imageUri != null) {
                     try {
                         InputStream inputStream = getContentResolver().openInputStream(imageUri);
                         Bitmap image = BitmapFactory.decodeStream(inputStream);
@@ -160,7 +160,8 @@ public class ChooseImageActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editText);
         try {
             URL url = new URL(editText.getText().toString());
-            new GetUrlImage().execute(url).get();
+            Bitmap b = new GetUrlImage().execute(url).get();
+            imageToTiles(b);
             gameStart();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -208,17 +209,16 @@ public class ChooseImageActivity extends AppCompatActivity {
     /***
      * An background task to download image from url
      */
-    private class GetUrlImage extends AsyncTask<URL, Void, Void> {
+    private static class GetUrlImage extends AsyncTask<URL, Void, Bitmap> {
         @Override
-        protected Void doInBackground(URL... urls) {
+        protected Bitmap doInBackground(URL... urls) {
             try {
                 InputStream inputStream = urls[0].openStream();
-                Bitmap b = BitmapFactory.decodeStream(inputStream);
-                imageToTiles(b);
+                return BitmapFactory.decodeStream(inputStream);
             } catch (IOException e) {
                 e.printStackTrace();
+                return null;
             }
-            return null;
         }
     }
 }

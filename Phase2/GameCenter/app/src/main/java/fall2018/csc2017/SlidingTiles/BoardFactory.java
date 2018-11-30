@@ -7,44 +7,99 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class BoardFactory {
+/***
+ * This class is used to generate the game board and tiles for SlidingTiles game
+ */
+abstract class BoardFactory {
+
+    /***
+     * Number of rows of the board to be created
+     */
     static private int numRows;
+
+    /***
+     * Number of columns of the board to be created
+     */
     static private int numCols;
+
+    /***
+     * A list of images to be set as the background of tiles
+     */
     static private List<Drawable> backgrounds;
+
+    /***
+     * The image to represent the empty tile
+     */
     static private Drawable emptyTileBackground;
 
-    public static void setEmptyTileBackground(Drawable d){
+    /***
+     * Setter of emptyTileBackground
+     * @param d the image to be set as emptyTileBackground
+     */
+    static void setEmptyTileBackground(Drawable d) {
         emptyTileBackground = d;
     }
 
-    public static int getNumRows() {
+    /***
+     * Getter for numRows
+     * @return numRows
+     */
+    static int getNumRows() {
         return numRows;
     }
 
-    public static void setNumRowsCows(int numRows, int numCols) {
+    /***
+     * Setter for numRows and numCols.
+     * Also initiate backgrounds with new capacity indicated by numRows and numCols
+     * @param numRows the value to be set as numRows
+     * @param numCols the value to be set as numCols
+     */
+    static void setNumRowsCows(int numRows, int numCols) {
         BoardFactory.numRows = numRows;
         BoardFactory.numCols = numCols;
-        backgrounds = new ArrayList<>(numCols*numRows);
+        backgrounds = new ArrayList<>(numCols * numRows);
     }
 
-    public static int getNumCols() {
+    /***
+     * Getter for numCols
+     * @return numCols
+     */
+    static int getNumCols() {
         return numCols;
     }
 
-    static void addBackground(Drawable d){
+    /***
+     * Adds an image into backgrounds
+     * @param d the image to be added into backgrounds
+     */
+    static void addBackground(Drawable d) {
         backgrounds.add(d);
     }
 
-    static void clearBackground(){
+    /***
+     * Clear all images in backgrounds
+     */
+    static void clearBackground() {
         backgrounds.clear();
     }
 
-    static int numTiles(){
-        return numCols*numRows;
+    /***
+     * Return how many tiles the board will have after generation.
+     * @return the number of tiles the board will have
+     */
+    static int numTiles() {
+        return numCols * numRows;
     }
 
-    static Board createBoard(){
-        if (backgrounds == null){
+    /***
+     * Create the board based on preset values.
+     * Also creates the tiles of the board in random but solvable order,
+     * with their images properly setup.
+     * Returns null if setNumRowsCols has not been called.
+     * @return the generated board.
+     */
+    static Board createBoard() {
+        if (backgrounds == null) {
             return null;
         }
         List<Tile> tiles = new ArrayList<>();
@@ -54,7 +109,7 @@ public abstract class BoardFactory {
         }
         tiles.get(numTiles - 1).setBackground(emptyTileBackground);
         Collections.shuffle(tiles);
-        while (isSolvable(tiles)){
+        while (!isSolvable(tiles)) {
             Collections.shuffle(tiles);
         }
 
@@ -71,37 +126,40 @@ public abstract class BoardFactory {
         return new Board(numRows, numCols, tiles2);
     }
 
-    static private boolean isSolvable(List<Tile> tiles){
+    /***
+     * Tests if the given list of tiles in current order will generate a solvable board.
+     * @param tiles the list of tiles to be tested.
+     * @return whether the board will be solvable.
+     */
+    static private boolean isSolvable(List<Tile> tiles) {
         int parity = 0;
         int width = numCols;
         int curRow = 0;
         int blankRow = 0;
 
-        for (int i = 0; i < numCols * numRows; i++){
-            if (i % width == 0){
-                curRow ++;
+        for (int i = 0; i < numCols * numRows; i++) {
+            if (i % width == 0) {
+                curRow++;
             }
-            if (tiles.get(i).getId() == numRows * numCols){
+            if (tiles.get(i).getId() == numRows * numCols) {
                 blankRow = curRow;
                 continue;
             }
-            for (int j = i+1; j < numCols * numRows; j++){
-                if (tiles.get(i).getId() > tiles.get(j).getId() && tiles.get(j).getId() != 0){
+            for (int j = i + 1; j < numCols * numRows; j++) {
+                if (tiles.get(i).getId() > tiles.get(j).getId() && tiles.get(j).getId() != 0) {
                     parity++;
                 }
             }
 
         }
-        if (width%2 == 0){
-            if (blankRow % 2 ==0){
-                return parity % 2 ==0;
-            }
-            else {
+        if (width % 2 == 0) {
+            if (blankRow % 2 == 0) {
+                return parity % 2 == 0;
+            } else {
                 return parity % 2 != 0;
             }
-        }
-        else {
-            return parity % 2 ==0;
+        } else {
+            return parity % 2 == 0;
         }
     }
 }
