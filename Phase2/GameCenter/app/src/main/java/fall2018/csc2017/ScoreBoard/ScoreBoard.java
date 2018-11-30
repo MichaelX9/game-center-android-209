@@ -21,7 +21,7 @@ public abstract class ScoreBoard implements Serializable {
     /**
      * A list of all recorded scores achieved by the current user ranked from lowest to highest.
      */
-    protected ArrayList<Integer> userScores;
+    protected ArrayList<String> userScores;
 
     /**
      * The duration for which the current user has played the current round.

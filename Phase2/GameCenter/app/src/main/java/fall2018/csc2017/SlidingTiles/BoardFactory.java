@@ -126,12 +126,13 @@ abstract class BoardFactory {
         return new Board(numRows, numCols, tiles2);
     }
 
-    /***
-     * Tests if the given list of tiles in current order will generate a solvable board.
-     * @param tiles the list of tiles to be tested.
-     * @return whether the board will be solvable.
+    /**
+     * Checks whether or not generated board can be solved. This was adapted from the formula to
+     * calculate for tile game solvability from: https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html.
+     * @param tiles - list of all the tiles in the row-column order they appear on the board
+     * @return whether or not the board can be solved
      */
-    static private boolean isSolvable(List<Tile> tiles) {
+    static private boolean isSolvable(List<Tile> tiles){
         int parity = 0;
         int width = numCols;
         int curRow = 0;
@@ -152,14 +153,14 @@ abstract class BoardFactory {
             }
 
         }
-        if (width % 2 == 0) {
-            if (blankRow % 2 == 0) {
-                return parity % 2 == 0;
-            } else {
+        if (width % 2 == 0){
+            if (blankRow % 2 ==0){
                 return parity % 2 != 0;
+            } else {
+                return parity % 2 == 0;
             }
         } else {
-            return parity % 2 == 0;
+            return parity % 2 ==0;
         }
     }
 }
