@@ -7,14 +7,11 @@ import static org.junit.Assert.*;
 
 public class TFETileTest {
 
+    private int newValue;
     private TFETile tile;
-
     @Before
-    public void setUp() throws Exception{
+    public void setUp(){
         tile = new TFETile(4);
-
-    @Test
-    public void TFEvaluesetter() {
     }
 
     @Test
@@ -23,5 +20,15 @@ public class TFETileTest {
     }
 
     @Test
-    public void copy() { }
+    public void copy() {
+        TFETile newTile = tile.copy();
+        assertEquals(tile.getTileValue(), newTile.getTileValue());
+    }
+    @Test
+    public void TFEvaluesetter() {
+        newValue = 8;
+        tile.TFEvaluesetter(newValue);
+        assertEquals(8, tile.getTileValue());
+    }
+
 }
