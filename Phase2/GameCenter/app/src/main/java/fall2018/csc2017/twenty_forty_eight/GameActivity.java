@@ -83,6 +83,14 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     }
 
     float prevX, prevY;
+
+    /**
+     * Slide gesture sensor to allow swiping actions in 2048. Adapted from:
+     * https://stackoverflow.com/questions/11327095/implement-the-swipe-gesture-on-grid-view.
+     * @param v - current view
+     * @param event - recorded touch event
+     * @return whether or not a swipe was made
+     */
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {

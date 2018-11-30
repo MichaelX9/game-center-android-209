@@ -1,0 +1,7 @@
+#Meeting 8 Minutes
+- Played our implemented games!
+    - Fixed several bugs that arose in 2048 to do with merging and swipe direction recognition
+- Noticed backpress from game selection screen to login screen was missing -> implemented
+- Began refactoring and troubleshooting code to cut down on rendundancies and smells
+- Final meeting next time to do final round of refactoring -> checking for correct unittests ->
+discussing and creating the walkthrough

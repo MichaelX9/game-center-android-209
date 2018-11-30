@@ -1,0 +1,8 @@
+#Meeting 7 minutes
+- Discussed roadblocks in implementation -> Minesweeper coming along swimmingly
+    -2048 main algorithm largely worked out, how exactly do we track sliding gestures -> look for
+    model code on stackexchange or git for ideas
+- Implemented a checker to make sure any generated board for SlidingTiles was solvable -> used parity
+and observation of width of grid to determine solvability
+- Make sure to have all games finished for next meeting as least in the rough so troubleshooting can
+begin

@@ -1,0 +1,5 @@
+#Meeting 9 Minutes
+- Finished for the large part unittests and troubleshooting -> Minesweeper likely to be the 100% coverage class we present.
+- Discussion of process of design and construction -> began work on walkthrough doc -> finish night before phase 2 due date??
+- Spent time playing and checking a variety of different button inputs and orderings within games to
+try and catch any final extraneous bugs that might have arisen

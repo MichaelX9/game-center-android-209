@@ -1,0 +1,7 @@
+#Meeting 6 minutes
+- Decided on 2048 and Minesweeper as our two games -> discussed key points of implementation for each game
+    - How are we going to do random mine and tile generation? How exactly do tiles shift in 2048?
+    How do we want to do large swatch reveals in minesweeper? Which functions does each game need (undo
+    in minesweeper seems unintuitive)
+- Began coding on games -> try and follow similar class design structures (controller, model, view deisgn pattern
+under heavy consideration for use)

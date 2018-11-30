@@ -1,0 +1,10 @@
+# Meeting 5 minutes
+- Start of a new phase!
+- Identified residue issues and bugs from phase 1 we needed to resolve (scoreboard updating issues, clearing up class
+and code structure)
+- Possible design patterns to use for phase 2? Discussion on whether or not we wanted to shift away from the SlidingTile
+structure -> unanimously yes, there must be better ways to organize
+- Divided tasks up very roughly, ~2 people per game, 1 person on float duty, UI, and additional cross
+game functionality like scoreboard
+- Brainstormed possible games -> 2 player games are harder because they need AI or some sort of cross-play
+capability -> better to use pre-existing resources like the gridview for games
