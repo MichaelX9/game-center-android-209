@@ -176,8 +176,8 @@ class  BoardManager implements Serializable {
                 scoreBoard.updateDurationPlayed();
                 scoreBoard.setComplexityMeasure(board.numTiles());
                 int score = scoreBoard.calculateScore();
-                int userHighestScore = scoreBoard.getUserHighestScore();
-                int gameHighestScore = scoreBoard.getGameHighestScore();
+                String userHighestScore = scoreBoard.getUserHighestScore();
+                String gameHighestScore = scoreBoard.getGameHighestScore();
                 StartingActivity.manager.addScore(context, score,"SlidingTiles");
                 Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                                 ".\n Your highest score is " + userHighestScore +

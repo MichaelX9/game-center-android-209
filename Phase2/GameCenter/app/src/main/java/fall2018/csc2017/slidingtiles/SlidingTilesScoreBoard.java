@@ -15,12 +15,12 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * A collection of each users' list of scores ranked from lowest to highest
      * allowing for look-up by username.
      */
-    HashMap<String, ArrayList<Integer>> userToScores = new HashMap<>();
+    HashMap<String, ArrayList<String>> userToScores = new HashMap<>();
 
     /**
      * A list of all recorded scores ranked from lowest to highest.
      */
-    ArrayList<Integer> highScores = new ArrayList<>();
+    ArrayList<String> highScores = new ArrayList<>();
 
     /***
      * Initialize a scoreboard
@@ -34,7 +34,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * Return the highest score user username has achieved so far; if user username has no scores,
      * return null.
      */
-    Integer getUserHighestScore() {
+    String getUserHighestScore() {
         if (userToScores.get(currentUser) != null) {
             return userToScores.get(currentUser).get(userScores.size() - 1);
         } else {
@@ -45,7 +45,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
     /**
      * Return the highest score any user has achieved
      */
-    Integer getGameHighestScore() {
+    String getGameHighestScore() {
         return highScores.get(highScores.size() - 1);
     }
 
@@ -76,8 +76,8 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      * @param score the recently calculated score for the player.
      */
     private void updateData(Integer score) {
-        highScores.add(score);
-        userScores.add(score);
+        highScores.add(String.valueOf(score));
+        userScores.add(String.valueOf(score));
         Collections.sort(highScores);
         Collections.sort(userScores);
         userToScores.put(currentUser, userScores);
