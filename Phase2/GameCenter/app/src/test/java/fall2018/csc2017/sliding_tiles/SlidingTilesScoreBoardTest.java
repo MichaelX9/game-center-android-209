@@ -27,8 +27,9 @@ public class SlidingTilesScoreBoardTest {
     public void getGameHighestScore() {
         ArrayList<String> lst1 = new ArrayList<>();
         Random r = new Random();
-        lst1.add(((Integer)r.nextInt(10000)).toString());
+        lst1.add(((Integer)r.nextInt(10000)).toString() + ": ");
         scoreBoard.highScores = lst1;
-        assertEquals(lst1.get(0), scoreBoard.getGameHighestScore());
+        assertEquals(lst1.get(0).substring(0,  lst1.get(0).indexOf(':') ),
+                scoreBoard.getGameHighestScore());
     }
 }
