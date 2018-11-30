@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
 import fall2018.csc2017.game_manager.GameManager;
 import static java.lang.Integer.min;
 
-class TFEManager extends GameManager {
+class TFEGameManager extends GameManager {
 
      /**
      * Number of remaining undos for the player.
@@ -42,7 +42,7 @@ class TFEManager extends GameManager {
      * Constructure for new game manager class.
      * @param name - username of user logged in.
      */
-    TFEManager(String name){
+    TFEGameManager(String name){
         super(name, "TFE");
         undos = 3;
     }

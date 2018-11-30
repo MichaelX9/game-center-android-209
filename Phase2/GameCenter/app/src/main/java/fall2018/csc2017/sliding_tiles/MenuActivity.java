@@ -25,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
     /***
      * The game manager for this game.
      */
-    public static SlidingTilesManager manager = new SlidingTilesManager(username);
+    public static SlidingTilesGameManager manager = new SlidingTilesGameManager(username);
 
     /***
      * Maximum # of save files a user is allowed.

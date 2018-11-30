@@ -13,6 +13,9 @@ import fall2018.csc2017.R;
 import fall2018.csc2017.game_manager.GameManager;
 import fall2018.csc2017.launch_centre.GameLaunchActivity;
 
+/***
+ * This activity displays the scoreboard for sliding_tiles.
+ */
 public class SlidingTilesScoreboardActivity extends AppCompatActivity {
 
     @Override
@@ -78,11 +81,9 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
     /**
      * Overrides Comparator's compare method to sort by the "number part" of the String
      */
-    class sortByScore implements Comparator<String>
-    {
+    class sortByScore implements Comparator<String> {
         @Override
-        public int compare(String a, String b)
-        {
+        public int compare(String a, String b) {
             return Integer.parseInt(a.substring(0, a.indexOf(':'))) -
                     Integer.parseInt(b.substring(0, b.indexOf(':')));
         }

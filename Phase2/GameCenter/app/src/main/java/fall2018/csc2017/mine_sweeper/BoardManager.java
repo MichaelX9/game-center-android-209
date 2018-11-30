@@ -6,26 +6,28 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 import fall2018.csc2017.game_manager.GameManager;
-
 import fall2018.csc2017.launch_centre.GameLaunchActivity;
 
+/***
+ * A class manages the minesweeper gameboard.
+ */
 public class BoardManager implements Serializable {
 
+    /**
+     * The scoreBoard for the game.
+     */
+    public MineSweeperScoreBoard scoreBoard;
     /**
      * The board for the game to be managed.
      */
     private Board board;
 
     /**
-     * The scoreBoard for the game.
-     */
-    public MineSweeperScoreBoard scoreBoard;
-
-    /**
      * A new BoardManager.
+     *
      * @param board the board to be assigned
      */
-    public BoardManager(Board board){
+    public BoardManager(Board board) {
         this.board = board;
     }
 
@@ -38,9 +40,10 @@ public class BoardManager implements Serializable {
 
     /**
      * setter for scoreboard
+     *
      * @param scoreBoard the scoreboard
      */
-    public void setScoreBoard(Context context, MineSweeperScoreBoard scoreBoard) {
+    void setScoreBoard(Context context, MineSweeperScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
         this.scoreBoard.setUserScores(GameManager.scoreGetter(context, "Minesweeper",
                 GameLaunchActivity.username));
@@ -49,31 +52,31 @@ public class BoardManager implements Serializable {
 
     /***
      * Processes a tap on a block.
+     * @param context the context of this click
      * @param position The index of the block in board.blocks
      */
-    public void processClick(Context context, int position){
-        if (board.getBlock(position).isMineType()){
+    void processClick(Context context, int position) {
+        if (board.getBlock(position).isMineType()) {
             scoreBoard.finishTiming();
             scoreBoard.updateDurationPlayed();
             int score = scoreBoard.calculateScore();
             MenuActivity.manager.addScore(context, score, "Minesweeper");
-            Toast.makeText(context,  "YOU LOST!" + " \n Your score is " + score +
-                            ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
-                            ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
-                            ". ", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "YOU LOST!" + " \n Your score is " + score +
+                    ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
+                    ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
+                    ". ", Toast.LENGTH_LONG).show();
             MenuActivity.manager.save(context);
 
             for (int i = 0; i < board.getNumCols(); i++) {
                 for (int j = 0; j < board.getNumRows(); j++) {
-                    board.getBlock(i*board.getNumCols()+j).setVisible();
+                    board.getBlock(i * board.getNumCols() + j).setVisible();
                 }
             }
-            }
-        else{
+        } else {
             board.revealLocal(position);
             scoreBoard.updateScoreOnClick(position);
 
-            if (board.solved()){
+            if (board.solved()) {
                 scoreBoard.finishTiming();
                 scoreBoard.updateDurationPlayed();
                 scoreBoard.incrementMoveCount();
@@ -81,8 +84,8 @@ public class BoardManager implements Serializable {
                     MenuActivity.manager.save(context);
                 }
                 int score = scoreBoard.calculateScore();
-                MenuActivity.manager.addScore(context, score,"Minesweeper");
-                Toast.makeText(context,  "YOU WIN!" + " \n Your score is " + score +
+                MenuActivity.manager.addScore(context, score, "Minesweeper");
+                Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                         ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
                         ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
                         ". ", Toast.LENGTH_LONG).show();
@@ -94,8 +97,8 @@ public class BoardManager implements Serializable {
      *  Processes a tap and hold on a clock
      * @param position The index of the block in board.blocks
      */
-    public void processLongClick(Context context, int position){
-        if(!board.getBlock(position).isVisible()){
+    void processLongClick(int position) {
+        if (!board.getBlock(position).isVisible()) {
             board.getBlock(position).toggleFlagged();
         }
     }

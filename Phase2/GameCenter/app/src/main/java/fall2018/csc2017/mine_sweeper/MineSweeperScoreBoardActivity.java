@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import fall2018.csc2017.R;
 import fall2018.csc2017.game_manager.GameManager;
 import fall2018.csc2017.launch_centre.GameLaunchActivity;
-import fall2018.csc2017.R;
 
+/***
+ * This activity displays the scoreboard for minesweeper.
+ */
 public class MineSweeperScoreBoardActivity extends AppCompatActivity {
 
     @Override
@@ -22,7 +25,7 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         ArrayList<String> userHighScores = GameManager.scoreGetter(
-                this,"Minesweeper", GameLaunchActivity.username);
+                this, "Minesweeper", GameLaunchActivity.username);
 
         if (userHighScores != null && userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
@@ -35,11 +38,12 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
 
     /**
      * Display the current user's high scores on the Scores page.
+     *
      * @param userScores the TextView for the user's high scores
      */
     private void displayUserHighScores(TextView userScores) {
         ArrayList<String> userHighScores = GameManager.scoreGetter(
-                this,"Minesweeper", GameLaunchActivity.username);
+                this, "Minesweeper", GameLaunchActivity.username);
         if (userHighScores != null) {
             Collections.sort(userHighScores, new sortByScore());
             Collections.reverse(userHighScores);
@@ -55,6 +59,7 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
 
     /**
      * Display the game's high scores on the Scores page.
+     *
      * @param globalScores the TextView for the game's high scores
      */
     private void displayGlobalHighScores(TextView globalScores) {
@@ -75,11 +80,9 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
     /**
      * Overrides Comparator's compare method to sort by the "number part" of the String
      */
-    class sortByScore implements Comparator<String>
-    {
+    class sortByScore implements Comparator<String> {
         @Override
-        public int compare(String a, String b)
-        {
+        public int compare(String a, String b) {
             return Integer.parseInt(a.substring(0, a.indexOf(':'))) -
                     Integer.parseInt(b.substring(0, b.indexOf(':')));
         }

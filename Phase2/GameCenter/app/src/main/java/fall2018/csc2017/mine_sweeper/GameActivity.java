@@ -2,8 +2,8 @@ package fall2018.csc2017.mine_sweeper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
@@ -13,10 +13,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-import fall2018.csc2017.launch_centre.GameLaunchActivity;
 import fall2018.csc2017.R;
+import fall2018.csc2017.launch_centre.GameLaunchActivity;
 
-
+/***
+ * The activity class for minesweeper game
+ */
 public class GameActivity extends AppCompatActivity implements Observer {
 
     /**
@@ -37,22 +39,22 @@ public class GameActivity extends AppCompatActivity implements Observer {
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
         Board loadedBoard = MenuActivity.manager.getGameState().getBoard();
 
-        boardManager = new BoardManager(new Board(loadedBoard.getNumCols(),loadedBoard.getNumRows(),
+        boardManager = new BoardManager(new Board(loadedBoard.getNumCols(), loadedBoard.getNumRows(),
                 loadedBoard.getPercentMines()));
         boardManager.setScoreBoard(this, new MineSweeperScoreBoard());
         boardManager.scoreBoard.setCurrentUser(GameLaunchActivity.username);
         boardManager.scoreBoard.startTiming();
 
-        for (int a = 0; a < loadedBoard.getNumBlocks(); a++){
+        for (int a = 0; a < loadedBoard.getNumBlocks(); a++) {
             Block block = boardManager.getBoard().getBlock(a);
-            if (loadedBoard.getBlock(a).isVisible()){
+            if (loadedBoard.getBlock(a).isVisible()) {
                 block.setVisible();
             }
 
             block.setMine(loadedBoard.getBlock(a).isMineType());
             block.setNumMines(loadedBoard.getBlock(a).getNumMines());
 
-            if (loadedBoard.getBlock(a).isFlagged()){
+            if (loadedBoard.getBlock(a).isFlagged()) {
                 block.toggleFlagged();
             }
 
@@ -77,16 +79,17 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         int columnHeight = displayHeight / boardManager.getBoard().getNumRows();
 
                         gridView.setAdapter(new BoardGridAdapter(boardManager, columnWidth,
-                                columnHeight,context));
+                                columnHeight, context));
                     }
                 });
     }
 
     /**
      * Add the save button functionality to the game interface.
+     *
      * @param view the view
      */
-    public void saveClicker(View view){
+    public void saveClicker(View view) {
         MenuActivity.manager.setGameState(boardManager);
         MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
@@ -98,15 +101,15 @@ public class GameActivity extends AppCompatActivity implements Observer {
     public void undoClicker(View view) {
         Random rand = new Random();
         int n = rand.nextInt(5) + 1;
-        if (n == 1){
+        if (n == 1) {
             Toast.makeText(this, "Sorry, I can't save you", Toast.LENGTH_SHORT).show();
-        } else if (n == 2){
+        } else if (n == 2) {
             Toast.makeText(this, "Try again :)", Toast.LENGTH_SHORT).show();
-        } else if (n == 3){
+        } else if (n == 3) {
             Toast.makeText(this, "Ha Ha, you can't Undo", Toast.LENGTH_SHORT).show();
-        } else if (n == 4){
+        } else if (n == 4) {
             Toast.makeText(this, "Nice Try...", Toast.LENGTH_SHORT).show();
-        } else{
+        } else {
             Toast.makeText(this, "Undo NA ;-;", Toast.LENGTH_SHORT).show();
         }
     }
@@ -115,8 +118,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
     /**
      * Set background image of each grid space and call adaptor to change view.
      */
-    private void display(){
-        ((BoardGridAdapter)gridView.getAdapter()).notifyDataSetChanged();
+    private void display() {
+        ((BoardGridAdapter) gridView.getAdapter()).notifyDataSetChanged();
     }
 
     /**

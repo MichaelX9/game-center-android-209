@@ -21,9 +21,9 @@ import static fall2018.csc2017.launch_centre.GameLaunchActivity.username;
 public class MenuActivity extends AppCompatActivity {
 
     /**
-     * A new instance of the TFEManager for the game.
+     * A new instance of the TFEGameManager for the game.
      */
-    public static TFEManager manager = new TFEManager(username);
+    public static TFEGameManager manager = new TFEGameManager(username);
 
     /**
      * Maximum # of save files a use is allowed.

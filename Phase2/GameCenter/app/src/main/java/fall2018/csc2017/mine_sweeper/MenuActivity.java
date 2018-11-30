@@ -14,16 +14,18 @@ import android.widget.Toast;
 import fall2018.csc2017.R;
 import fall2018.csc2017.game_manager.GameManager;
 import fall2018.csc2017.launch_centre.GameLaunchActivity;
-import fall2018.csc2017.R;
+
 import static fall2018.csc2017.launch_centre.GameLaunchActivity.username;
 
-
+/***
+ * The activity class for the menu of minesweeper
+ */
 public class MenuActivity extends AppCompatActivity {
 
     /***
      * The game manager for this game.
      */
-    public static MineManager manager = new MineManager(username);
+    public static MinesweeperGameManager manager = new MinesweeperGameManager(username);
 
     /**
      * Maximum # of save files a use is allowed.
@@ -40,13 +42,13 @@ public class MenuActivity extends AppCompatActivity {
         addDeleteButtonListener();
         addScoreButtonListener();
 
-        final EditText editText =findViewById(R.id.fileInput);
+        final EditText editText = findViewById(R.id.fileInput);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 GameManager.currentFile = username + "_" + editText.getText() + ".txt";
                 editText.setVisibility(View.INVISIBLE);
-                manager.setGameState(new BoardManager(new Board(10,10,0.15)));
+                manager.setGameState(new BoardManager(new Board(10, 10, 0.15)));
                 manager.tempSave(MenuActivity.this);
                 switchToGame();
                 return true;
@@ -65,16 +67,15 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int counter = 0;
 
-                for(String save: manager.findSaves(MenuActivity.this)){
-                    if (save != null){
+                for (String save : manager.findSaves(MenuActivity.this)) {
+                    if (save != null) {
                         counter += 1;
                     }
                 }
 
-                if (counter < MAX_SAVES){
+                if (counter < MAX_SAVES) {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     Toast.makeText(MenuActivity.this, "You've reached max saves!",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -117,7 +118,7 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Activates the load file buttons as invisible.
      */
-    private void addLoadFilesListener(){
+    private void addLoadFilesListener() {
         final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2),
                 findViewById(R.id.save3), findViewById(R.id.save4)};
 
@@ -125,10 +126,10 @@ public class MenuActivity extends AppCompatActivity {
         manager.tempSave(this);
         String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
-        for(int i = 0; i < saves.length; i++){
-            if (saves[i] != null) {
+        for (String save : saves) {
+            if (save != null) {
                 loadFiles[counter].setVisibility(View.VISIBLE);
-                loadFiles[counter].setText(saves[i]);
+                loadFiles[counter].setText(save);
                 final int finalI = counter;
                 loadFiles[counter].setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -136,7 +137,7 @@ public class MenuActivity extends AppCompatActivity {
                         setInvisible(loadFiles);
                         GameManager.currentFile = (String) loadFiles[finalI].getText();
 
-                            manager.load(MenuActivity.this, GameManager.currentFile);
+                        manager.load(MenuActivity.this, GameManager.currentFile);
 
                         switchToGame();
                     }
@@ -149,8 +150,8 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Set a list of buttons to invisible.
      */
-    public void setInvisible(Button[] buttons){
-        for(Button button: buttons){
+    public void setInvisible(Button[] buttons) {
+        for (Button button : buttons) {
             button.setVisibility(View.INVISIBLE);
         }
     }
@@ -158,28 +159,27 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Activates the delete file buttons as invisible.
      */
-    private void addDeleteFilesListener(){
+    private void addDeleteFilesListener() {
         final Button[] loadFiles = {findViewById(R.id.save1), findViewById(R.id.save2),
                 findViewById(R.id.save3), findViewById(R.id.save4)};
 
         manager.tempSave(this);
         String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
-        for(int i = 0; i < saves.length; i++){
-            if (saves[i] != null) {
+        for (String save : saves) {
+            if (save != null) {
                 loadFiles[counter].setVisibility(View.VISIBLE);
-                loadFiles[counter].setText(saves[i]);
+                loadFiles[counter].setText(save);
                 final int finalI = counter;
                 loadFiles[counter].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
                         if (manager.deleteSave(MenuActivity.this,
-                                ((String) loadFiles[finalI].getText()))){
+                                ((String) loadFiles[finalI].getText()))) {
                             Toast.makeText(MenuActivity.this,
                                     "Save deleted", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(MenuActivity.this,
                                     "Could not delete :(", Toast.LENGTH_SHORT).show();
                         }
@@ -203,12 +203,13 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Switch to the GameActivity view to play the game.
      */
-    private void switchToGame(){
+    private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
         manager.tempSave(this);
 
         startActivity(tmp);
     }
+
     @Override
     public void onBackPressed() {
 

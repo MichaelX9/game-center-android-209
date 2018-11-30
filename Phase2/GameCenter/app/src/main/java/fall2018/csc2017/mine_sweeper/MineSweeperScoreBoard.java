@@ -1,8 +1,8 @@
 package fall2018.csc2017.mine_sweeper;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import fall2018.csc2017.score_board.ScoreBoard;
 
@@ -30,7 +30,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /***
      * Initialize a scoreboard
      */
-    public MineSweeperScoreBoard() {
+    MineSweeperScoreBoard() {
         score = 0;
         userScores = new ArrayList<>();
         highScores = new ArrayList<>();
@@ -39,17 +39,19 @@ public class MineSweeperScoreBoard extends ScoreBoard {
 
     /**
      * set userScores to the given ArrayList.
+     *
      * @param lst the ArrayList used to set userScores.
      */
-    public void setUserScores(ArrayList<String> lst) {
+    void setUserScores(ArrayList<String> lst) {
         userScores = lst;
     }
 
     /**
      * set highScores to the given ArrayList.
+     *
      * @param lst the ArrayList used to set highScores.
      */
-    public void setHighScores(ArrayList<String> lst) {
+    void setHighScores(ArrayList<String> lst) {
         highScores = lst;
     }
 
@@ -57,8 +59,8 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * Return the highest score user username has achieved so far; if user username has no scores,
      * return null.
      */
-    public String getUserHighestScore() {
-        if (userScores == null){
+    String getUserHighestScore() {
+        if (userScores == null) {
             return null;
         }
         String onlyScore = userScores.get(userScores.size() - 1);
@@ -68,7 +70,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /**
      * Return the highest score any user has achieved
      */
-    public String getGameHighestScore() {
+    String getGameHighestScore() {
         String onlyScore = highScores.get(highScores.size() - 1);
         return onlyScore.substring(0, onlyScore.indexOf(':'));
     }
@@ -76,10 +78,11 @@ public class MineSweeperScoreBoard extends ScoreBoard {
 
     /**
      * Update the score (after each click) based on the number of blocks revealed.
+     *
      * @param position the position of the block clicked.
      */
     void updateScoreOnClick(int position) {
-        if (MenuActivity.manager.getGameState() == null){
+        if (MenuActivity.manager.getGameState() == null) {
             return;
         }
         int numBlocksRevealed = MenuActivity.manager.getGameState().getBoard().revealLocal(position);

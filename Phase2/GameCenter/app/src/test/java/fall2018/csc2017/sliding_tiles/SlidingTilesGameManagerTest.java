@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SlidingTilesManagerTest {
+public class SlidingTilesGameManagerTest {
 
-    private SlidingTilesManager manager;
+    private SlidingTilesGameManager manager;
     @Before
     public void setUp(){
-        manager = new SlidingTilesManager("name");
+        manager = new SlidingTilesGameManager("name");
         manager.setUndo(3);
     }
     @Test
