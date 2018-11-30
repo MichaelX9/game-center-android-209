@@ -68,7 +68,7 @@ public class Block extends Observable implements Serializable {
     /**
      * @return return whether the block is Flagged.
      */
-    boolean isFlagged(){
+    public boolean isFlagged(){
         return flagged;
     }
 

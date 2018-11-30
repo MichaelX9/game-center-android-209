@@ -190,7 +190,7 @@ public class Board extends Observable implements Observer, Serializable {
      * @param pos the position clicked
      * @return the Block at pos
      */
-    Block getBlock(int pos){
+    public Block getBlock(int pos){
         try{
             int c = pos % numRows;
             int r = (pos - c)/numCols;

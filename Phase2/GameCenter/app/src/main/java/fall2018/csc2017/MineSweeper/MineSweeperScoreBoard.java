@@ -29,7 +29,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /***
      * Initialize a scoreboard
      */
-    MineSweeperScoreBoard() {
+    public MineSweeperScoreBoard() {
         score = 0;
         userScores = new ArrayList<>();
         highScores = new ArrayList<>();
