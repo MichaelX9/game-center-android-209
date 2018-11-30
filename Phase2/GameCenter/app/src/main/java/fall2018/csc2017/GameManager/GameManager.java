@@ -260,20 +260,20 @@ public abstract class GameManager {
         }
     }
 
-    public static ArrayList<Integer> scoreGetter(Context context, String gameName){
+    public static ArrayList<String> scoreGetter(Context context, String gameName){
         if (context.getFilesDir() == null){
             return null;
         }
         System.out.println(context.getFilesDir());
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
-        ArrayList<Integer> gameScores = new ArrayList<>();
+        ArrayList<String> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
             String curLine;
             while((curLine = reader.readLine()) != null){
                 String[] split = curLine.split("-");
                 if (split[0].equals(gameName)){
-                    gameScores.add(Integer.parseInt(split[2]));
+                    gameScores.add(split[2] + ": " + split[1]);
                 }
             }
         }
@@ -283,19 +283,19 @@ public abstract class GameManager {
         return gameScores;
     }
 
-    public static ArrayList<Integer> scoreGetter(Context context, String gameName, String username){
+    public static ArrayList<String> scoreGetter(Context context, String gameName, String username){
         if (context.getFilesDir() == null){
             return null;
         }
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
-        ArrayList<Integer> gameScores = new ArrayList<>();
+        ArrayList<String> gameScores = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path + "scores.txt"));
             String curLine;
             while((curLine = reader.readLine()) != null){
                 String[] split = curLine.split("-");
                 if (split[0].equals(gameName) && split[1].equals(username)){
-                    gameScores.add(Integer.parseInt(split[2]));
+                    gameScores.add(split[2] + ": " +  split[1]);
                 }
             }
         }
