@@ -159,7 +159,7 @@ public abstract class GameManager {
         String path = context.getFilesDir() + File.separator + "/saves/" + gameName +"/";
         File file = new File(path);
         String[] saves = file.list();
-        if (saves != null) {
+        if (saves != null ) {
             for (int i = 0; i < saves.length; i++) {
                 if (!(saves[i].startsWith(username))) {
                     saves[i] = null;
