@@ -9,11 +9,33 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Board extends Observable implements Observer, Serializable {
+
+    /**
+     * The number of columns on the board.
+     */
     private int numCols;
+
+    /**
+     * The number of rows on the board.
+     */
     private int numRows;
+
+    /**
+     * The number of blocks on the board.
+     */
     private Block[][] blocks;
+
+    /**
+     * The percentage of the blocks on the board that are mines.
+     */
     private double percentMines;
 
+    /**
+     * A new board.
+     * @param col number of columns
+     * @param row number of rows
+     * @param percentMines percentage of blocks on the board which are mines
+     */
     public Board(int col, int row, double percentMines){
         this.numCols = col;
         this.numRows = row;
@@ -98,22 +120,42 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
 
+    /**
+     * Getter for the number of columns.
+     * @return numCols
+     */
     int getNumCols() {
         return numCols;
     }
 
+    /**
+     * Setter for the number of columns.
+     * @param numCols the desired number of columns.
+     */
     public void setNumCols(int numCols) {
         this.numCols = numCols;
     }
 
+    /**
+     * Getter for the number of rows.
+     * @return the number of rows.
+     */
     int getNumRows() {
         return numRows;
     }
 
+    /**
+     * Setter for the number of rows.
+     * @param numRows the desired number of rows.
+     */
     public void setNumRows(int numRows) {
         this.numRows = numRows;
     }
 
+    /**
+     * Get the total number of blocks on the board.
+     * @return number of blocks on the board.
+     */
     int getNumBlocks(){
         return numCols*numRows;
     }
@@ -143,6 +185,11 @@ public class Board extends Observable implements Observer, Serializable {
     }
 
 
+    /**
+     * Get the block at the given position.
+     * @param pos the position clicked
+     * @return the Block at pos
+     */
     public Block getBlock(int pos){
         try{
             int c = pos % numRows;
@@ -175,6 +222,10 @@ public class Board extends Observable implements Observer, Serializable {
         return true;
     }
 
+    /**
+     * Getter for the percentMines attribute.
+     * @return percentMines
+     */
     double getPercentMines(){return percentMines;}
 
 
