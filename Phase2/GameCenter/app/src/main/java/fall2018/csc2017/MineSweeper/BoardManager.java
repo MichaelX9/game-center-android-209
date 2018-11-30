@@ -1,8 +1,6 @@
 package fall2018.csc2017.MineSweeper;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.Serializable;

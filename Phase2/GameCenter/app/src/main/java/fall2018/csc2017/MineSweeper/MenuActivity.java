@@ -18,9 +18,17 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 
 
 public class MenuActivity extends AppCompatActivity {
+
+    /***
+     * The game manager for this game.
+     */
     public static MineManager manager = new MineManager(username);
-    //Maximum # of save files a use is allowed.
+
+    /**
+     * Maximum # of save files a use is allowed.
+     */
     int MAX_SAVES = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
