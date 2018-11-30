@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fall2018.csc2017.MineSweeper.GameActivity">
+    tools:context="fall2018.csc2017.mine_sweeper.GameActivity">
 
     <GridView
         android:id="@+id/MSgridview"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="fall2018.csc2017.GameManager.GameButtons"
+        android:name="fall2018.csc2017.game_manager.GameButtons"
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:layout_alignParentBottom="true"

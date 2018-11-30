@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/ic_register_background"
-    tools:context="fall2018.csc2017.LaunchCentre.RegisterActivity">
+    tools:context="fall2018.csc2017.launch_centre.RegisterActivity">
 
     <EditText
         android:id="@+id/etName"
