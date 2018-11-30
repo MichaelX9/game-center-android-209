@@ -20,7 +20,7 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
         setContentView(R.layout.mine_score_board);
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
-        ArrayList<Integer> userHighScores = GameManager.scoreGetter(
+        ArrayList<String> userHighScores = GameManager.scoreGetter(
                 this,"Minesweeper", GameLaunchActivity.username);
 
         if (userHighScores != null && userHighScores.size() != 0) {
@@ -37,17 +37,17 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
      * @param userScores the TextView for the user's high scores
      */
     private void displayUserHighScores(TextView userScores) {
-        ArrayList<Integer> userHighScores = GameManager.scoreGetter(
+        ArrayList<String> userHighScores = GameManager.scoreGetter(
                 this,"Minesweeper", GameLaunchActivity.username);
         if (userHighScores != null) {
             Collections.sort(userHighScores);
             Collections.reverse(userHighScores);
             StringBuilder userHighScoresBuilder = new StringBuilder();
-            for (Integer score : userHighScores) {
+            for (String score : userHighScores) {
                 userHighScoresBuilder.append(score);
                 userHighScoresBuilder.append("\n");
             }
-            userScores.setText(userHighScoresBuilder.toString());
+            userScores.setText(userHighScoresBuilder);
         }
     }
 
@@ -56,17 +56,17 @@ public class MineSweeperScoreBoardActivity extends AppCompatActivity {
      * @param globalScores the TextView for the game's high scores
      */
     private void displayGlobalHighScores(TextView globalScores) {
-        ArrayList<Integer> globalHighScores = GameManager.scoreGetter(this,
+        ArrayList<String> globalHighScores = GameManager.scoreGetter(this,
                 "Minesweeper");
         if (globalHighScores != null) {
             Collections.sort(globalHighScores);
             Collections.reverse(globalHighScores);
             StringBuilder globalHighScoresBuilder = new StringBuilder();
-            for (Integer score : globalHighScores) {
+            for (String score : globalHighScores) {
                 globalHighScoresBuilder.append(score);
                 globalHighScoresBuilder.append("\n");
             }
-            globalScores.setText(globalHighScoresBuilder.toString());
+            globalScores.setText(globalHighScoresBuilder);
         }
     }
 
