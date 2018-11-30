@@ -23,8 +23,6 @@ import static java.lang.Math.min;
  */
 public class GameActivity extends AppCompatActivity implements Observer, View.OnTouchListener {
 
-
-    float prevX, prevY;
     /**
      * GridView which displays the game board.
      */
@@ -83,6 +81,11 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 });
 
     }
+
+    /**
+     * Variables to hold the even info in the x and y directions for onTouch functionality.
+     */
+    float prevX, prevY;
 
     /**
      * Slide gesture sensor to allow swiping actions in 2048. Adapted from:
