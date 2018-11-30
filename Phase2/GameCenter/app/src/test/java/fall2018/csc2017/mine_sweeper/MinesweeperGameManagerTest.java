@@ -6,15 +6,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests 100% of (Minesweeper) MineManager
+ * Tests 100% of (Minesweeper) MinesweeperGameManager
  */
-public class MineManagerTest {
-    private MineManager manager;
+public class MinesweeperGameManagerTest {
+    private MinesweeperGameManager manager;
     private BoardManager boardManager = null;
 
     @Before
     public void setUp(){
-        manager = new MineManager("test");
+        manager = new MinesweeperGameManager("test");
     }
 
     /**

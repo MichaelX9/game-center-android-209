@@ -5,10 +5,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class TFEManagerTest {
+public class TFEGameManagerTest {
 
     private int undos;
-    private TFEManager manager = new TFEManager("name");
+    private TFEGameManager manager = new TFEGameManager("name");
     @Before
     public void setUp(){
         undos = 3;

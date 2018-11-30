@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import fall2018.csc2017.game_manager.GameManager;
 
-public class SlidingTilesManager extends GameManager {
+/***
+ * The game manager for sliding tiles.
+ */
+public class SlidingTilesGameManager extends GameManager {
 
     /**
      * Number of remaining undos for the player. Negative values denote unlimited undo chances
@@ -19,11 +22,11 @@ public class SlidingTilesManager extends GameManager {
     private ArrayList<Integer> pastMoves = new ArrayList<>();
 
     /**
-     * Class constructor for SlidingTilesManager.
+     * Class constructor for SlidingTilesGameManager.
      *
      * @param name - username of player.
      */
-    SlidingTilesManager(String name) {
+    SlidingTilesGameManager(String name) {
         super(name, "sliding_tiles");
         autosaveInterval = 3;
     }
@@ -47,7 +50,7 @@ public class SlidingTilesManager extends GameManager {
     }
 
     /**
-     * Getter for the stored GameState in SlidingTilesManager.
+     * Getter for the stored GameState in SlidingTilesGameManager.
      *
      * @return BoardManager
      */

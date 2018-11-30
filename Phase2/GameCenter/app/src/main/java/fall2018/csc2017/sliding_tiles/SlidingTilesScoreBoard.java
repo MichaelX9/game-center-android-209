@@ -21,7 +21,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
     /**
      * A list of all recorded scores ranked from lowest to highest.
      */
-    public ArrayList<String> highScores = new ArrayList<>();
+    ArrayList<String> highScores = new ArrayList<>();
 
     /***
      * Initialize a scoreboard
@@ -81,7 +81,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
      */
     private void updateData(Integer score) {
         highScores.add(String.valueOf(score + ": "));
-        userScores.add(String.valueOf(score+ ": "));
+        userScores.add(String.valueOf(score + ": "));
         Collections.sort(highScores, new sortByScore());
         Collections.sort(userScores, new sortByScore());
         userToScores.put(currentUser, userScores);
