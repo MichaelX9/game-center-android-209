@@ -40,7 +40,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * set userScores to the given ArrayList.
      * @param lst the ArrayList used to set userScores.
      */
-    void setUserScores(ArrayList<String> lst) {
+    public void setUserScores(ArrayList<String> lst) {
         userScores = lst;
     }
 
@@ -48,7 +48,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * set highScores to the given ArrayList.
      * @param lst the ArrayList used to set highScores.
      */
-    void setHighScores(ArrayList<String> lst) {
+    public void setHighScores(ArrayList<String> lst) {
         highScores = lst;
     }
 
@@ -56,7 +56,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
      * Return the highest score user username has achieved so far; if user username has no scores,
      * return null.
      */
-    String getUserHighestScore() {
+    public String getUserHighestScore() {
         if (userScores == null){
             return null;
         }
@@ -66,7 +66,7 @@ public class MineSweeperScoreBoard extends ScoreBoard {
     /**
      * Return the highest score any user has achieved
      */
-    String getGameHighestScore() {
+    public String getGameHighestScore() {
         return highScores.get(highScores.size() - 1);
     }
 

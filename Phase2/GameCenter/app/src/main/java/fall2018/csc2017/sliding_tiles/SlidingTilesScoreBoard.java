@@ -21,7 +21,7 @@ class SlidingTilesScoreBoard extends ScoreBoard {
     /**
      * A list of all recorded scores ranked from lowest to highest.
      */
-    ArrayList<String> highScores = new ArrayList<>();
+    public ArrayList<String> highScores = new ArrayList<>();
 
     /***
      * Initialize a scoreboard
