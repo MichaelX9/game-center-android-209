@@ -1,9 +1,8 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,33 +19,37 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
-
+    /***
+     * The game manager for this game.
+     */
     public static SlidingTilesManager manager = new SlidingTilesManager(username);
 
-    //Maximum # of save files a use is allowed.
+    /***
+     * Maximum # of save files a user is allowed.
+     */
     int MAX_SAVES = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_);
-        manager.checkNew(StartingActivity.this);
+        setContentView(R.layout.activity_slidingtile_menu);
+        manager.checkNew(MenuActivity.this);
         addStartButtonListener();
         addLoadButtonListener();
         addScoreButtonListener();
         addDeleteButtonListener();
         manager.tempSave(this);
 
-        final EditText editText =findViewById(R.id.fileInput);
+        final EditText editText = findViewById(R.id.fileInput);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    GameManager.currentFile = username + "_" + editText.getText() + ".txt";
-                    editText.setVisibility(View.INVISIBLE);
-                    switchToSettingup();
-                    return true;
+                GameManager.currentFile = username + "_" + editText.getText() + ".txt";
+                editText.setVisibility(View.INVISIBLE);
+                switchToSettingUp();
+                return true;
             }
 
         });
@@ -63,17 +66,16 @@ public class StartingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int counter = 0;
 
-                for(String save: manager.findSaves(StartingActivity.this)){
-                    if (save != null){
+                for (String save : manager.findSaves(MenuActivity.this)) {
+                    if (save != null) {
                         counter += 1;
                     }
                 }
 
-                if (counter < MAX_SAVES){
+                if (counter < MAX_SAVES) {
                     findViewById(R.id.fileInput).setVisibility(View.VISIBLE);
-                }
-                else {
-                    Toast.makeText(StartingActivity.this, "You've reached max saves!",
+                } else {
+                    Toast.makeText(MenuActivity.this, "You've reached max saves!",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -99,14 +101,14 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activates the score button
      */
-    private void addScoreButtonListener(){
+    private void addScoreButtonListener() {
         ImageButton scoreButton = findViewById(R.id.scoreButton);
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent scorePage = new Intent(StartingActivity.this,
+                Intent scorePage = new Intent(MenuActivity.this,
                         SlidingTilesScoreboardActivity.class);
-                StartingActivity.this.startActivity(scorePage);
+                MenuActivity.this.startActivity(scorePage);
             }
         });
 
@@ -115,27 +117,27 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activates the load file buttons as invisible.
      */
-    private void addLoadFilesListener(){
+    private void addLoadFilesListener() {
         final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2),
                 findViewById(R.id.button3), findViewById(R.id.button4)};
 
 
         manager.tempSave(this);
-        String[] saves = manager.findSaves(StartingActivity.this);
+        String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
-        for(int i = 0; i < saves.length; i++){
-            if (saves[i] != null) {
+        for (String save : saves) {
+            if (save != null) {
                 loadFiles[counter].setVisibility(View.VISIBLE);
-                loadFiles[counter].setText(saves[i]);
+                loadFiles[counter].setText(save);
                 final int finalI = counter;
                 loadFiles[counter].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
                         GameManager.currentFile = (String) loadFiles[finalI].getText();
-                        if ((StartingActivity.manager.getGameState()) != null) {
+                        if ((MenuActivity.manager.getGameState()) != null) {
 
-                            manager.load(StartingActivity.this, GameManager.currentFile);
+                            manager.load(MenuActivity.this, GameManager.currentFile);
 
                         }
                         switchToGame();
@@ -150,29 +152,28 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activates the delete file buttons as invisible.
      */
-    private void addDeleteFilesListener(){
+    private void addDeleteFilesListener() {
         final Button[] loadFiles = {findViewById(R.id.button), findViewById(R.id.button2),
                 findViewById(R.id.button3), findViewById(R.id.button4)};
 
         manager.tempSave(this);
-        String[] saves = manager.findSaves(StartingActivity.this);
+        String[] saves = manager.findSaves(MenuActivity.this);
         int counter = 0;
-        for(int i = 0; i < saves.length; i++){
-            if (saves[i] != null) {
+        for (String save : saves) {
+            if (save != null) {
                 loadFiles[counter].setVisibility(View.VISIBLE);
-                loadFiles[counter].setText(saves[i]);
+                loadFiles[counter].setText(save);
                 final int finalI = counter;
                 loadFiles[counter].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         setInvisible(loadFiles);
-                        if (manager.deleteSave(StartingActivity.this,
-                                ((String) loadFiles[finalI].getText()))){
-                            Toast.makeText(StartingActivity.this,
+                        if (manager.deleteSave(MenuActivity.this,
+                                ((String) loadFiles[finalI].getText()))) {
+                            Toast.makeText(MenuActivity.this,
                                     "Save deleted", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(StartingActivity.this,
+                        } else {
+                            Toast.makeText(MenuActivity.this,
                                     "Could not delete :(", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -186,21 +187,15 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Set a list of buttons to invisible.
      */
-    public void setInvisible(Button[] buttons){
-        for(Button button: buttons){
+    public void setInvisible(Button[] buttons) {
+        for (Button button : buttons) {
             button.setVisibility(View.INVISIBLE);
         }
     }
 
-    /**
-     * Read the temporary board from disk.
+    /***
+     * Activate the Delete button
      */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //manager.load(StartingActivity.this, "temp.txt");
-    }
-
     private void addDeleteButtonListener() {
         ImageButton deleteButton = findViewById(R.id.deleter);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -212,21 +207,21 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the SettingUp view to set up game.
+     * Switch to ChooseComplexityActivity to set up a new game.
      */
-    private void switchToSettingup() {
-
-        Intent tmp = new Intent(this, SettingupActivity.class);
+    private void switchToSettingUp() {
+        Intent tmp = new Intent(this, ChooseComplexityActivity.class);
         startActivity(tmp);
     }
 
     /**
      * Switch to the GameActivity view to play the game.
      */
-    private void switchToGame(){
+    private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
         startActivity(tmp);
     }
+
     @Override
     public void onBackPressed() {
 

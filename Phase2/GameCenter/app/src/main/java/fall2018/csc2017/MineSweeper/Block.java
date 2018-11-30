@@ -6,21 +6,42 @@ import java.util.Random;
 
 public class Block extends Observable implements Serializable {
 
-    /***
+    /**
      * Number of mines around this block.
      * Equals MINE if the block itself is a mine.
      */
     private int numMines;
+
+    /**
+     * Whether the block is flagged.
+     */
     private boolean flagged = false;
+
+    /**
+     * Whether the block has been made visible.
+     */
     private boolean visible = false;
+
+    /**
+     * Whether the block is a mine.
+     */
     private boolean isMine = false;
 
+    /**
+     * The constant indicating the block is a mine.
+     */
     static final int MINE = -1;
 
+    /**
+     * A new block.
+     */
     public Block(){
         numMines = 0;
     }
 
+    /**
+     * A new block.
+     */
     Block(double percentMines){
         Random rand = new Random();
 
@@ -30,18 +51,30 @@ public class Block extends Observable implements Serializable {
 
     }
 
-    boolean isMineType(){
+    /**
+     * @return whether the block is a mine.
+     */
+    boolean isMineType() {
         return isMine;
     }
 
+    /**
+     * @return whether the block is visible.
+     */
     public boolean isVisible(){
         return visible;
     }
 
+    /**
+     * @return return whether the block is Flagged.
+     */
     public boolean isFlagged(){
         return flagged;
     }
 
+    /**
+     * Make the block visible.
+     */
     void setVisible(){
         visible = true;
         if (isFlagged()){
@@ -51,6 +84,9 @@ public class Block extends Observable implements Serializable {
         notifyObservers();
     }
 
+    /**
+     * Toggle flagged
+     */
     void toggleFlagged(){
         if (isVisible()){
             flagged = false;
@@ -61,14 +97,25 @@ public class Block extends Observable implements Serializable {
         notifyObservers();
     }
 
+    /**
+     * @return the number of mines on the map.
+     */
     int getNumMines() {
         return numMines;
     }
 
+    /**
+     * Setter for numMines.
+     * @param numMines the desired number of mines.
+     */
     void setNumMines(int numMines) {
         this.numMines = numMines;
     }
 
+    /**
+     * Set a mine.
+     * @param state of whether this is a mine
+     */
     void setMine(boolean state){this.isMine = state;}
 
 }

@@ -14,7 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
-import fall2018.csc2017.slidingtiles.R ;
+import fall2018.csc2017.SlidingTiles.R ;
 
 import static java.lang.Math.min;
 
@@ -30,6 +30,16 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
      */
     private TFEBoardManager tfeBoardManager;
 
+    /**
+     * Boolean flag to mark when a gameState has ended.
+     */
+    private boolean gameOver = false;
+
+    /**
+     * Boolean flag to mark when a 2048 has been made.
+     */
+    private boolean TFEMade = false;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         gridView = findViewById(R.id.TFE_Grid);
 
         MenuActivity.manager.load(GameActivity.this, "temp.txt");
-        tfeBoardManager = (TFEBoardManager) MenuActivity.manager.getGameState();
+        tfeBoardManager = MenuActivity.manager.getGameState();
         MenuActivity.manager.undoSetup(this);
         MenuActivity.manager.setUndos(MenuActivity.manager.getUndos());
 
@@ -73,6 +83,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     }
 
     float prevX, prevY;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -87,36 +98,33 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
                 float newX = event.getX();
                 float newY = event.getY();
 
-
-                //Calculates where we swiped
                 if (MenuActivity.manager.getUndos() > 0){
                     MenuActivity.manager.addRecent(this, tfeBoardManager);
                 }
                 if (Math.abs(newX - prevX) > Math.abs(newY - prevY)) {
-                    //LEFT - RiGHT Direction
-
                     if( newX > prevX) {
-                        //RIGHT
+                        //Right-swipe
                         tfeBoardManager.getBoard().tileSlide(0);
                     } else {
-                        //LEFT
+                        //Left-swipe
                         tfeBoardManager.getBoard().tileSlide(1);
                     }
                 } else {
-                    // UP-DOWN Direction
-                    if (newY > prevY) {
-                        //DOWN
-                        tfeBoardManager.getBoard().tileSlide(3);
-                    } else {
-                        //UP
+                    if (newY < prevY) {
+                        //Up-Swipe
                         tfeBoardManager.getBoard().tileSlide(2);
+                    } else {
+                        //Down-swipe
+                        tfeBoardManager.getBoard().tileSlide(3);
                     }
                 }
-                if(tfeBoardManager.getBoard().isSolved()){
+                if(tfeBoardManager.getBoard().isSolved() && !TFEMade){
                     tfeBoardManager.makeTextForSolvedGame(this);
+                    TFEMade = true;
                 }
-                if(tfeBoardManager.getBoard().isOver()){
+                else if(tfeBoardManager.getBoard().isOver() && !gameOver){
                     tfeBoardManager.makeTextForLostGame(this);
+                    gameOver = true;
                 }
 
                 break;
@@ -129,7 +137,6 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
     public void update(Observable o, Object arg) {
         display();
     }
-
 
     /**
      * Set background image of each grid space and call adaptor to change view.
@@ -164,7 +171,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
             else {
                 for(int i = 0; i < tfeBoardManager.getBoard().numTiles(); i++){
                     tfeBoardManager.getBoard().tileGetter(i).TFEvaluesetter(
-                            ((TFEBoardManager)MenuActivity.manager.getGameState()
+                            (MenuActivity.manager.getGameState()
                             ).getBoard().tileGetter(i).getTileValue());
                 }
             display();

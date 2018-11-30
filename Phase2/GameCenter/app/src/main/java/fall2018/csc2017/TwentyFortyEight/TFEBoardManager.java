@@ -57,16 +57,14 @@ public class TFEBoardManager implements Serializable {
      * Make the text bubble for when the game is solved after recording the score.
      */
     void makeTextForSolvedGame(Context context) {
-        if(scoreBoard.getNumberOfMoves() % GameManager.autosaveInterval ==0) {
-            MenuActivity.manager.save(context);
-        }
         int score = scoreBoard.calculateScore();
         MenuActivity.manager.addScore(context, score,"TFE");
-        Toast.makeText(context,"YOU WIN!"+" \n Your score is "+score +
-                ".\n Your highest score is "+scoreBoard.getUserHighestScore()+
-                ".\n The game's highest score is "+scoreBoard.getGameHighestScore()+
-                ". ",Toast.LENGTH_LONG).show();
-    }
+        Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
+                ".\n Your highest score is " + scoreBoard.getUserHighestScore() +
+                ".\n The game's highest score is " + scoreBoard.getGameHighestScore() +
+                ". ", Toast.LENGTH_LONG).show();
+        MenuActivity.manager.save(context);
+        }
 
     /**
      * Make the text bubble for when the game is over after recording the score.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fall2018.csc2017.slidingtiles">
+    package="fall2018.csc2017.SlidingTiles">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,15 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StartingActivity" />
-        <activity android:name=".GameActivity" />
+        <activity android:name="fall2018.csc2017.SlidingTiles.MenuActivity" />
+        <activity android:name="fall2018.csc2017.SlidingTiles.GameActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.MenuActivity" />
         <activity android:name="fall2018.csc2017.TwentyFortyEight.MenuActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.RegisterActivity" />
         <activity android:name="fall2018.csc2017.LaunchCentre.GameLaunchActivity" />
-        <activity android:name=".SettingupActivity" />
-        <activity android:name=".SlidingTilesScoreboardActivity" />
-        <activity android:name=".ChooseImageActivity" />
+        <activity android:name="fall2018.csc2017.SlidingTiles.ChooseComplexityActivity" />
+        <activity android:name="fall2018.csc2017.SlidingTiles.SlidingTilesScoreboardActivity" />
+        <activity android:name="fall2018.csc2017.SlidingTiles.ChooseImageActivity" />
         <activity android:name="fall2018.csc2017.MineSweeper.GameActivity" />
         <activity android:name="fall2018.csc2017.TwentyFortyEight.GameActivity"></activity>
         <activity android:name="fall2018.csc2017.MineSweeper.MineSweeperScoreBoardActivity" />

@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Context;
 
@@ -30,6 +30,7 @@ public class SlidingTilesManager extends GameManager {
 
     /**
      * Getter for number of undos remaining.
+     *
      * @return number of undos
      */
     int getUndos() {
@@ -76,10 +77,10 @@ public class SlidingTilesManager extends GameManager {
      * board back one move, while decreasing undo chances by one.
      */
     void undo() {
-        BoardManager boardToChange = StartingActivity.manager.getGameState();
+        BoardManager boardToChange = MenuActivity.manager.getGameState();
         undos -= 1;
         boardToChange.touchMove(pastMoves.remove(pastMoves.size() - 1));
-        StartingActivity.manager.subtractMoves();
+        MenuActivity.manager.subtractMoves();
         pastMoves.remove(pastMoves.size() - 1);
         getGameState().scoreBoard.incrementUndoCount();
     }

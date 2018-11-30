@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +20,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
         TextView globalScores = findViewById(R.id.globalScores);
         TextView yourScores = findViewById(R.id.yourScores);
         ArrayList<String> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", GameLaunchActivity.username);
+                this, "SlidingTiles", GameLaunchActivity.username);
 
         if (userHighScores != null && userHighScores.size() != 0) {
             displayUserHighScores(yourScores);
@@ -33,11 +33,12 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
 
     /**
      * Display the current user's high scores on the Scores page.
+     *
      * @param userScores the TextView for the user's high scores
      */
     private void displayUserHighScores(TextView userScores) {
         ArrayList<String> userHighScores = GameManager.scoreGetter(
-                this,"SlidingTiles", GameLaunchActivity.username);
+                this, "SlidingTiles", GameLaunchActivity.username);
         if (userHighScores != null) {
             Collections.sort(userHighScores);
             Collections.reverse(userHighScores);
@@ -52,6 +53,7 @@ public class SlidingTilesScoreboardActivity extends AppCompatActivity {
 
     /**
      * Display the game's high scores on the Scores page.
+     *
      * @param globalScores the TextView for the game's high scores
      */
     private void displayGlobalHighScores(TextView globalScores) {

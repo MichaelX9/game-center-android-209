@@ -1,21 +1,20 @@
 package fall2018.csc2017.TwentyFortyEight;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 public class TFEGridAdapter extends BaseAdapter {
-    TFEBoardManager tfeBoardManager;
-    AbsListView.LayoutParams params;
-    Context context;
+    private TFEBoardManager tfeBoardManager;
+    private AbsListView.LayoutParams params;
+    private Context context;
 
-    public TFEGridAdapter(TFEBoardManager tfeBoardManager, int columnWidth, int columnHeight, Context context) {
+    TFEGridAdapter(TFEBoardManager tfeBoardManager, int columnWidth, int columnHeight, Context context) {
         this.tfeBoardManager = tfeBoardManager;
         this.params = new AbsListView.LayoutParams(columnWidth, columnHeight);
         this.context = context;

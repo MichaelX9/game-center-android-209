@@ -13,15 +13,23 @@ import android.widget.Toast;
 
 import fall2018.csc2017.GameManager.GameManager;
 import fall2018.csc2017.LaunchCentre.GameLaunchActivity;
-import fall2018.csc2017.slidingtiles.R;
+import fall2018.csc2017.SlidingTiles.R;
 
 import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 
 
 public class MenuActivity extends AppCompatActivity {
+
+    /**
+     * A new instance of the TFEManager for the game.
+     */
     public static TFEManager manager = new TFEManager(username);
-    //Maximum # of save files a use is allowed.
+
+    /**
+     * Maximum # of save files a use is allowed.
+     */
     int MAX_SAVES = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

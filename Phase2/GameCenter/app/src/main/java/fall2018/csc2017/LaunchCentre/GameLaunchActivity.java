@@ -8,9 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import fall2018.csc2017.MineSweeper.MenuActivity;
-import fall2018.csc2017.slidingtiles.R;
-import fall2018.csc2017.slidingtiles.StartingActivity;
+import fall2018.csc2017.SlidingTiles.R;
+import fall2018.csc2017.SlidingTiles.MenuActivity;
 
 /**
  * Game Launcher Interface, will eventually be location from which all games are opened.
@@ -48,7 +47,7 @@ public class GameLaunchActivity extends AppCompatActivity {
         startSlidingTiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(GameLaunchActivity.this, StartingActivity.class);
+                Intent tmp = new Intent(GameLaunchActivity.this, MenuActivity.class);
                 GameLaunchActivity.this.startActivity(tmp);
             }
         });
@@ -62,7 +61,7 @@ public class GameLaunchActivity extends AppCompatActivity {
         startMinesweeper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(GameLaunchActivity.this, MenuActivity.class);
+                Intent tmp = new Intent(GameLaunchActivity.this, fall2018.csc2017.MineSweeper.MenuActivity.class);
                 GameLaunchActivity.this.startActivity(tmp);
             }
         });
@@ -81,6 +80,19 @@ public class GameLaunchActivity extends AppCompatActivity {
                 GameLaunchActivity.this.startActivity(tmp);
             }
         });
+    }
+
+
+    /**
+     * Returns to login activity.
+     */
+    @Override
+    public void onBackPressed() {
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        System.exit(0);
     }
 
 }

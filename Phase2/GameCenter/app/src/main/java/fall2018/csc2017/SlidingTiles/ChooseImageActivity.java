@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,16 +32,11 @@ public class ChooseImageActivity extends AppCompatActivity {
      */
     public static final int REQUEST_CODE = 7;
 
-    /***
-     * the board manager of the game board
-     */
-    private BoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_image);
-        boardManager = StartingActivity.manager.getGameState();
+        setContentView(R.layout.activity_slidingtile_choose_image);
     }
 
     /***
@@ -49,20 +44,19 @@ public class ChooseImageActivity extends AppCompatActivity {
      * @param view Android view
      */
     public void StandardBG(View view) {
-        if (boardManager.getBoard().numTiles() > 25) {
+        if (BoardFactory.numTiles() > 25) {
             Toast.makeText(this,
                     "Numbered background is only supported for boards with under 25 tiles"
                     , Toast.LENGTH_SHORT).show();
         } else {
-            boardManager.getBoard().clearBGs();
+            BoardFactory.clearBackground();
             for (int id : resToList()) {
                 Bitmap b = BitmapFactory.decodeResource(getResources(), id);
                 Drawable d = new BitmapDrawable(getResources(), b);
-                boardManager.getBoard().addBG(d);
+                BoardFactory.addBackground(d);
 
             }
-            boardManager.setEmptyTile(getDrawable(R.drawable.tile_25));
-            boardManager.getBoard().generateTiles();
+            BoardFactory.setEmptyTileBackground(getDrawable(R.drawable.tile_25));
             gameStart();
         }
     }
@@ -141,7 +135,7 @@ public class ChooseImageActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
                 Uri imageUri = data.getData();
-                if(imageUri != null) {
+                if (imageUri != null) {
                     try {
                         InputStream inputStream = getContentResolver().openInputStream(imageUri);
                         Bitmap image = BitmapFactory.decodeStream(inputStream);
@@ -166,7 +160,8 @@ public class ChooseImageActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editText);
         try {
             URL url = new URL(editText.getText().toString());
-            new GetUrlImage().execute(url).get();
+            Bitmap b = new GetUrlImage().execute(url).get();
+            imageToTiles(b);
             gameStart();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -183,20 +178,19 @@ public class ChooseImageActivity extends AppCompatActivity {
      * @param b bitmap of the image
      */
     public void imageToTiles(Bitmap b) {
-        int trimH = b.getHeight() / boardManager.getBoard().getNumRows();
-        int trimW = b.getWidth() / boardManager.getBoard().getNumCols();
+        int trimH = b.getHeight() / BoardFactory.getNumRows();
+        int trimW = b.getWidth() / BoardFactory.getNumCols();
 
-        boardManager.getBoard().clearBGs();
+        BoardFactory.clearBackground();
 
-        for (int i = 0; i < boardManager.getBoard().getNumRows(); i++) {
-            for (int j = 0; j < boardManager.getBoard().getNumCols(); j++) {
+        for (int i = 0; i < BoardFactory.getNumRows(); i++) {
+            for (int j = 0; j < BoardFactory.getNumCols(); j++) {
                 Bitmap bitmap = Bitmap.createBitmap(b, j * trimW, i * trimH, trimW, trimH);
                 Drawable d = new BitmapDrawable(getResources(), bitmap);
-                boardManager.getBoard().addBG(d);
+                BoardFactory.addBackground(d);
             }
         }
-        boardManager.setEmptyTile(getDrawable(R.drawable.tile_25));
-        boardManager.getBoard().generateTiles();
+        BoardFactory.setEmptyTileBackground(getDrawable(R.drawable.tile_25));
     }
 
     /***
@@ -204,24 +198,27 @@ public class ChooseImageActivity extends AppCompatActivity {
      */
     public void gameStart() {
         Intent intent = new Intent(this, GameActivity.class);
-        StartingActivity.manager.save(this);
+        Board board = BoardFactory.createBoard();
+        MenuActivity.manager.setGameState(new BoardManager(board));
+        MenuActivity.manager.getGameState().setScoreBoard(this,
+                new SlidingTilesScoreBoard());
+        MenuActivity.manager.save(this);
         startActivity(intent);
     }
 
     /***
      * An background task to download image from url
      */
-    private class GetUrlImage extends AsyncTask<URL, Void, Void> {
+    private static class GetUrlImage extends AsyncTask<URL, Void, Bitmap> {
         @Override
-        protected Void doInBackground(URL... urls) {
+        protected Bitmap doInBackground(URL... urls) {
             try {
                 InputStream inputStream = urls[0].openStream();
-                Bitmap b = BitmapFactory.decodeStream(inputStream);
-                imageToTiles(b);
+                return BitmapFactory.decodeStream(inputStream);
             } catch (IOException e) {
                 e.printStackTrace();
+                return null;
             }
-            return null;
         }
     }
 }

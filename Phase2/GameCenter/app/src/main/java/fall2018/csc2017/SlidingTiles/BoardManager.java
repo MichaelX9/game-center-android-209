@@ -1,7 +1,6 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -14,10 +13,16 @@ import static fall2018.csc2017.LaunchCentre.GameLaunchActivity.username;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class  BoardManager implements Serializable {
+class BoardManager implements Serializable {
 
+    /**
+     * The maximumComplexity measure for score calculation.
+     */
     static int maximumComplexity = 200;
 
+    /**
+     * The scoreboard for the game.
+     */
     SlidingTilesScoreBoard scoreBoard;
 
     /**
@@ -52,20 +57,13 @@ class  BoardManager implements Serializable {
         return board;
     }
 
-    /***
-     * Set the empty tile image.
-     * @param d the image to be set
-     */
-    void setEmptyTile(Drawable d) {
-        Tile.setEmptyTile(d);
-    }
 
     /***
-     * decompress the board after unserialized
+     * postSer the board after unserialized
      * @param context the context
      */
     void decompress(Context context) {
-        board.decompress(context);
+        board.postSer(context);
     }
 
     /**
@@ -123,7 +121,7 @@ class  BoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
-    boolean isValidTap(int position) {
+    private boolean isValidTap(int position) {
         return !posEmptyTile(position).equals("None");
     }
 
@@ -133,26 +131,25 @@ class  BoardManager implements Serializable {
      * @param position the position
      */
     void touchMove(int position) {
-        //StartingActivity.manager.addMove();
         int row = position / board.getNumCols();
         int col = position % board.getNumCols();
         String emptyTilePos = posEmptyTile(position);
         switch (emptyTilePos) {
             case "Above":
                 board.swapTiles(row - 1, col, row, col);
-                StartingActivity.manager.getPastMoves().add(position - board.getNumCols());
+                MenuActivity.manager.getPastMoves().add(position - board.getNumCols());
                 break;
             case "Below":
                 board.swapTiles(row + 1, col, row, col);
-                StartingActivity.manager.getPastMoves().add(position + board.getNumCols());
+                MenuActivity.manager.getPastMoves().add(position + board.getNumCols());
                 break;
             case "Right":
                 board.swapTiles(row, col + 1, row, col);
-                StartingActivity.manager.getPastMoves().add(position + 1);
+                MenuActivity.manager.getPastMoves().add(position + 1);
                 break;
             case "Left":
                 board.swapTiles(row, col - 1, row, col);
-                StartingActivity.manager.getPastMoves().add(position - 1);
+                MenuActivity.manager.getPastMoves().add(position - 1);
                 break;
         }
     }
@@ -168,7 +165,7 @@ class  BoardManager implements Serializable {
             scoreBoard.incrementMoveCount();
             //Checks if its time to autoSave
             if (scoreBoard.getNumberOfMoves() % GameManager.autosaveInterval == 0) {
-                StartingActivity.manager.save(context);
+                MenuActivity.manager.save(context);
             }
 
             if (puzzleSolved()) {
@@ -178,12 +175,12 @@ class  BoardManager implements Serializable {
                 int score = scoreBoard.calculateScore();
                 String userHighestScore = scoreBoard.getUserHighestScore();
                 String gameHighestScore = scoreBoard.getGameHighestScore();
-                StartingActivity.manager.addScore(context, score,"SlidingTiles");
+                MenuActivity.manager.addScore(context, score, "SlidingTiles");
                 Toast.makeText(context, "YOU WIN!" + " \n Your score is " + score +
                                 ".\n Your highest score is " + userHighestScore +
                                 ".\n The game's highest score is " + gameHighestScore + ". ",
                         Toast.LENGTH_LONG).show();
-                StartingActivity.manager.save(context);
+                MenuActivity.manager.save(context);
             }
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();

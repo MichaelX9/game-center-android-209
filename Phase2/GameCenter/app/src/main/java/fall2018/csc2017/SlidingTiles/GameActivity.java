@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.SlidingTiles;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +32,10 @@ public class GameActivity extends AppCompatActivity implements Observer {
      */
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
-    
+
+    /***
+     * The game board of current game
+     */
     private Board board;
 
     /**
@@ -49,18 +52,18 @@ public class GameActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        StartingActivity.manager.load(GameActivity.this, GameManager.currentFile);
-        this.board = StartingActivity.manager.getGameState().getBoard();
-        StartingActivity.manager.tempSave(this);
+        MenuActivity.manager.load(GameActivity.this, GameManager.currentFile);
+        this.board = MenuActivity.manager.getGameState().getBoard();
+        MenuActivity.manager.tempSave(this);
 
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_slidingtile_game);
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
         gridView.setNumColumns(board.getNumCols());
-        gridView.setBoardManager(StartingActivity.manager.getGameState());
-        (StartingActivity.manager.getGameState()).getBoard().addObserver(this);
+        gridView.setBoardManager(MenuActivity.manager.getGameState());
+        (MenuActivity.manager.getGameState()).getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -76,8 +79,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         display();
                     }
                 });
-        StartingActivity.manager.getGameState().scoreBoard.setCurrentUser(GameLaunchActivity.username);
-        StartingActivity.manager.getGameState().scoreBoard.startTiming();
+        MenuActivity.manager.getGameState().scoreBoard.setCurrentUser(GameLaunchActivity.username);
+        MenuActivity.manager.getGameState().scoreBoard.startTiming();
     }
 
     /**
@@ -87,7 +90,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
      */
     private void createTileButtons(Context context) {
         //
-        Board board = (StartingActivity.manager.getGameState()).getBoard();
+        Board board = (MenuActivity.manager.getGameState()).getBoard();
         //
         tileButtons = new ArrayList<>();
         for (int row = 0; row != board.getNumRows(); row++) {
@@ -103,7 +106,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = (StartingActivity.manager.getGameState()).getBoard();
+        Board board = (MenuActivity.manager.getGameState()).getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
             int row = nextPos / board.getNumCols();
@@ -117,14 +120,14 @@ public class GameActivity extends AppCompatActivity implements Observer {
      * Adds the undo button functionality to the game interface.
      */
     public void undoClicker(View view){
-        if (StartingActivity.manager.getPastMoves().size() > 0 && StartingActivity.manager.getUndos() != 0) {
-            StartingActivity.manager.undo();
+        if (MenuActivity.manager.getPastMoves().size() > 0 && MenuActivity.manager.getUndos() != 0) {
+            MenuActivity.manager.undo();
             String str;
-            if (StartingActivity.manager.getUndos() < 0){
+            if (MenuActivity.manager.getUndos() < 0){
                 str = "You have unlimited undos remaining.";
             }
             else {
-                str = "You have " + StartingActivity.manager.getUndos() + " undos remaining.";
+                str = "You have " + MenuActivity.manager.getUndos() + " undos remaining.";
             }
             Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
         }
@@ -138,7 +141,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
      * Adds the save button functionality to the game interface
      */
     public void saveClicker (View view) {
-        StartingActivity.manager.save(this);
+        MenuActivity.manager.save(this);
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
@@ -148,11 +151,11 @@ public class GameActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onPause() {
 
-        StartingActivity.manager.getGameState().scoreBoard.finishTiming();
-        StartingActivity.manager.getGameState().scoreBoard.updateDurationPlayed();
+        MenuActivity.manager.getGameState().scoreBoard.finishTiming();
+        MenuActivity.manager.getGameState().scoreBoard.updateDurationPlayed();
 
         super.onPause();
-        StartingActivity.manager.tempSave(GameActivity.this);
+        MenuActivity.manager.tempSave(GameActivity.this);
 
     }
 
@@ -163,7 +166,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(this, StartingActivity.class);
+        Intent i = new Intent(this, MenuActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
     }
